@@ -15,6 +15,7 @@ router.get('/register', function(req, res) {
 router.post('/register', function(req, res) {
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
+            //ToDo: Currently just refreshes page if invalid. Add response to this behavior
             return res.render('register', { account : account });
         }
 
@@ -35,10 +36,6 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
-});
-
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
 });
 
 module.exports = router;

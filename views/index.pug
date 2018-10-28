@@ -2,9 +2,10 @@ extends layout
 
 block content
     if (!user)
+        p This page will ultimately be our home page. To be updated at a later date!
         a(href="/login") Login
         br
         a(href="/register") Register
     if (user)
-        p You are currently logged in as #{user.username}
+        p Welcome #{user.username}! This is the homepage
         a(href="/logout") Logout

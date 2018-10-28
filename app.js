@@ -38,7 +38,7 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-var mongoDB = 'mongodb://127.0.0.1/';
+var mongoDB = 'mongodb://127.0.0.1:27017/';
 mongoose.connect(mongoDB);
 
 
