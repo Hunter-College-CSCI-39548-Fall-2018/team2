@@ -6,14 +6,13 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug')
+app.set('view engine', 'ejs');
 
 
 app.use(logger('dev'));
@@ -28,18 +27,41 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
 
 app.use('/', routes);
 
 
 var Account = require('./models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ username: username }, function (err, user) {
+            // If the credentials are valid, the verify callback invokes done to supply
+            // Passport with the user that authenticated
+            if (err) { return done(err); }
+
+            // If the credentials are not valid, done should be invoked with false instead
+            // of a user to indicate an authentication failure.
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username.' });
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: 'Incorrect password.' });
+            }
+
+            //If an exception occurred while verifying the credentials (for example, if the database is not available
+            return done(null, user);
+        });
+    }
+));
+passport.use(new LocalStrategy(
+    Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 var mongoDB = 'mongodb://127.0.0.1:27017/';
-mongoose.connect(mongoDB);
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 
 // catch 404 and forward to error handler
