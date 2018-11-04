@@ -6,50 +6,8 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
 @font-face {
     font-family: 'Poppins';
     font-style: normal;
-    font-weight: 300;
-    src: url("../fonts/poppins/poppins-v5-latin-300.eot");
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
     font-weight: 400;
-    src: url("../fonts/poppins/poppins-v5-latin-regular.eot");
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    src: url("../fonts/poppins/poppins-v5-latin-500.eot");
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    src: url("../fonts/poppins/poppins-v5-latin-600.eot");
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    src: url("../fonts/poppins/poppins-v5-latin-700.eot");
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 800;
-    src: url("../fonts/poppins/poppins-v5-latin-800.eot");
-}
-
-@font-face {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 900;
-    src: url("../fonts/poppins/poppins-v5-latin-900.eot");
+    src: url('https://fonts.googleapis.com/css?family=Poppins');
 }
 
 @font-face {
@@ -68,11 +26,6 @@ a:focus, a:active {
 input, select, textarea {
     outline: none;
     appearance: unset !important;
-}
-
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-    appearance: none !important;
-    margin: 0;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -160,13 +113,12 @@ body {
 }
 
 .signup {
-    margin-bottom: 150px;
     z-index: 1
 }
 
 .signup-content {
     padding-top: 30px;
-    padding-bottom: 50px;
+    padding-bottom: 55px;
     box-shadow: 0 -1px 1px rgba(0,0,0,0.15),
     0 -10px 0 -5px #eee,
     0 -10px 1px -4px rgba(0,0,0,0.15),
@@ -373,8 +325,8 @@ label.valid:after {
     0 -20px 0 -10px #eee,
     0 -20px 1px -9px rgba(0,0,0,0.15);
 
-    padding-top: 30px;
-    padding-bottom: 70px;
+    padding-top: 40px;
+    padding-bottom: 80px;
 }
 
 .signin-form {
