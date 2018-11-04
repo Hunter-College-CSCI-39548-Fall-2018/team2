@@ -52,10 +52,40 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     src: url("../fonts/poppins/poppins-v5-latin-900.eot");
 }
 
+@font-face {
+    font-family: 'IM Fell Great Primer', serif;
+    font-style: italic;
+    font-weight: 400;
+    src: url('https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer:400i');
+}
+
 a:focus, a:active {
     text-decoration: none;
     outline: none;
     transition: all 300ms ease 0s;
+}
+
+input, select, textarea {
+    outline: none;
+    appearance: unset !important;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    appearance: none !important;
+    margin: 0;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    box-shadow: none !important;
+}
+
+input[type=checkbox] {
+    appearance: checkbox !important;
+}
+
+input[type=radio] {
+    appearance: radio !important;
 }
 
 img {
@@ -86,6 +116,10 @@ h2 {
 .main {
     background: #9dc183;
     padding: 75px 0;
+    background-image: radial-gradient(#ffffff75 10%, transparent 0),
+    radial-gradient(#fff8e973 10%, transparent 0);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
 }
 
 .clear {
@@ -105,8 +139,7 @@ body {
     width: 900px;
     background: #fff;
     margin: 0 auto;
-    box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-    border-radius: 20px;
+    box-shadow: 0px 7px 16.83px 0.17px rgba(134, 133, 133, 0.67);
 }
 
 .display-flex {
@@ -132,7 +165,13 @@ body {
 }
 
 .signup-content {
-    padding: 75px 0;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    box-shadow: 0 -1px 1px rgba(0,0,0,0.15),
+    0 -10px 0 -5px #eee,
+    0 -10px 1px -4px rgba(0,0,0,0.15),
+    0 -20px 0 -10px #eee,
+    0 -20px 1px -9px rgba(0,0,0,0.15);
 }
 
 .signup-form, .signup-image, .signin-form, .signin-image {
@@ -140,21 +179,22 @@ body {
     overflow: hidden;
 }
 
-.signup-image {
-    margin: 0 55px;
-}
-
 .form-title {
+    font-size: 45px;
     margin-left: 25%;
     margin-bottom: 33px;
+    color: #314e31;
+    font-style: italic;
 }
 
 .signup-image {
-    margin-top: 45px;
+    margin-left: 110px;
+    margin-right: 20px;
+    margin-top: 10px;
 }
 
 figure {
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     text-align: center;
 }
 
@@ -164,10 +204,11 @@ figure {
     color: #fff;
     border-bottom: none;
     width: auto;
-    padding: 15px 39px;
+    padding: 12px 35px;
     border-radius: 5px;
     margin-top: 25px;
-    margin-left: 25%;
+    margin-left: 95px;
+    margin-bottom: 20px;
     cursor: pointer;
 }
 
@@ -177,6 +218,9 @@ figure {
 
 #signin {
     margin-top: 16px;
+    margin-left: 95px;
+    margin-bottom: 20px;
+    font-size: 12px;
 }
 
 .signup-image-link {
@@ -193,8 +237,8 @@ figure {
 
 .signup-form {
     margin-top: 20px;
-    margin-left: 75px;
-    margin-right: 75px;
+    margin-left: 55px;
+    margin-right: 95px;
     padding-left: 34px;
 }
 
@@ -323,12 +367,18 @@ label.valid:after {
 }
 
 .signin-content {
-    padding-top: 67px;
-    padding-bottom: 87px;
+    box-shadow: 0 -1px 1px rgba(0,0,0,0.15),
+    0 -10px 0 -5px #eee,
+    0 -10px 1px -4px rgba(0,0,0,0.15),
+    0 -20px 0 -10px #eee,
+    0 -20px 1px -9px rgba(0,0,0,0.15);
+
+    padding-top: 30px;
+    padding-bottom: 70px;
 }
 
 .signin-form {
-    margin-top: 100px;
+    margin-top: 70px;
     margin-right: 90px;
     margin-left: 80px;
 }
@@ -339,3 +389,19 @@ label.valid:after {
     margin-top: 10px;
 }
 
+#application-title {
+    font-family: IM Fell Great Primer;
+    text-align: center;
+    font-style: italic;
+    font-size: 30px;
+    margin-top: 0;
+    font-weight:bold;
+}
+
+#application-description {
+    text-align: center;
+    margin-top: 0;
+    line-height: 1.5;
+    font-style: italic;
+    font-size: 16px;
+}
