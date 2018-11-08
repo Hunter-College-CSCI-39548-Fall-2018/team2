@@ -3,7 +3,9 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var dbConfig = require('./db.js'); //this line is recently added b/c of db.js
 var mongoose = require('mongoose');
+mongoose.connect(dbConfig.url); //as well as this line
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
