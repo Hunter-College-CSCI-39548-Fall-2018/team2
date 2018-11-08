@@ -7,9 +7,9 @@ var dbConfig = require('./db.js'); //this line is recently added b/c of db.js
 var mongoose = require('mongoose');
 mongoose.connect(dbConfig.url); //as well as this line
 var passport = require('passport');
+var expressSession = require('express-session'); //added express-session
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
-
 var routes = require('./routes/index');
 var app = express();
 
@@ -25,6 +25,7 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
+app.use(expressSession({secret: 'mySecretKey'})); // added. for express-session
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -58,6 +59,11 @@ passport.use(new LocalStrategy(
     Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+
+//Encrypting password before saving to db using bcrypt-node.js
+var isValidPassword = function(user, password){
+    return bCrypt.compareSync(password, user.password);
+}
 
 var mongoDB = 'mongodb://127.0.0.1:27017/';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
