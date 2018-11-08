@@ -81,13 +81,15 @@ body {
     font-size: 13px;
     line-height: 1.8;
     color: #222;
-    background: #9dc183;
     font-weight: 400;
     font-family: Poppins;
+    background: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ),
+    url("../assets/plant-background.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 
 .container {
-    width: 900px;
+    width: 750px;
     background: #fff;
     margin: 0 auto;
     box-shadow: 0px 7px 16.83px 0.17px rgba(134, 133, 133, 0.67);
@@ -116,7 +118,7 @@ body {
 
 .signup-content {
     padding-top: 40px;
-    padding-bottom: 80px;
+    padding-bottom: 60px;
     box-shadow: 0 -1px 1px rgba(0,0,0,0.15),
     0 -10px 0 -5px #eee,
     0 -10px 1px -4px rgba(0,0,0,0.15),
@@ -132,7 +134,6 @@ body {
 .form-title {
     font-size: 45px;
     margin-left: 34%;
-    margin-bottom: 33px;
     color: #314e31;
     font-style: italic;
 }
@@ -173,7 +174,7 @@ figure {
     margin-top: 16px;
     margin-left: 100px;
     margin-bottom: 20px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .signup-image-link {
@@ -189,10 +190,7 @@ figure {
 }
 
 .signup-form {
-    margin-top: 20px;
-    margin-left: 55px;
-    margin-right: 95px;
-    padding-left: 34px;
+    margin: 0px 100px 0px 180px
 }
 
 .register-form {
@@ -218,6 +216,7 @@ input {
     padding: 6px 30px;
     font-family: Poppins;
     box-sizing: border-box;
+    font-size: 13px;
 }
 
 input:focus {
@@ -329,7 +328,7 @@ label.valid:after {
 }
 
 .signin-form {
-    margin: 90px 60px;
+    margin: 60px 100px 90px 180px;
 }
 
 .signin-image {
@@ -348,6 +347,7 @@ label.valid:after {
 #application-description {
     text-align: center;
     margin-top: 0;
+    margin-bottom: 35px;
     line-height: 1.5;
     font-style: italic;
     font-size: 16px;

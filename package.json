@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Hunter-College-CSCI-39548-Fall-2018/team2#readme",
   "dependencies": {
     "@material/card": "^0.41.0",
+    "@material/fab": "^0.41.0",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -35,6 +36,7 @@
     "passport-local-mongoose": "^5.0.1",
     "react": "^16.5.2",
     "serve-favicon": "^2.5.0",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "material-design-lite": "^1.3.0"
   }
 }
