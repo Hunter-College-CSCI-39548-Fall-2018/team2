@@ -44,9 +44,10 @@ img {
 }
 
 body {
-    padding: 20px;
     background: #fafafa;
     position: relative;
+    margin-bottom: 100px;
+    padding: 20px 20px 20px 40px;
 }
 
 .mdl-card__title .mdl-card--expand {

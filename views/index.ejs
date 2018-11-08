@@ -2,6 +2,7 @@
 
 <head>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.green-light_green.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/index.css">
@@ -43,11 +44,12 @@
                     create
                 </i>
             </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    star_border
-                </i>
-            </button>
+            <i class="mdc-icon-toggle material-icons" role="button" aria-pressed="false"
+               aria-label="Add to favorites" tabindex="0"
+               data-toggle-on='{"label": "Remove from favorites", "content": "favorite"}'
+               data-toggle-off='{"label": "Add to favorites", "content": "favorite_border"}'>
+                favorite_border
+            </i>
         </div>
     </div>
 
