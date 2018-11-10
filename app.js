@@ -133,5 +133,6 @@ passport.use('registration', new LocalStrategy({
         // Delay the execution of findOrCreateUser and execute
         // the method in the next tick of the event loop
         process.nextTick(findOrCreateUser);
-    });
+    })
 );
+
