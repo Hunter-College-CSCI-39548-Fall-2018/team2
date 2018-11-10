@@ -112,8 +112,8 @@ passport.use('registration', new LocalStrategy({
                     // create the user
                     var newUser = new User();
                     // set the user's local credentials
-                    newUser.firstName = req.param('firstName');
-                    newUser.lastName = req.param('lastName');
+                    // newUser.firstName = req.param('firstName');
+                    // newUser.lastName = req.param('lastName');
                     newUser.username = username;
                     newUser.password = createHash(password);
 
@@ -123,7 +123,7 @@ passport.use('registration', new LocalStrategy({
                             console.log('Error in Saving user: '+err);
                             throw err;
                         }
-                        console.log('User Registration succesful');
+                        console.log('User Registration successful');
                         return done(null, newUser);
                     });
                 }
