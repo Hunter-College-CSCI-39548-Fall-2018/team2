@@ -7,3 +7,4 @@ const status = document.getElementById('status');
 iconEl.addEventListener('MDCIconToggle:change', ({detail}) => {
     status.textContent = `Icon Toggle is ${detail.isOn ? 'on' : 'off'}`;
 });
+
