@@ -8,6 +8,11 @@ router.get('/', function (req, res) {
     res.render('index', {user: req.user});
 });
 
+router.post('/', function (req, res) {
+    // Todo: Validate and sanitize form data with express-validator
+    res.render('index', {user: req.user});
+});
+
 router.get('/register', function (req, res) {
     if(req.user){
         res.redirect('/');
@@ -24,7 +29,7 @@ router.post('/register', function (req, res) {
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+            res.redirect('/', {user: req.user});
         });
     });
 });
