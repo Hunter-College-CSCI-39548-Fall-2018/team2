@@ -1,24 +1,29 @@
 /* Import node libraries */
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var flash = require('connect-flash');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+
+require('dotenv').config();
 
 
 /* Require modules from routes directory */
-var routes = require('./routes/index');
-var goals = require('./routes/goals');
-var subgoals = require('./routes/subgoals');
+const routes = require('./routes/index');
+const goals = require('./routes/goals');
+const subgoals = require('./routes/subgoals');
 
 
 /* Create app object using express module and
    set to use EJS view engine */
-var app = express();
+const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -46,7 +51,7 @@ app.use('/subgoals', subgoals);
 
 
 /* Passport setup */
-var Account = require('./models/account');
+const Account = require('./models/account');
 passport.use(new LocalStrategy(
     function(username, password, done) {
         User.findOne({ username: username }, function (err, user) {
@@ -73,20 +78,35 @@ passport.use(new LocalStrategy(
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
+/* Configure Cloudinary */
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+});
+
+const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: "demo",
+    allowedFormats: ["jpg", "png"],
+    transformation: [{ width: 500, height: 500, crop: "limit" }]
+});
+
+const parser = multer({ storage: storage });
 
 /* Set up default mongoose connection */
-var mongoDB = 'mongodb://127.0.0.1:27017/';
+const mongoDB = 'mongodb://127.0.0.1:27017/';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 
 /* Get notification of connection errors */
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 /* Catch 404 and forward to error handler */
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

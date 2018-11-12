@@ -1,10 +1,21 @@
-var Goal = require('../models/goal');
-var Account = require('../models/account');
-var Subgoal = require('../models/subgoal');
-var async = require('async');
+const Goal = require('../models/goal');
+const Account = require('../models/account');
+const Subgoal = require('../models/subgoal');
+const async = require('async');
 
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
+
+// Display list of all filtered goals belonging to a given user
+exports.goal_list = function (req, res, next) {
+
+    //ToDo: Add a filter to filter goals by the current button toggled
+    Goal.find({'username': req.user.username}).exec(function (err, list_goals) {
+        if (err) { return next(err); }
+
+        res.render('/goals', {title: 'Goal List', goal_list: list_goals});
+    })
+};
 
 // Handles creation of a goal on POST
 exports.create_goal_post = [
@@ -18,10 +29,12 @@ exports.create_goal_post = [
     sanitizeBody('goalDescription.*').trim().escape(),
 
     (req, res, next) => {
+
         // Extracts validation errors from the request
         const errors = validationResult(req);
 
-        var goal = new Goal( {
+        // Create a goal object with escaped and trimmed data
+        const goal = new Goal( {
             title: req.body.goalTitle,
             description: req.body.goalDescription,
             username: req.user.username,
@@ -30,16 +43,14 @@ exports.create_goal_post = [
             posts: []
         });
 
-
         if(!errors.isEmpty()) {
-            console.log(errors);
-            // ToDo: Insert response if form fields are invalid
-            console.log(errors.mapped());
+            // ToDo: Insert response if form fields are invalid.
+            console.log("Errors in creation of a new card\n", errors.mapped());
             res.redirect('/goals');
 
         } else {
             goal.save(function (err) {
-                if (err) {return next(err); }
+                if (err) {return next(err);}
 
                 Console.log('Successful creation of a new card!');
                 res.redirect('/goals');
