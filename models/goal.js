@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var Goal = new Schema({
     title: {type: String, required: true},
     description: {type: String, required: true},
-    author: {type: Schema.ObjectId, ref: 'Account', required: true},
+    username: {type: String, required: true},
     created: {type: Date, default: Date.now, required: true},
     completed: {type: Date, default: Date.now},
     priority: {type: Boolean, default: false},

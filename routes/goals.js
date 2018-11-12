@@ -11,9 +11,11 @@ router.get('/', function (req, res) {
     res.render('index', {user: req.user});
 });
 
+
 /// Goals routes ///
 
 // POST request for creating a goal
 router.post('/create', goal_controller.create_goal_post);
+
 
 module.exports = router;
