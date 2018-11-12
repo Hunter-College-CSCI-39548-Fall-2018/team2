@@ -1,4 +1,4 @@
-/* Import node libraries */
+// Import node libraries
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -15,7 +15,7 @@ const cloudinaryStorage = require("multer-storage-cloudinary");
 require('dotenv').config();
 
 
-/* Require modules from routes directory */
+// Require modules from routes directory
 const routes = require('./routes/index');
 const goals = require('./routes/goals');
 const subgoals = require('./routes/subgoals');
@@ -28,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-/* Add middleware libraries into request handling chain */
+// Add middleware libraries into request handling chain
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,13 +44,13 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-/* Add route-handling code to request handling chain */
+// Add route-handling code to request handling chain
 app.use('/', routes);
 app.use('/goals', goals);
 app.use('/subgoals', subgoals);
 
 
-/* Passport setup */
+// Passport setup
 const Account = require('./models/account');
 passport.use(new LocalStrategy(
     function(username, password, done) {
@@ -78,7 +78,7 @@ passport.use(new LocalStrategy(
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-/* Configure Cloudinary */
+// Configure Cloudinary
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
@@ -94,17 +94,17 @@ const storage = cloudinaryStorage({
 
 const parser = multer({ storage: storage });
 
-/* Set up default mongoose connection */
+// Set up default mongoose connection
 const mongoDB = 'mongodb://127.0.0.1:27017/';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 
-/* Get notification of connection errors */
+// Get notification of connection errors
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-/* Catch 404 and forward to error handler */
+// Catch 404 and forward to error handler
 app.use(function(req, res, next) {
     const err = new Error('Not Found');
     err.status = 404;
@@ -112,7 +112,7 @@ app.use(function(req, res, next) {
 });
 
 
-/* Development error handler. Will print stacktrace */
+// Development error handler. Will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
