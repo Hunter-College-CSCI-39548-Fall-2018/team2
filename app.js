@@ -9,14 +9,19 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 
+
 /* Require modules from routes directory */
 var routes = require('./routes/index');
+var goals = require('./routes/goals');
+var subgoals = require('./routes/subgoals');
+
 
 /* Create app object using express module and
    set to use EJS view engine */
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 
 /* Add middleware libraries into request handling chain */
 app.use(logger('dev'));
@@ -33,8 +38,12 @@ app.use(passport.session());
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 /* Add route-handling code to request handling chain */
 app.use('/', routes);
+app.use('/goals', goals);
+app.use('/subgoals', subgoals);
+
 
 /* Passport setup */
 var Account = require('./models/account');
@@ -64,9 +73,15 @@ passport.use(new LocalStrategy(
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-/* Database connection */
+
+/* Set up default mongoose connection */
 var mongoDB = 'mongodb://127.0.0.1:27017/';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
+
+
+/* Get notification of connection errors */
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 /* Catch 404 and forward to error handler */
@@ -75,6 +90,7 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
 
 /* Development error handler. Will print stacktrace */
 if (app.get('env') === 'development') {
@@ -86,4 +102,5 @@ if (app.get('env') === 'development') {
         });
     });
 }
+
 module.exports = app;

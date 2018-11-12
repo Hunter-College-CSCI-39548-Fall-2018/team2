@@ -13,5 +13,4 @@ var Goal = new Schema({
     img: {data: Buffer, contentType: String}
 });
 
-
 module.exports = mongoose.model('Goal', Goal);

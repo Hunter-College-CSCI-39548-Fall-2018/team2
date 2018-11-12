@@ -3,14 +3,8 @@ var passport = require('passport');
 var Account = require('../models/account');
 var router = express.Router();
 
-
-router.get('/', function (req, res) {
-    res.render('index', {user: req.user});
-});
-
-router.post('/', function (req, res) {
-    // Todo: Validate and sanitize form data with express-validator
-    res.render('index', {user: req.user});
+router.get('/', function(req, res) {
+    res.redirect('/goals');
 });
 
 router.get('/register', function (req, res) {
@@ -25,11 +19,11 @@ router.post('/register', function (req, res) {
     Account.register(new Account({username: req.body.username}), req.body.password, function (err, account) {
         if (err || (req.body.password !== req.body.re_password)) {
             // ToDo: Currently just refreshes page if invalid. Add response indicating error to user
-            return res.render('register', {account: account});
+            return res.render('register');
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/', {user: req.user});
+            res.redirect('/goals', {user: req.user});
         });
     });
 });
