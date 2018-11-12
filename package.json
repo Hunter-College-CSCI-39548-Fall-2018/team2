@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "start": "node ./bin/start"
+    "start": "node ./bin/start",
+    "devstart": "nodemon ./bin/start"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "@material/fab": "^0.41.0",
     "@material/icon-toggle": "^0.41.0",
     "body-parser": "^1.18.3",
+    "bootstrap-material-design": "^4.1.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "debug": "^4.1.0",
@@ -39,5 +41,8 @@
     "react": "^16.5.2",
     "serve-favicon": "^2.5.0",
     "should": "^13.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
   }
 }

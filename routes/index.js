@@ -5,8 +5,6 @@ var router = express.Router();
 
 
 router.get('/', function (req, res) {
-    // We might just end up making the login
-    // our home page but this is just here for now
     res.render('index', {user: req.user});
 });
 
