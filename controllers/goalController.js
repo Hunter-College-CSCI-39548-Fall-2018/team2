@@ -71,7 +71,7 @@ exports.create_goal_post = [
             title: req.body.goalTitle,
             description: req.body.goalDescription,
             username: req.user.username,
-            created: req.body.dateCreated,
+            created: Date.now,
             subgoals: [],
             posts: []
         });
