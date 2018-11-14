@@ -94,7 +94,6 @@ const storage = cloudinaryStorage({
     transformation: [{ width: 500, height: 500, crop: "limit" }]
 });
 
-const parser = multer({ storage: storage });
 
 // Set up default mongoose connection
 const mongoDB = 'mongodb://127.0.0.1:27017/';

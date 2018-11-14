@@ -2,25 +2,10 @@ const Goal = require('../models/goal');
 const Account = require('../models/account');
 const Subgoal = require('../models/subgoal');
 const async = require('async');
-require('dotenv').config();
 
 const multer = require("multer");
 const upload = multer({dest: './uploads/'});
 const cloudinary = require("cloudinary");
-const cloudinaryStorage = require("multer-storage-cloudinary");
-
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-});
-
-const storage = cloudinaryStorage({
-    cloudinary: cloudinary,
-    folder: "demo",
-    allowedFormats: ["jpg", "png"],
-    transformation: [{width: 500, height: 500, crop: "limit"}]
-});
 
 const {body, validationResult} = require('express-validator/check');
 const {sanitizeBody} = require('express-validator/filter');
@@ -33,7 +18,6 @@ exports.goal_list = function (req, res, next) {
         if (err) {
             return next(err);
         }
-
         res.render('/goals', {title: 'Goal List', goal_list: list_goals});
     })
 };
@@ -51,18 +35,6 @@ exports.create_goal_post = [
 
     (req, res, next) => {
 
-        console.log(req.file);
-
-        const image = {};
-
-        // URL which is used to display image on the front-end
-        image.url = req.file.url;
-
-        // ID used to access and delete the image from Cloudinary
-        image.id = req.file.public_id;
-
-        //Image.create(image).then(newImage => res.json(newImage)).catch(err => console.log(err));
-
         // Extracts validation errors from the request
         const errors = validationResult(req);
 
@@ -71,25 +43,32 @@ exports.create_goal_post = [
             title: req.body.goalTitle,
             description: req.body.goalDescription,
             username: req.user.username,
-            created: Date.now,
             subgoals: [],
             posts: []
         });
 
         if (!errors.isEmpty()) {
             // ToDo: Insert response if form fields are invalid.
+
             console.log("Errors in creation of a new card\n", errors.mapped());
             res.redirect('/goals');
 
         } else {
-            goal.save(function (err) {
-                if (err) {
-                    return next(err);
+            if (req.file) { // Image provided during goal creation
+                try {
+                    cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
+                        goal.img = result.url.toString();
+                        goal.save();
+                        console.log('Image successfully uploaded to Cloudinary', result.url);
+                    });
+                } catch (err) {
+                    console.log(err);
                 }
-
-                console.log('Successful creation of a new card!');
-                res.redirect('/goals');
-            });
+            } else {
+                goal.save();
+            }
+            console.log('Successful creation of a new card!');
+            res.redirect('/goals');
         }
     }
 ];
