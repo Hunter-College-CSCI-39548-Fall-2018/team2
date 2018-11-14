@@ -27,6 +27,6 @@ router.post('/login', passport.authenticate('local',
 /** Logout Routes **/
 
 // GET request for logging out
-router.post('/logout', account_controller.account_logout_post);
+router.get('/logout', account_controller.account_logout_get);
 
 module.exports = router;

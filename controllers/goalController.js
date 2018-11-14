@@ -8,21 +8,18 @@ const cloudinary = require("cloudinary");
 const {body, validationResult} = require('express-validator/check');
 const {sanitizeBody} = require('express-validator/filter');
 
-// Return home goals page
-exports.goals_home_get = function (req, res) {
-    res.render('index', {user: req.user});
-};
+// Return home goals page (retrieves list of filtered goals belonging to a given user
+exports.goals_home_get = function (req, res, next) {
 
-// Display list of all filtered goals belonging to a given user
-exports.goal_list = function (req, res, next) {
-
-    //ToDo: Add a filter to filter goals by the current button toggled
-    Goal.find({'username': req.user.username}).exec(function (err, list_goals) {
-        if (err) {
-            return next(err);
-        }
-        res.render('/goals', {title: 'Goal List', goal_list: list_goals});
-    })
+        //ToDo: Add a filter to filter goals by the current button toggled
+        Goal.find({'username': req.user.username}, function (err, list_goals) {
+            console.log(req.user.username);
+            if (err) return next(err);
+            for (let i = 0; i < list_goals.length; i++){
+                   console.log(list_goals[i].title);
+            }
+            res.render('index', {title: 'Goal List', goal_list: list_goals, user: req.user});
+        }).lean();
 };
 
 // Handles creation of a goal on POST
@@ -33,8 +30,8 @@ exports.create_goal_post = [
     body('goalDescription').isLength({min: 1}).trim().withMessage('Description must not be empty'),
 
     // Sanitize fields
-    sanitizeBody('goalTitle.*').trim().escape(),
-    sanitizeBody('goalDescription.*').trim().escape(),
+    sanitizeBody('goalTitle.*').escape(),
+    sanitizeBody('goalDescription.*').escape(),
 
     (req, res, next) => {
 
@@ -57,6 +54,7 @@ exports.create_goal_post = [
             res.redirect('/goals');
 
         } else {
+            console.log('description', goal.description);
             if (req.file) { // Image provided during goal creation
                 try {
                     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
@@ -71,7 +69,7 @@ exports.create_goal_post = [
                 goal.save();
             }
             console.log('Successful creation of a new card!');
-            res.redirect('/goals');
+            res.redirect('/');
         }
     }
 ];

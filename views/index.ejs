@@ -18,7 +18,6 @@
             integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
             crossorigin="anonymous"></script>
 </head>
-
 <body>
 <% if (!user) { %>
 <h1>Hi there! This is a placeholder because you are not currently logged in.</h1>
@@ -52,7 +51,8 @@
                         </div>
                         <div class="form-group">
                             <label for="goalDescription">Goal Description</label>
-                            <textarea class="form-control" name="goalDescription" id="goalDescription" rows="3"></textarea>
+                            <textarea class="form-control" name="goalDescription" id="goalDescription"
+                                      rows="3"></textarea>
                         </div>
                         <div class="form-group">
                             <input type="file" class="form-control-file" name="uploadPicture" id="uploadPicture">
@@ -79,12 +79,16 @@
 </div>
 
 <div id="container">
+    <% if (goal_list.length === 0) { %>
+    <p>You currently have no goals. Add one by clicking the '+' button! </p>
+    <% } else {
+    for(let i = 0; i < goal_list.length; i++) { %>
     <div class="mdl-card mdl-shadow--2dp demo-card-square">
         <div class="mdl-card__title mdl-card__accent mdl-card--expand">
-            <img src="assets/cactus.jpg">
+            <img src=<%= goal_list[i].img %>>
         </div>
         <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
+            <p><%= goal_list[i].description %></p>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <button class="mdl-button mdl-js-button mdl-button--icon">
@@ -99,112 +103,10 @@
             </button>
         </div>
     </div>
-
-    <div class="mdl-card mdl-shadow--2dp demo-card-square">
-        <div class="mdl-card__title mdl-card__accent mdl-card--expand">
-            <img src="assets/greenhouse.jpg">
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    create
-                </i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    star_border
-                </i>
-            </button>
-        </div>
-    </div>
-
-    <div class="mdl-card mdl-shadow--2dp demo-card-square">
-        <div class="mdl-card__title mdl-card--expand">
-            <img src="assets/meadow.jpg">
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    create
-                </i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    star_border
-                </i>
-            </button>
-        </div>
-    </div>
-
-    <div class="mdl-card mdl-shadow--2dp demo-card-square">
-        <div class="mdl-card__title mdl-card--expand">
-            <img src="assets/cactusflowers.jpg">
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    create
-                </i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    star_border
-                </i>
-            </button>
-        </div>
-    </div>
-
-    <div class="mdl-card mdl-shadow--2dp demo-card-square">
-        <div class="mdl-card__title mdl-card--expand">
-            <img src="assets/garden.jpg">
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    create
-                </i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    star_border
-                </i>
-            </button>
-        </div>
-    </div>
-
-    <div class="mdl-card mdl-shadow--2dp demo-card-square">
-        <div class="mdl-card__title mdl-card--expand">
-            <img src="assets/plants.jpg">
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenan convallis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    create
-                </i>
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--icon">
-                <i class="material-icons">
-                    star_border
-                </i>
-            </button>
-        </div>
-    </div>
+    <% } %>
+    <% } %>
 </div>
 <% } %>
 </body>
 </html>
+
