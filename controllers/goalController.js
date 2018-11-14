@@ -1,6 +1,4 @@
 const Goal = require('../models/goal');
-const Account = require('../models/account');
-const Subgoal = require('../models/subgoal');
 const async = require('async');
 
 const multer = require("multer");
@@ -9,6 +7,11 @@ const cloudinary = require("cloudinary");
 
 const {body, validationResult} = require('express-validator/check');
 const {sanitizeBody} = require('express-validator/filter');
+
+// Return home goals page
+exports.goals_home_get = function (req, res) {
+    res.render('index', {user: req.user});
+};
 
 // Display list of all filtered goals belonging to a given user
 exports.goal_list = function (req, res, next) {
