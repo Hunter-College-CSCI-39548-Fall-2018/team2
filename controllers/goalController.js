@@ -18,10 +18,22 @@ exports.goals_home_get = function (req, res, next) {
         Goal.find({'username': req.user.username}, function (err, list_goals) {
             if (err) return next(err);
 
-            res.locals.goals = (req.session.goals === undefined || req.session.length === 0) ? list_goals : req.session.goals;
-            req.session.goals = res.locals.goals;
+            res.locals.goals = (req.session.goals === undefined || req.session.length === 0)
+                ? list_goals : req.session.goals;
 
+            const MAX_DESCRIPTION_LENGTH = 68;
+
+            // Format goals before displaying to meet card structure
+            for (let i = 0; i < res.locals.goals.length; i++) {
+                res.locals.goals[i].title = list_goals[i].title.charAt(0).toUpperCase() + list_goals[i].title.slice(1);
+
+                if(res.locals.goals[i].description.length > MAX_DESCRIPTION_LENGTH) res.locals.goals[i].description =
+                    res.locals.goals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
+            }
+
+            req.session.goals = res.locals.goals;
             res.render('index', {user: req.user});
+
         }).lean();
 };
 

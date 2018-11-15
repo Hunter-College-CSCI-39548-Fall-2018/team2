@@ -87,8 +87,13 @@
         <div class="mdl-card__title mdl-card__accent mdl-card--expand">
             <img src=<%= goals[i].img %>>
         </div>
-        <div class="mdl-card__supporting-text">
-            <p><%= goals[i].description %></p>
+        <div class="card-information">
+            <div class="mdl-card__card-title">
+                <span class="card-title"><%= goals[i].title %></span>
+            </div>
+            <div class="mdl-card__supporting-text">
+                <span class="card-description"><%= goals[i].description %></span>
+            </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <button class="mdl-button mdl-js-button mdl-button--icon">
