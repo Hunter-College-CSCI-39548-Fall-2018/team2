@@ -79,16 +79,16 @@
 </div>
 
 <div id="container">
-    <% if (goal_list.length === 0) { %>
+    <% if (goals.length === 0) { %>
     <p>You currently have no goals. Add one by clicking the '+' button! </p>
     <% } else {
-    for(let i = 0; i < goal_list.length; i++) { %>
+    for(let i = 0; i < goals.length; i++) { %>
     <div class="mdl-card mdl-shadow--2dp demo-card-square">
         <div class="mdl-card__title mdl-card__accent mdl-card--expand">
-            <img src=<%= goal_list[i].img %>>
+            <img src=<%= goals[i].img %>>
         </div>
         <div class="mdl-card__supporting-text">
-            <p><%= goal_list[i].description %></p>
+            <p><%= goals[i].description %></p>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <button class="mdl-button mdl-js-button mdl-button--icon">

@@ -1,5 +1,7 @@
 const Goal = require('../models/goal');
 const async = require('async');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 const multer = require("multer");
 const upload = multer({dest: './uploads/'});
@@ -12,13 +14,14 @@ const {sanitizeBody} = require('express-validator/filter');
 exports.goals_home_get = function (req, res, next) {
 
         //ToDo: Add a filter to filter goals by the current button toggled
+
         Goal.find({'username': req.user.username}, function (err, list_goals) {
-            console.log(req.user.username);
             if (err) return next(err);
-            for (let i = 0; i < list_goals.length; i++){
-                   console.log(list_goals[i].title);
-            }
-            res.render('index', {title: 'Goal List', goal_list: list_goals, user: req.user});
+
+            res.locals.goals = (req.session.goals === undefined || req.session.length === 0) ? list_goals : req.session.goals;
+            req.session.goals = res.locals.goals;
+
+            res.render('index', {user: req.user});
         }).lean();
 };
 
@@ -48,28 +51,34 @@ exports.create_goal_post = [
         });
 
         if (!errors.isEmpty()) {
+
             // ToDo: Insert response if form fields are invalid.
 
             console.log("Errors in creation of a new card\n", errors.mapped());
             res.redirect('/goals');
 
         } else {
-            console.log('description', goal.description);
+
+            // ToDo: Look into a better way to do this to avoid code repetition
+
             if (req.file) { // Image provided during goal creation
                 try {
                     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
                         goal.img = result.url.toString();
                         goal.save();
                         console.log('Image successfully uploaded to Cloudinary', result.url);
+                        req.session.goals.push(goal);
+                        res.redirect('/goals');
                     });
                 } catch (err) {
                     console.log(err);
                 }
             } else {
                 goal.save();
+                req.session.goals.push(goal);
+                res.redirect('/goals');
             }
-            console.log('Successful creation of a new card!');
-            res.redirect('/');
+
         }
     }
 ];
