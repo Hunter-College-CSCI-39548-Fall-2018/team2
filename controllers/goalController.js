@@ -44,10 +44,6 @@ exports.create_goal_post = [
     body('goalTitle').isLength({min: 1}).trim().withMessage('Title must not be empty.'),
     body('goalDescription').isLength({min: 1}).trim().withMessage('Description must not be empty'),
 
-    // Sanitize fields
-    sanitizeBody('goalTitle.*').escape(),
-    sanitizeBody('goalDescription.*').escape(),
-
     (req, res, next) => {
 
         // Extracts validation errors from the request
@@ -86,11 +82,14 @@ exports.create_goal_post = [
                     console.log(err);
                 }
             } else {
+                // Select a random default image to be associated with the goal
+                const default_images = ['cactus.jpg', 'garden.jpg', 'greenhouse.jpg', 'meadow.jpg'];
+                goal.img = 'assets/' + default_images[Math.floor(Math.random() * default_images.length)];
+
                 goal.save();
                 req.session.goals.push(goal);
                 res.redirect('/goals');
             }
-
         }
     }
 ];
