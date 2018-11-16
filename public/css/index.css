@@ -19,7 +19,7 @@ img {
 
 .demo-card-square.mdl-card {
     width: 320px;
-    height: 320px;
+    height: 350px;
     float: left;
     margin: 1rem;
     position: relative;
@@ -68,7 +68,7 @@ body {
     padding-left: 12%;
 }
 
-#toggle-buttons {
+#header {
     text-align: center;
     margin-bottom: 25px;
     margin-top: 15px;
@@ -89,27 +89,28 @@ body {
     text-align: center;
     font-size: 20px;
     margin: 0px;
-    font-family:poppins;
+    font-family: poppins;
 }
-
 
 .mdl-card__actions.mdl-card--border {
     text-align: right;
 }
 
 .mdl-card__supporting-text {
+    padding-top: 0;
+    padding-bottom: 0;
     font-family: Poppins;
+    width: 100%;
 }
 
 hr {
-    border:none;
+    border: none;
     width: 90%;
     height: 50px;
     border-bottom: 1px solid #C5C8C9;
     box-shadow: 0 18px 15px -20px #333;
     margin: -50px auto 40px;
 }
-
 
 .fab {
     width: 60px;
@@ -137,3 +138,59 @@ hr {
 #add-button {
     margin: 30%;
 }
+
+#add-goal {
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 0;
+}
+
+.modal-title {
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+#uploadPicture {
+    margin-top:20px;
+}
+
+.modal-content .modal-footer {
+    margin-bottom: 10px;
+    padding-right: 20px;
+}
+
+.form-group {
+    text-align:left;
+}
+
+.mdl-card__card-title {
+    color: rgba(0,0,0,.54);
+    font-size: 1rem;
+    line-height: 18px;
+    font-family: Poppins;
+    width: 100%;
+    overflow: hidden;
+    padding: 12px 0px 0px 16px;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 17px;
+    color: #003300;
+
+}
+
+.card-description {
+    margin-bottom: 0px;
+}
+
+.card-information {
+    height: 90px;
+}
+
