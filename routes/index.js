@@ -1,50 +1,32 @@
-var express = require('express');
-var passport = require('passport');
-var Account = require('../models/account');
-var router = express.Router();
+const express = require('express');
+const passport = require('passport');
+const router = express.Router();
+const account_controller = require('../controllers/accountController');
 
-router.get('/', function(req, res) {
-    res.redirect('/goals');
-});
+router.get('/', account_controller.account_home_get);
 
-router.get('/register', function (req, res) {
-    if(req.user){
-        res.redirect('/');
-    } else {
-        res.render('register');
-    }
-});
+/** Registration Routes **/
 
-router.post('/register', function (req, res) {
-    Account.register(new Account({username: req.body.username}), req.body.password, function (err, account) {
-        if (err || (req.body.password !== req.body.re_password)) {
-            // ToDo: Currently just refreshes page if invalid. Add response indicating error to user
-            return res.render('register');
-        }
+// GET request for registration page
+router.get('/register', account_controller.account_registration_get);
 
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/goals', {user: req.user});
-        });
-    });
-});
+// POST request for creating an account
+router.post('/register', account_controller.account_registration_post);
 
-router.get('/login', function (req, res) {
-    if (req.user){
-        res.redirect('/');
-    } else {
-        res.render('login', {user: req.user});
-    }
 
-});
+/** Login Routes **/
 
+// GET request for login page
+router.get('/login', account_controller.account_login_get);
+
+// POST request for logging in
 router.post('/login', passport.authenticate('local',
-    {successRedirect: '/', failureRedirect: '/login', failureFlash: true}
-));
+    {successRedirect: '/goals', failureRedirect: '/login', failureFlash: true}));
 
 
-router.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/login');
-});
+/** Logout Routes **/
+
+// GET request for logging out
+router.get('/logout', account_controller.account_logout_get);
 
 module.exports = router;

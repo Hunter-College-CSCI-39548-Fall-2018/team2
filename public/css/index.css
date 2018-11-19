@@ -19,7 +19,7 @@ img {
 
 .demo-card-square.mdl-card {
     width: 320px;
-    height: 320px;
+    height: 350px;
     float: left;
     margin: 1rem;
     position: relative;
@@ -97,6 +97,8 @@ body {
 }
 
 .mdl-card__supporting-text {
+    padding-top: 0;
+    padding-bottom: 0;
     font-family: Poppins;
     width: 100%;
 }
@@ -164,3 +166,31 @@ hr {
 .form-group {
     text-align:left;
 }
+
+.mdl-card__card-title {
+    color: rgba(0,0,0,.54);
+    font-size: 1rem;
+    line-height: 18px;
+    font-family: Poppins;
+    width: 100%;
+    overflow: hidden;
+    padding: 12px 0px 0px 16px;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 17px;
+    color: #003300;
+
+}
+
+.card-description {
+    margin-bottom: 0px;
+}
+
+.card-information {
+    height: 90px;
+}
+
