@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node ./bin/start",
-    "devstart": "nodemon ./bin/start"
+    "devstart": "nodemon ./bin/start",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,10 @@
     "should": "^13.2.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
     "nodemon": "^1.18.6"
   }
 }
