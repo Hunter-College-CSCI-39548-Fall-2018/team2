@@ -87,16 +87,16 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 });
 
-/*
+
 // Set up default mongoose connection
-const mongoDB = 'mongodb://127.0.0.1:27017/';
+const mongoDB = 'mongodb://127.0.0.1:27017/bloom';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 
 // Get notification of connection errors
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-*/
+
 
 
 // Catch 404 and forward to error handler

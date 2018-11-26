@@ -1,6 +1,8 @@
 {
   "name": "bloom-team2",
   "version": "1.0.0",
+  "description": "Web Development Project Team Two",
+  "license": "ISC",
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",

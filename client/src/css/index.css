@@ -1,0 +1,219 @@
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@font-face {
+    font-family: 'IM Fell Great Primer', serif;
+    font-style: italic;
+    font-weight: 400;
+    src: url('https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer:400i');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://fonts.googleapis.com/css?family=Poppins');
+}
+
+.demo-card-square.mdl-card {
+    width: 320px;
+    height: 350px;
+    float: left;
+    margin: 1rem;
+    position: relative;
+}
+
+.demo-card-square.mdl-card:hover {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14),
+    0 3px 14px 2px rgba(0, 0, 0, .12),
+    0 5px 5px -3px rgba(0, 0, 0, .2);
+}
+
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    background: #fff;
+    padding: 0;
+    overflow: hidden;
+}
+
+.demo-card-square > .mdl-card__accent {
+    background: #fff;
+    overflow: hidden;
+}
+
+.body {
+    background: #fafafa;
+    position: relative;
+    margin-bottom: 100px;
+    padding: 20px 20px 20px 40px;
+}
+
+.mdl-card__title .mdl-card--expand {
+    width: 320px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.mdl-button--raised.mdl-button--colored {
+    color: white;
+    background: #266A2E;
+    width: 120px;
+    font-family: Poppins;
+    margin: 15px 17px 30px;
+}
+
+#container {
+    padding-left: 12%;
+}
+
+#header {
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 15px;
+}
+
+#application-title {
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 45px;
+    color: #314e31;
+    font-style: italic;
+    font-family: IM Fell Great Primer;
+    font-weight: bold;
+}
+
+#application-description {
+    text-align: center;
+    font-size: 20px;
+    margin: 0px;
+    font-family: poppins;
+}
+
+.mdl-card__actions.mdl-card--border {
+    text-align: right;
+}
+
+.mdl-card__supporting-text {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-family: Poppins;
+    width: 100%;
+}
+
+hr {
+    border: none;
+    width: 90%;
+    height: 50px;
+    border-bottom: 1px solid #C5C8C9;
+    box-shadow: 0 18px 15px -20px #333;
+    margin: -50px auto 40px;
+}
+
+.fab {
+    width: 60px;
+    height: 60px;
+    background-color: #266A2E;
+    border-radius: 50%;
+    box-shadow: 0 6px 10px 0 #666;
+    transition: all 0.1s ease-in-out;
+
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+}
+
+.fab:hover {
+    box-shadow: 0 6px 14px 0 #666;
+    transform: scale(1.05);
+}
+
+#add-button {
+    margin: 30%;
+}
+
+#add-goal {
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 0;
+}
+
+.modal-title {
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+#uploadPicture {
+    margin-top:20px;
+}
+
+.modal-content .modal-footer {
+    margin-bottom: 10px;
+    padding-right: 20px;
+}
+
+.form-group {
+    text-align:left;
+}
+
+.mdl-card__card-title {
+    color: rgba(0,0,0,.54);
+    font-size: 1rem;
+    line-height: 18px;
+    font-family: Poppins;
+    width: 100%;
+    overflow: hidden;
+    padding: 12px 0px 0px 16px;
+    margin-bottom: 5px;
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 17px;
+    color: #003300;
+
+}
+
+.card-description {
+    margin-bottom: 0px;
+}
+
+.card-information {
+    height: 90px;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v41/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+

@@ -3,7 +3,8 @@ const passport = require('passport');
 
 
 exports.account_home_get = function (req, res) {
-    res.redirect('/goals');
+    res.send({ express: 'HELOO' });
+    //res.redirect('/goals');
 };
 
 exports.account_registration_get = function (req, res) {
