@@ -3,7 +3,13 @@ const passport = require('passport');
 const router = express.Router();
 const account_controller = require('../controllers/accountController');
 
+/** Home and Goal Page Routes **/
+
 router.get('/', account_controller.account_home_get);
+
+//router.get('/goals', account_controller.account_goals_get);
+
+router.get('/subgoals', account_controller.account_subgoals_get);
 
 /** Registration Routes **/
 
@@ -19,21 +25,14 @@ router.post('/register', account_controller.account_registration_post);
 // GET request for login page
 router.get('/login', account_controller.account_login_get);
 
+
 // POST request for logging in
 router.post('/login', passport.authenticate('local',
-    {successRedirect: '/goals', failureRedirect: '/login', failureFlash: true}));
-
+    {successRedirect: '/', failureRedirect: '/login', failureFlash: true}));
 
 /** Logout Routes **/
 
 // GET request for logging out
 router.get('/logout', account_controller.account_logout_get);
-
-router.post('/home', (req, res) => {
-    console.log(req.body);
-    res.send(
-        `I received your POST request. This is what you sent me: ${req.body.post}`,
-    );
-});
 
 module.exports = router;

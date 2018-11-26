@@ -6,9 +6,22 @@ exports.account_home_get = function (req, res) {
     console.log("Temporary placeholder for homepage");
 };
 
-exports.account_registration_get = function (req, res) {
+/*
+exports.account_goals_get = function (req, res) {
     if (req.user) {
         res.redirect('/goals');
+    }
+}; */
+
+exports.account_subgoals_get = function (req, res) {
+    if (req.user) {
+        res.redirect('/subgoals');
+    }
+};
+
+exports.account_registration_get = function (req, res) {
+    if (req.user) {
+        res.redirect('/');
     }
 };
 
@@ -18,13 +31,16 @@ exports.account_registration_post = function (req, res) {
             if (err || (req.body.password !== req.body.re_password)) {
                 console.log(err);
                 // ToDo: Currently just refreshes page if invalid. Add response indicating error to user
-                //return res.render('register');
             }
 
             passport.authenticate('local')(req, res, function () {
-                res.redirect('/goals');
+                res.redirect('/');
             });
         });
+};
+
+exports.account_login_post = function (req, res) {
+
 };
 
 exports.account_login_get = function (req, res) {

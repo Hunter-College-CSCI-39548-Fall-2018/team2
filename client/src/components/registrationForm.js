@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router';
 import '../css/login-registration.css';
 
 class RegistrationForm extends Component {
@@ -19,6 +20,7 @@ class RegistrationForm extends Component {
     // Handles submission of form data and posts it to backend
     handleSubmit = async e => {
         e.preventDefault();
+
         const response = await fetch('/register', {
             method: 'POST',
             headers: {
@@ -71,4 +73,4 @@ class RegistrationForm extends Component {
     }
 }
 
-export default RegistrationForm;
+export default withRouter(RegistrationForm);
