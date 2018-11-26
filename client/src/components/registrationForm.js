@@ -49,17 +49,17 @@ class RegistrationForm extends Component {
             <form className="register-form" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label><i className="zmdi zmdi-account material-icons-name"/></label>
-                    <input type="text" name="username" id="username" placeholder="Username"
+                    <input type="text" name="username" placeholder="Username"
                            value={this.state.username} onChange={this.handleInputChange}/>
                 </div>
                 <div className="form-group">
                     <label><i className="zmdi zmdi-lock"/></label>
-                    <input type="password" name="password" id="password"
+                    <input type="password" name="password"
                            placeholder="Password" value={this.state.password} onChange={this.handleInputChange}/>
                 </div>
                 <div className="form-group">
                     <label><i className="zmdi zmdi-lock-outline"/></label>
-                    <input type="password" name="rePassword" id="re_password"
+                    <input type="password" name="rePassword"
                            placeholder="Re-enter your password" value={this.state.rePassword}
                            onChange={this.handleInputChange}/>
                 </div>

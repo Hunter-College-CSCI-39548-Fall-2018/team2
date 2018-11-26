@@ -45,7 +45,7 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <form method="POST" className="register-form" id="login-form">
+            <form className="register-form" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label><i className="zmdi zmdi-account material-icons-name"/></label>
                     <input type="text" name="username" placeholder="Username" value={this.state.username}

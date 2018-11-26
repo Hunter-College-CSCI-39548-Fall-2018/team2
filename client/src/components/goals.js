@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Header from './header';
+import GoalModal from './goalModal';
 import '../css/index.css';
 import '../css/goals.css';
 
@@ -20,8 +21,9 @@ class Goals extends Component {
 
     render() {
         return (
-            <div id="back">
-            <Header/>
+            <div>
+                <Header/>
+                <GoalModal/>
             </div>
         );
     }
