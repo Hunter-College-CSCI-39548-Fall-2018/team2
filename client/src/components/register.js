@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import '../css/login-registration.css';
 import RegistrationForm from './registrationForm'
 import '../fonts/material-icon/css/material-design-iconic-font.min.css';
@@ -16,12 +16,12 @@ class Register extends Component {
 
     componentDidMount() {
         this.callApi()
-            .then(res => this.setState({ response: res.express }))
+            .then(res => this.setState({response: res.express}))
             .catch(err => console.log(err));
     }
 
     callApi = async () => {
-        const response = await fetch('/home');
+        const response = await fetch('/register');
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
         return body;

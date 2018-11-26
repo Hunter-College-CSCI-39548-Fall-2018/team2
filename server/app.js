@@ -92,7 +92,6 @@ cloudinary.config({
 const mongoDB = 'mongodb://127.0.0.1:27017/bloom';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
-
 // Get notification of connection errors
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -117,5 +116,6 @@ if (app.get('env') === 'development') {
         });
     });
 }
+
 
 module.exports = app;

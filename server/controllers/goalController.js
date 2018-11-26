@@ -130,7 +130,7 @@ exports.update_goal_post = [
     }
 ];
 
-// Handles deleteing a goal on POST
+// Handles deleting a goal on POST
 exports.delete_goal_post = function (req, res, next) {
 
     async.parallel({

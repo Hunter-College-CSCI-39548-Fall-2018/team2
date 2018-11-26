@@ -10,7 +10,7 @@ import Register from './components/register'
 const Routes = () => (
     <Router>
         <div>
-            <Route exact path="/home" component={Home}/>
+            <Route exact path="/" component={Home}/>
             <Route path="/goals" component={Goals}/>
             <Route path="/subgoals" component={Subgoals}/>
             <Route path="/login" component={Login}/>

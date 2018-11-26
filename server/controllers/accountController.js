@@ -3,15 +3,12 @@ const passport = require('passport');
 
 
 exports.account_home_get = function (req, res) {
-    res.send({ express: 'HELOO' });
-    //res.redirect('/goals');
+    console.log("Temporary placeholder for homepage");
 };
 
 exports.account_registration_get = function (req, res) {
     if (req.user) {
-        res.redirect('/');
-    } else {
-        res.render('register');
+        res.redirect('/goals');
     }
 };
 
@@ -21,20 +18,18 @@ exports.account_registration_post = function (req, res) {
             if (err || (req.body.password !== req.body.re_password)) {
                 console.log(err);
                 // ToDo: Currently just refreshes page if invalid. Add response indicating error to user
-                return res.render('register');
+                //return res.render('register');
             }
 
             passport.authenticate('local')(req, res, function () {
-                res.redirect('/');
+                res.redirect('/goals');
             });
         });
 };
 
 exports.account_login_get = function (req, res) {
     if (req.user) {
-        res.redirect('/');
-    } else {
-        res.render('login2', {user: req.user});
+        res.redirect('/goals');
     }
 };
 

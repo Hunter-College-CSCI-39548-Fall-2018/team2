@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const account_controller = require('../controllers/accountController');
 
-router.get('/home', account_controller.account_home_get);
+router.get('/', account_controller.account_home_get);
 
 /** Registration Routes **/
 
