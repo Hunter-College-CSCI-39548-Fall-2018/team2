@@ -7,8 +7,6 @@ const account_controller = require('../controllers/accountController');
 
 router.get('/', account_controller.account_home_get);
 
-//router.get('/goals', account_controller.account_goals_get);
-
 router.get('/subgoals', account_controller.account_subgoals_get);
 
 /** Registration Routes **/

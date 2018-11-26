@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import { withRouter } from 'react-router';
 import '../css/login-registration.css';
 
 class RegistrationForm extends Component {
@@ -73,4 +72,4 @@ class RegistrationForm extends Component {
     }
 }
 
-export default withRouter(RegistrationForm);
+export default RegistrationForm;

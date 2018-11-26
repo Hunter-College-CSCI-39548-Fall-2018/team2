@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import Header from './header';
+import '../css/index.css';
+import '../css/goals.css';
 
 class Goals extends Component {
 
@@ -9,7 +12,7 @@ class Goals extends Component {
     }
 
     callApi = async () => {
-        const response = await fetch('/goals');
+        const response = await fetch('/');
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
         return body;
@@ -17,8 +20,9 @@ class Goals extends Component {
 
     render() {
         return (
-            <p> Hello World! This page will eventually be the goals page but it is currently <br/>
-                under construction. Thanks for the patience! </p>
+            <div id="back">
+            <Header/>
+            </div>
         );
     }
 }

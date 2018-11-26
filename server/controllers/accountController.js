@@ -3,15 +3,10 @@ const passport = require('passport');
 
 
 exports.account_home_get = function (req, res) {
-    console.log("Temporary placeholder for homepage");
-};
-
-/*
-exports.account_goals_get = function (req, res) {
     if (req.user) {
         res.redirect('/goals');
     }
-}; */
+};
 
 exports.account_subgoals_get = function (req, res) {
     if (req.user) {

@@ -86,6 +86,7 @@ img {
 }
 
 #application-description {
+    font-weight: unset;
     text-align: center;
     font-size: 20px;
     margin: 0px;
@@ -136,7 +137,9 @@ hr {
 }
 
 #add-button {
+    position: relative;
     margin: 30%;
+    top: -20%;
 }
 
 #add-goal {
@@ -215,5 +218,9 @@ hr {
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+}
+
+#back {
+    background: none !important;
 }
 
