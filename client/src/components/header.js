@@ -11,14 +11,13 @@ class Header extends Component {
             clickedButton: '',
             userName: ''
         };
-
     }
 
     render() {
         return (
             <div id="header">
                 <h1 id="application-title"> Bloom </h1>
-                <h2 id="application-description"> Welcome !</h2>
+                <h2 id="application-description"> Welcome!</h2>
 
                 <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                     All

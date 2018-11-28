@@ -86,7 +86,7 @@ html, body {
 .bg {
     height:100vh;
     background: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ),
-    url("../assets/plant-background.jpg") no-repeat center fixed;
+    url("../assets/default_Images/plant-background.jpg") no-repeat center fixed;
     background-size: cover;
 }
 
