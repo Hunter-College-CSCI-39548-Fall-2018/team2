@@ -10,16 +10,12 @@ class GoalCard extends Component {
             goalTitle: this.props.goalTitle,
             goalDescription: this.props.goalDescription,
             goalImage: this.props.goalImage,
-            starred: true
+            starred: this.props.starred
         };
 
-        this.handleStarredClick = this.handleStarredClick.bind(this);
+        this.toggleStar = this.toggleStar.bind(this);
         this.handleEditClick = this.handleEditClick.bind(this);
         this.star = this.star.bind(this);
-    }
-
-    handleStarredClick() {
-
     }
 
     handleEditClick() {
@@ -27,12 +23,17 @@ class GoalCard extends Component {
     }
 
     star(props) {
-        const starred = props.starred;
-        if (starred) {
-            return (<img src={ require('../assets/icons/star_filled.svg') } alt="filled star" />);
+        if (this.props.starred) {
+            return (<i className="material-icons">star</i> );
         } else {
-            return (<img src={ require('../assets/icons/star_empty.svg') } alt="empty star" />);
+            return (<i className="material-icons">star_border</i>);
         }
+    }
+
+    toggleStar() {
+        this.setState({
+            starred: !this.state.starred
+        });
     }
 
     render() {
@@ -55,8 +56,10 @@ class GoalCard extends Component {
                             create
                         </i>
                     </button>
-                    <button className="mdl-button mdl-js-button mdl-button--icon">
-                        <star starred={this.state.starred}/>
+                    <button className="mdl-button mdl-js-button mdl-button--icon"
+                            onClick={this.toggleStar}>
+                        {this.state.starred && <i className="material-icons">star</i>}
+                        {!this.state.starred && <i className="material-icons">star_border</i>}
                     </button>
                 </div>
             </div>

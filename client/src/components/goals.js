@@ -11,7 +11,11 @@ class Goals extends Component {
         super(props);
         this.state = {
             user: '',
-            cards: [],
+            cards: [{title: 'testing', description: 'testing description', img: '', starred: true},
+                {title: 'testing', description: 'testing description', img: '', starred: false},
+                {title: 'testing', description: 'testing description', img: '', starred: true},
+                {title: 'testing', description: 'testing description', img: '', starred: true},
+                {title: 'testing', description: 'testing description', img: '', starred: true}],
             filteredType: ''
         };
         this.displayGoals = this.displayGoals.bind(this);
@@ -33,13 +37,13 @@ class Goals extends Component {
     displayGoals(props) {
         const numGoals = this.state.cards.length;
         if (numGoals === 0) {
-            return(<p> You currently have no goals. Add one by clicking the '+' button! </p>);
+            return (<p> You currently have no goals. Add one by clicking the '+' button! </p>);
         } else {
             return (
                 <ul> {
-                    this.state.cards.map((goal, index) => {
+                    props.map((goal, index) => {
                         return (<GoalCard key={index} goalTitle={goal.title}
-                                          goalDescription={goal.description} goalImage={goal.img}/>);
+                                          goalDescription={goal.description} goalImage={goal.img} starred={goal.starred}/>);
                     })}
                 </ul>
             )
@@ -52,9 +56,7 @@ class Goals extends Component {
                 <Header/>
                 <GoalModal/>
                 <test/>
-                <div>
-                    {this.displayGoals(this.state.cards)}
-                </div>
+                {this.displayGoals(this.state.cards)}
             </div>
         );
     }
