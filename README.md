@@ -1,3 +1,5 @@
+Under construction - Currently serving as a place to learn about React and Express as well as test features for a team project
+
 To download:
 
 1. Clone the repository
