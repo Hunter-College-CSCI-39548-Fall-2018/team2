@@ -23,7 +23,7 @@ img {
 
 .demo-card-square.mdl-card {
     width: 320px;
-    height: 350px;
+    height: 340px;
     float: left;
     margin: 1rem;
     position: relative;
@@ -278,6 +278,75 @@ img {
     margin: 15px 17px 30px;
 }
 
-.rkmd-btn:hover {
-    text-decoration: none; box-shadow: 0 4px 10px 0px rgba(0,0,0,0.225);
+.remove-btn {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 1.5rem;
+    font-size: 14px;
+    letter-spacing: .8px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    outline: none;
+    border: none;
+    user-select: none;
+    border-radius: 2px;
+    transition: all .3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.225);
+    color: white;
+    background: #ff1a1a;
+    width: 110px;
+    font-family: Poppins;
+    margin: 15px 17px 30px;
+}
+
+.edit-btn {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 1.5rem;
+    font-size: 14px;
+    letter-spacing: .8px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    outline: none;
+    border: none;
+    user-select: none;
+    border-radius: 2px;
+    transition: all .3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.225);
+    color: white;
+    background: #3aa246;
+    width: 110px;
+    font-family: Poppins;
+    margin: 15px 17px 30px;
+}
+
+.mdl-layout-title {
+    color: white;
+    font-family: Poppins;
+}
+
+.mdl-layout__header-row .mdl-navigation__link{
+    color: white;
+    font-family: Poppins;
+}
+
+.mdl-layout__header {
+    background: #266A2E;
+    margin-bottom: 20px;
+}
+
+.star {
+    color: #ffcc00;
 }

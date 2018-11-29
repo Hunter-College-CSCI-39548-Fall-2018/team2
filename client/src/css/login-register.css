@@ -366,3 +366,13 @@ label.valid:after {
     margin-left: 150px;
     margin-right: 0;
 }
+
+.img_wrp {
+    display: inline-block;
+    position: relative;
+}
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

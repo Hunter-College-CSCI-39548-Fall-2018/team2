@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Header from './header';
-import GoalModal from './goalModal';
+import GoalModal from './createGoal';
 import GoalCard from './goalCard';
+import NavBar from './navbar';
 
 class Goals extends Component {
 
@@ -49,9 +50,12 @@ class Goals extends Component {
         }
     };
 
+
+
     render() {
         return (
             <div>
+                <NavBar/>
                 <Header/>
                 <GoalModal/>
                 {this.displayGoals(this.state.cards)}

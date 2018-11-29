@@ -10,26 +10,26 @@ class Header extends Component {
             userName: ''
         };
 
-        this.filterCategoryPriority= this.filterCategoryPriority.bind(this);
+        this.filterCategoryPriority = this.filterCategoryPriority.bind(this);
         this.filterCategoryAll = this.filterCategoryAll.bind(this);
         this.filterCategoryCompleted = this.filterCategoryCompleted.bind(this);
         this.buttonStyle = this.buttonStyle.bind(this);
     }
 
-    filterCategoryAll(props){
-        this.setState({clickedButton:'All'});
+    filterCategoryAll(props) {
+        this.setState({clickedButton: 'All'});
 
     }
 
-    filterCategoryPriority(props){
-        this.setState({clickedButton:'Priority'});
+    filterCategoryPriority(props) {
+        this.setState({clickedButton: 'Priority'});
     }
 
-    filterCategoryCompleted(props){
-        this.setState({clickedButton:'Completed'});
+    filterCategoryCompleted(props) {
+        this.setState({clickedButton: 'Completed'});
     }
 
-    buttonStyle(props){
+    buttonStyle(props) {
         if (props === this.state.clickedButton) {
             return 'rkmd-btn-toggled';
         } else {
@@ -44,8 +44,9 @@ class Header extends Component {
                 <h2 id='application-description'> Welcome!</h2>
                 <button className={this.buttonStyle('All')} onClick={this.filterCategoryAll}>All</button>
                 <button className={this.buttonStyle('Priority')} onClick={this.filterCategoryPriority}>Priority</button>
-                <button className={this.buttonStyle('Completed')} onClick={this.filterCategoryCompleted}>Completed</button>
-            <hr className='divider'/>
+                <button className={this.buttonStyle('Completed')} onClick={this.filterCategoryCompleted}>Completed
+                </button>
+                <hr className='divider'/>
             </div>
         );
     }
