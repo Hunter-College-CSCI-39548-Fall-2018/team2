@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import RegistrationForm from './loginForm'
 import '../css/login-register.css';
-import '../fonts/material-icon/css/material-design-iconic-font.min.css';
+import '../fonts/material-icon/css/material-design-iconic-font.css';
 
 class Login extends Component {
 
