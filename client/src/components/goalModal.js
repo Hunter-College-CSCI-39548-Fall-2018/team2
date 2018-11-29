@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../css/index.css';
 import '../css/goals.css';
 
 class GoalModal extends Component {
@@ -54,8 +53,8 @@ class GoalModal extends Component {
         return (
             <div>
                 {/** Floating action button **/}
-                <div className="fab" data-toggle="modal" data-target="#addGoalModal">
-                    <i id="add-button" className="material-icons"> add </i>
+                <div className='fab' data-toggle="modal" data-target="#addGoalModal">
+                    <i id='add-button' className='material-icons'> add </i>
                 </div>
 
                 {/** Add goal modal **/}
@@ -90,7 +89,7 @@ class GoalModal extends Component {
                                                name="uploadPicture"/>
                                     </div>
                                     <div className="modal-footer">
-                                        <input type="submit" value="Add Item" className="btn btn-primary"/>
+                                        <input type="submit" value="Add Item" className='rkmd-btn'/>
                                     </div>
                                 </form>
                             </div>

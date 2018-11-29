@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import Header from './header';
 import GoalModal from './goalModal';
-import GoalCard from "./goalCard";
-import '../css/index.css';
-import '../css/goals.css';
+import GoalCard from './goalCard';
 
 class Goals extends Component {
 
@@ -11,11 +9,11 @@ class Goals extends Component {
         super(props);
         this.state = {
             user: '',
-            cards: [{title: 'testing', description: 'testing description', img: '', starred: true},
-                {title: 'testing', description: 'testing description', img: '', starred: false},
-                {title: 'testing', description: 'testing description', img: '', starred: true},
-                {title: 'testing', description: 'testing description', img: '', starred: true},
-                {title: 'testing', description: 'testing description', img: '', starred: true}],
+            cards: [{title: 'Test card 1', description: 'testing description', img: '', starred: true},
+                {title: 'Test card 2', description: 'testing description', img: '', starred: false},
+                {title: 'Test card 3', description: 'testing description', img: '', starred: true},
+                {title: 'Test card 4', description: 'testing description', img: '', starred: false},
+                {title: 'Test card 5', description: 'testing description', img: '', starred: true}],
             filteredType: ''
         };
         this.displayGoals = this.displayGoals.bind(this);
@@ -35,15 +33,16 @@ class Goals extends Component {
     };
 
     displayGoals(props) {
-        const numGoals = this.state.cards.length;
+        const numGoals = props.length;
         if (numGoals === 0) {
             return (<p> You currently have no goals. Add one by clicking the '+' button! </p>);
         } else {
             return (
-                <ul> {
+                <ul className='goal-cards'> {
                     props.map((goal, index) => {
                         return (<GoalCard key={index} goalTitle={goal.title}
-                                          goalDescription={goal.description} goalImage={goal.img} starred={goal.starred}/>);
+                                          goalDescription={goal.description} goalImage={goal.img}
+                                          starred={goal.starred}/>);
                     })}
                 </ul>
             )
@@ -55,7 +54,6 @@ class Goals extends Component {
             <div>
                 <Header/>
                 <GoalModal/>
-                <test/>
                 {this.displayGoals(this.state.cards)}
             </div>
         );

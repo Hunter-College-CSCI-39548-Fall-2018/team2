@@ -1,3 +1,7 @@
+@import url('https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css');
+@import url('https://code.jquery.com/jquery-3.2.1.slim.min.js');
+@import url('https://code.getmdl.io/1.3.0/material.green-light_green.min.css');
+
 img {
     max-width: 100%;
     max-height: 100%;
@@ -44,7 +48,6 @@ img {
 }
 
 .body {
-    background: #fafafa;
     position: relative;
     margin-bottom: 100px;
     padding: 20px 20px 20px 40px;
@@ -56,7 +59,7 @@ img {
     object-fit: contain;
 }
 
-.mdl-button--raised.mdl-button--colored {
+#header-button {
     color: white;
     background: #266A2E;
     width: 120px;
@@ -104,7 +107,7 @@ img {
     width: 100%;
 }
 
-hr {
+.divider {
     border: none;
     width: 90%;
     height: 50px;
@@ -220,3 +223,61 @@ hr {
     -webkit-font-smoothing: antialiased;
 }
 
+.rkmd-btn {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 1.5rem;
+    font-size: 14px;
+    letter-spacing: .8px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    outline: none;
+    border: none;
+    user-select: none;
+    border-radius: 2px;
+    transition: all .3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.225);
+    color: white;
+    background: #266A2E;
+    width: 150px;
+    font-family: Poppins;
+    margin: 15px 17px 30px;
+
+}
+
+.rkmd-btn-toggled {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 1.5rem;
+    font-size: 14px;
+    letter-spacing: .8px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    outline: none;
+    border: none;
+    user-select: none;
+    border-radius: 2px;
+    transition: all .3s ease-out;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.225);
+    color: white;
+    background: #3aa246;
+    width: 150px;
+    font-family: Poppins;
+    margin: 15px 17px 30px;
+}
+
+.rkmd-btn:hover {
+    text-decoration: none; box-shadow: 0 4px 10px 0px rgba(0,0,0,0.225);
+}

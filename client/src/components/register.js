@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../css/login-registration.css';
+import '../css/login-register.css';
 import RegistrationForm from './registrationForm'
 import '../fonts/material-icon/css/material-design-iconic-font.min.css';
 

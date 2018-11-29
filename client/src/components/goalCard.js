@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../css/index.css';
 import '../css/goals.css';
 
 class GoalCard extends Component {
@@ -9,7 +8,7 @@ class GoalCard extends Component {
         this.state = {
             goalTitle: this.props.goalTitle,
             goalDescription: this.props.goalDescription,
-            goalImage: this.props.goalImage,
+            goalImage: this.props.img,
             starred: this.props.starred
         };
 
@@ -40,7 +39,7 @@ class GoalCard extends Component {
         return (
             <div className="mdl-card mdl-shadow--2dp demo-card-square">
                 <div className="mdl-card__title mdl-card__accent mdl-card--expand">
-                    <img src={this.state.goalImage} alt="goal"/>
+                    <img src={require('./cactus.jpg')} alt="goal"/>
                 </div>
                 <div className="card-information">
                     <div className="mdl-card__card-title">
