@@ -15,6 +15,7 @@ class GoalModal extends Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
     }
 
     // Handles submission of form data and posts it to backend
@@ -48,6 +49,16 @@ class GoalModal extends Component {
         });
     }
 
+    uploadFile(event) {
+        let file = event.target.files[0];
+        this.setState({imageValue: file.name});
+
+        if (file) {
+            let data = new FormData();
+            data.append('file', file);
+        }
+    }
+
     // ToDo: Get rid of some of these divs and make this more clean (do it for other files too)
     render() {
         return (
@@ -72,24 +83,32 @@ class GoalModal extends Component {
                             </div>
 
                             {/** Modal body **/}
-                            <div id="add-goal" className="modal-body">
+                            <div className="add-goal modal-body">
                                 <form onSubmit={this.handleSubmit}>
-                                    <div className="form-group">
-                                        <label>Goal Title</label>
-                                        <input type="text" className="form-control" name="goalTitle"
-                                               value={this.state.title} onChange={this.handleInputChange}/>
+                                    <div className="mdl-textfield mdl-js-textfield">
+                                        <input className="mdl-textfield__input" type="text" id="fname"/>
+                                        <label className="mdl-textfield__label">Goal Title</label>
                                     </div>
-                                    <div className="form-group">
-                                        <label>Goal Description</label>
-                                        <textarea className="form-control" name="goalDescription" rows="3"
-                                                  value={this.state.description} onChange={this.handleInputChange}/>
+                                    <div className="mdl-textfield mdl-js-textfield">
+                                        <input className="mdl-textfield__input" type="text" id="sample1"/>
+                                        <label className="mdl-textfield__label">Goal Description</label>
                                     </div>
-                                    <div className="form-group">
-                                        <input type="file" ref={this.fileInput} className="form-control-file"
-                                               name="uploadPicture"/>
+                                    <div className="mdl-textfield mdl-js-textfield">
+                                        <input className="mdl-textfield__input file-input"
+                                               placeholder={this.state.imageValue} type="text" id="uploadFile"
+                                               readOnly/>
+                                        <div
+                                            className="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                                            <i className="material-icons">
+                                                cloud_upload
+                                            </i>
+                                            <input type="file" id="uploadBtn" onChange={this.uploadFile}/>
+                                        </div>
+                                        <label className="mdl-textfield__label">Goal Image Upload</label>
                                     </div>
+
                                     <div className="modal-footer">
-                                        <input type="submit" value="Add Item" className='rkmd-btn'/>
+                                        <input type="submit" value="Create" className='rkmd-btn-toggled'/>
                                     </div>
                                 </form>
                             </div>

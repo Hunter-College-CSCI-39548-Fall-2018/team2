@@ -15,6 +15,7 @@ class GoalCard extends Component {
         this.toggleStar = this.toggleStar.bind(this);
         this.handleEditClick = this.handleEditClick.bind(this);
         this.editGoal = this.editGoal.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
     }
 
     handleEditClick() {
@@ -29,6 +30,16 @@ class GoalCard extends Component {
 
     editGoal() {
 
+    }
+
+    uploadFile(event) {
+        let file = event.target.files[0];
+        this.setState({goalImage: file.name});
+
+        if (file) {
+            let data = new FormData();
+            data.append('file', file);
+        }
     }
 
     render() {
@@ -50,25 +61,47 @@ class GoalCard extends Component {
                             </div>
 
                             {/** Modal body **/}
-                            <div id="add-goal" className="modal-body">
+                            <div className="add-goal modal-body">
                                 <form onSubmit={this.handleSubmit}>
-                                    <div className="form-group">
-                                        <label>Goal Title</label>
-                                        <input type="text" className="form-control" name="goalTitle"
+                                    <div className="mdl-textfield mdl-js-textfield">
+                                        <input className="mdl-textfield__input" type="text"
                                                value={this.state.title} onChange={this.handleInputChange}/>
+                                        <label className="mdl-textfield__label">Goal Title</label>
                                     </div>
-                                    <div className="form-group">
-                                        <label>Goal Description</label>
-                                        <textarea className="form-control" name="goalDescription" rows="3"
-                                                  value={this.state.description} onChange={this.handleInputChange}/>
+                                    <div className="mdl-textfield mdl-js-textfield">
+                                        <input className="mdl-textfield__input" type="text"
+                                               value={this.state.description} onChange={this.handleInputChange}/>
+                                        <label className="mdl-textfield__label">Goal Description</label>
                                     </div>
-                                    <div className="form-group">
-                                        <input type="file" ref={this.fileInput} className="form-control-file"
-                                               name="uploadPicture"/>
+                                    <div className="mdl-textfield mdl-js-textfield">
+                                        <input className="mdl-textfield__input file-input"
+                                               placeholder={this.state.goalImage} type="text" id="uploadFile"
+                                               readOnly/>
+                                        <div
+                                            className="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                                            <i className="material-icons">
+                                                cloud_upload
+                                            </i>
+                                            <input type="file" id="uploadBtn" onChange={this.uploadFile}
+                                                   ref={this.fileInput}/>
+                                        </div>
+                                        <label className="mdl-textfield__label">Goal Image Upload</label>
                                     </div>
+                                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <select className="mdl-textfield__input">
+                                            <option/>
+                                            <option value="Update Goal">Update Goal</option>
+                                            <option value="Complete Goal">Complete Goal</option>
+                                            <option value="Delete Goal">Delete Goal (Warning: Deletion is permanent) </option>
+                                        </select>
+                                        <label className="mdl-textfield__label">Select Action</label>
+                                    </div>
+
+
                                     <div className="modal-footer">
-                                        <input type="submit" value="Delete" className='remove-btn'/>
-                                        <input type="submit" value="Edit" className='edit-btn'/>
+                                        <div className="modal-footer">
+                                            <input type="submit" value="Update" className='edit-btn'/>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -105,8 +138,8 @@ class GoalCard extends Component {
                     </div>
                 </div>
             </div>
-    );
+        );
     }
-    }
+}
 
-    export default GoalCard;
+export default GoalCard;
