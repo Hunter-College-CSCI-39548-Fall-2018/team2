@@ -23,8 +23,6 @@ exports.goals_home_get = function (req, res, next) {
 
             // Format goals before displaying to meet card structure
             for (let i = 0; i < filtered_goals.length; i++) {
-                console.log('starred' , filtered_goals[i].starred);
-                console.log('id', filtered_goals[i]._id);
                 filtered_goals[i].title = list_goals[i].title.charAt(0).toUpperCase() + list_goals[i].title.slice(1);
 
                 if (filtered_goals[i].description.length > MAX_DESCRIPTION_LENGTH) filtered_goals[i].description =
@@ -87,22 +85,13 @@ exports.create_goal_post = [
 ];
 
 // Handles updating of a goal on POST
-exports.update_goal_post = [
+exports.update_goal_post = function (req, res, next) {
 
-    (req, res, next) => {
-
-    console.log('before', req.body.starred);
-
-    console.log('ids', req.body.id);
-            Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred}}, function(err, res) {
-            if (err) console.log(err);
-            console.log("1 document updated", res);
-        });
-        Goal.findOne(ObjectID(req.body.id), function(err, res) {
-            console.log(res.starred);
-        });
-    }
-];
+    Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred}}, function (err, res) {
+        if (err) console.log(err);
+        console.log("1 document updated", res);
+    });
+};
 
 // Handles deleting a goal on POST
 exports.delete_goal_post = function (req, res, next) {

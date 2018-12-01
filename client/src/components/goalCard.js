@@ -26,8 +26,9 @@ class GoalCard extends Component {
 
     toggleStar() {
 
+        const newState = !this.state.starred;
         this.setState({
-            starred: !this.state.starred
+            starred: newState
         });
 
         fetch('/update', {
@@ -36,7 +37,7 @@ class GoalCard extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                starred: this.state.starred,
+                starred: newState,
                 id: this.state.id
             }),
         }).then(res => {
