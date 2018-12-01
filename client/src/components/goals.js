@@ -13,7 +13,7 @@ class Goals extends Component {
         this.state = {
             user: '',
             cards: [],
-            filteredType: ''
+            filteredType: 'All'
         };
         this.displayGoals = this.displayGoals.bind(this);
         this.updateGoals = this.updateGoals.bind(this);
@@ -28,7 +28,8 @@ class Goals extends Component {
                 } else {
                     this.setState(
                         {user: res.user.username,
-                        cards: res.goals});
+                        cards: res.goals,
+                        filteredType: res.filter});
                 }
             }).catch(err => console.log(err));
     }
@@ -69,7 +70,7 @@ class Goals extends Component {
         return (
             <div>
                 <NavBar/>
-                <Header/>
+                <Header filter={this.state.filteredType}/>
                 <p>{this.state.user}</p>
                 {this.displayGoals(this.state.cards)}
                 <GoalModal/>
