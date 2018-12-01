@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Goals from './goals.js';
 import '../css/goals.css';
 
 class Header extends Component {
@@ -6,7 +7,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clickedButton: 'All',
+            clickedButton: this.props.filter
         };
 
         this.filterCategoryPriority = this.filterCategoryPriority.bind(this);
@@ -15,30 +16,38 @@ class Header extends Component {
         this.buttonStyle = this.buttonStyle.bind(this);
     }
 
-    updateCards() {
-        fetch('/goals', {
+    updateCards(filterCategory) {
+        this.setState({clickedButton: filterCategory});
+
+        fetch('/filter', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-            }
-        }).then(res => {
-            this.props.updateGoals(res.goals);
+            },
+            body: JSON.stringify({
+                filter: filterCategory }),
+        });
 
-        }).catch(err => console.log(err));
+        fetch('/goals').then((response) => response.json())
+            .then((res) => {
+                this.props.updateGoals(res.goals);
+            })
+            .catch(error => console.warn(error));
     };
 
-    filterCategoryAll(props) {
-        this.setState({clickedButton: 'All'});
-        this.updateCards();
+    filterCategoryAll() {
+        const newState = 'All';
+        this.updateCards(newState);
     }
 
-    filterCategoryPriority(props) {
-        this.setState({clickedButton: 'Priority'});
-        this.updateCards();
+    filterCategoryPriority() {
+        const newState = 'Priority';
+        this.updateCards(newState);
     }
 
-    filterCategoryCompleted(props) {
-        this.setState({clickedButton: 'Completed'});
-        this.updateCards();
+    filterCategoryCompleted() {
+        const newState = 'Completed';
+        this.updateCards(newState);
     }
 
     buttonStyle(props) {

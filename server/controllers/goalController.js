@@ -1,4 +1,5 @@
 const Goal = require('../models/goal');
+const Account = require('../models/account');
 const async = require('async');
 
 const multer = require("multer");
@@ -14,23 +15,42 @@ exports.goals_home_get = function (req, res, next) {
     if (!req.user) {
         res.redirect('/login');
     } else {
-        // ToDo: Add a filter to filter goals by the current button toggled
-        Goal.find({'username': req.user.username}, function (err, list_goals) {
-            if (err) return next(err);
+        async.parallel({
+            goals: function (callback) {
+                Goal.find({'username': req.user.username}).exec(callback);
+            },
+            account : function (callback) {
+                Account.findOne({'username': req.user.username}).exec(callback);
+            },
+        }, function (err, results) {
+            if (err) { return next(err);}
 
-            const filtered_goals = list_goals.slice();
+            let selectedFilter = results.account.goalFilter;
+            let filteredGoals = (selectedFilter === 'All') ? results.goals : [];
+
+            // Filter the resulting goals for the goals that meet the specified criteria
+            if(selectedFilter === 'Priority') {
+                filteredGoals = results.goals.filter(goal => goal.starred === true);
+            } else if(selectedFilter === 'Completed') {
+                filteredGoals = results.goals.filter(goal => goal.completed === true);
+            }
+
             const MAX_DESCRIPTION_LENGTH = 68;
 
             // Format goals before displaying to meet card structure
-            for (let i = 0; i < filtered_goals.length; i++) {
-                filtered_goals[i].title = list_goals[i].title.charAt(0).toUpperCase() + list_goals[i].title.slice(1);
+            for (let i = 0; i < filteredGoals.length; i++) {
+                filteredGoals[i].title = filteredGoals[i].title.charAt(0).toUpperCase() + filteredGoals[i].title.slice(1);
 
-                if (filtered_goals[i].description.length > MAX_DESCRIPTION_LENGTH) filtered_goals[i].description =
-                    filtered_goals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
+                if (filteredGoals[i].description.length > MAX_DESCRIPTION_LENGTH) filteredGoals[i].description =
+                    filteredGoals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
             }
 
-            res.send({user: req.user, goals: filtered_goals});
-        }).lean();
+            console.log(filteredGoals);
+            console.log(results.account.goalFilter);
+
+            res.send({user: req.user, goals: filteredGoals, filter: selectedFilter});
+
+        });
     }
 };
 
@@ -86,12 +106,21 @@ exports.create_goal_post = [
 // Handles updating of a goal on POST
 exports.update_star_post = function (req) {
 
-    Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred}}, function (err, res) {
+    Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred} }, function (err, res) {
         if (err) console.log(err);
-        console.log("1 document updated", res);
+        console.log("Document updated - star", res);
     });
 };
 
+
+exports.filter_goals_post = function(req) {
+
+    const category = req.body.filter;
+    Account.updateOne({'username': req.user.username}, {$set: {"goalFilter": category}}, function (err, res) {
+        if(err) console.log(err);
+        console.log("Document updated - filter", res);
+    });
+};
 
 exports.update_goal_post = function(req, res, next) {
 

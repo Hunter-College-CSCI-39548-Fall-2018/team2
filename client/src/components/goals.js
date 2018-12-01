@@ -13,7 +13,7 @@ class Goals extends Component {
         this.state = {
             user: '',
             cards: [],
-            filteredType: ''
+            filteredType: 'All'
         };
         this.displayGoals = this.displayGoals.bind(this);
         this.updateGoals = this.updateGoals.bind(this);
@@ -28,7 +28,8 @@ class Goals extends Component {
                 } else {
                     this.setState(
                         {user: res.user.username,
-                        cards: res.goals});
+                        cards: res.goals,
+                        filteredType: res.filter});
                 }
             }).catch(err => console.log(err));
     }
@@ -41,7 +42,7 @@ class Goals extends Component {
     };
 
     displayGoals(props) {
-        const numGoals = props.length;
+        const numGoals = this.state.cards.length;
         if (numGoals === 0) {
             return (<p id='no-goals'> You currently have no goals. Add one by clicking the '+' button! </p>);
         } else {
@@ -57,19 +58,18 @@ class Goals extends Component {
         }
     };
 
-    updateGoals(goals){
+    updateGoals(goals) {
         this.setState({
             cards: goals
             }
         );
     }
 
-
     render() {
         return (
             <div>
                 <NavBar/>
-                <Header/>
+                <Header filter={this.state.filteredType} updateGoals={this.updateGoals}/>
                 <p>{this.state.user}</p>
                 {this.displayGoals(this.state.cards)}
                 <GoalModal/>
