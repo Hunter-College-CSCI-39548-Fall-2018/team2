@@ -68,7 +68,6 @@ exports.create_goal_post = [
             // ToDo: Look into a better way to do this to avoid code repetition
 
             if (req.file) { // Image provided during goal creation
-
                 try {
                     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
                         goal.img = result.public_id.toString() + ".png";
@@ -85,12 +84,17 @@ exports.create_goal_post = [
 ];
 
 // Handles updating of a goal on POST
-exports.update_goal_post = function (req, res, next) {
+exports.update_star_post = function (req) {
 
     Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred}}, function (err, res) {
         if (err) console.log(err);
         console.log("1 document updated", res);
     });
+};
+
+
+exports.update_goal_post = function(req, res, next) {
+
 };
 
 // Handles deleting a goal on POST

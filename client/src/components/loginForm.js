@@ -29,10 +29,11 @@ class LoginForm extends Component {
                 username: this.state.username,
                 password: this.state.password
             }),
-        });
+        }).then(() => {
+            const {history} = this.props;
+            history.push('/goals');
+        }).catch(err => console.log(err));
 
-        const {history} = this.props;
-        history.push('/goals');
     };
 
     // Updates the state of component with data entered into form

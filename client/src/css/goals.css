@@ -336,7 +336,9 @@ img {
 
 .mdl-layout-title {
     color: white;
-    font-family: Roboto, sans-serif;
+    font-family: IM Fell Great Primer;
+    font-size: 24px;
+    font-style: italic;
 }
 
 .mdl-layout__header-row .mdl-navigation__link {
@@ -394,6 +396,10 @@ img {
 .modal-footer {
     height: 60px;
     padding-right: 56px;
+}
+
+#no-goals {
+    margin-left: 90px;
 }
 
 

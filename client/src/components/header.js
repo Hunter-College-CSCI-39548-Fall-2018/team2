@@ -15,7 +15,7 @@ class Header extends Component {
         this.buttonStyle = this.buttonStyle.bind(this);
     }
 
-    updateCards(props) {
+    updateCards() {
         fetch('/goals', {
             headers: {
                 'Content-Type': 'application/json',

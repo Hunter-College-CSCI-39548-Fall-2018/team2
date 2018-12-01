@@ -12,7 +12,7 @@ class NavBar extends Component {
     logout() {
         const {history} = this.props;
         fetch('/logout')
-            .then(history.push('/'));
+            .then(history.push('/login'));
     }
 
     home() {

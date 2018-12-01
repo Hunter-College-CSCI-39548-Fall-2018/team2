@@ -31,7 +31,7 @@ class GoalCard extends Component {
             starred: newState
         });
 
-        fetch('/update', {
+        fetch('/star', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

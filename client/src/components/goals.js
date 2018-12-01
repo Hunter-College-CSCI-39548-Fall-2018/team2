@@ -43,7 +43,7 @@ class Goals extends Component {
     displayGoals(props) {
         const numGoals = props.length;
         if (numGoals === 0) {
-            return (<p> You currently have no goals. Add one by clicking the '+' button! </p>);
+            return (<p id='no-goals'> You currently have no goals. Add one by clicking the '+' button! </p>);
         } else {
             return (
                 <ul className='goal-cards'> {

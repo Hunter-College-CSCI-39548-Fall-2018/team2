@@ -30,9 +30,10 @@ class RegistrationForm extends Component {
                 username: this.state.username,
                 password: this.state.password
             }),
-        });
-        const {history} = this.props;
-        history.push('/login');
+        }).then(() => {
+            const {history} = this.props;
+            history.push('/login');
+        }).catch(err => console.log(err));
     };
 
     // Updates the state of component with data entered into form
