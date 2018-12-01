@@ -7,6 +7,7 @@ class GoalCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: this.props.id,
             goalTitle: this.props.goalTitle,
             goalDescription: this.props.goalDescription,
             goalImage: this.props.goalImage,
@@ -24,9 +25,23 @@ class GoalCard extends Component {
     }
 
     toggleStar() {
+
         this.setState({
             starred: !this.state.starred
         });
+
+        fetch('/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                starred: this.state.starred,
+                id: this.state.id
+            }),
+        }).then(res => {
+
+        }).catch(err => console.log(err));
     }
 
     editGoal() {
@@ -41,12 +56,6 @@ class GoalCard extends Component {
             let data = new FormData();
             data.append('file', file);
         }
-    }
-
-    getImage(props){
-            return(
-                <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}/>
-            );
     }
 
     render() {

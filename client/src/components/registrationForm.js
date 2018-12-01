@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom'
 import '../css/login-register.css';
 
 class RegistrationForm extends Component {
@@ -20,7 +21,7 @@ class RegistrationForm extends Component {
     handleSubmit = async e => {
         e.preventDefault();
 
-        const response = await fetch('/register', {
+        fetch('/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +31,8 @@ class RegistrationForm extends Component {
                 password: this.state.password
             }),
         });
-        const body = await response.text();
+        const {history} = this.props;
+        history.push('/login');
     };
 
     // Updates the state of component with data entered into form
@@ -71,4 +73,4 @@ class RegistrationForm extends Component {
     }
 }
 
-export default RegistrationForm;
+export default withRouter(RegistrationForm);

@@ -7,7 +7,6 @@ class Header extends Component {
         super(props);
         this.state = {
             clickedButton: 'All',
-            userName: ''
         };
 
         this.filterCategoryPriority = this.filterCategoryPriority.bind(this);
@@ -16,17 +15,30 @@ class Header extends Component {
         this.buttonStyle = this.buttonStyle.bind(this);
     }
 
+    updateCards(props) {
+        fetch('/goals', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res => {
+            this.props.updateGoals(res.goals);
+
+        }).catch(err => console.log(err));
+    };
+
     filterCategoryAll(props) {
         this.setState({clickedButton: 'All'});
-
+        this.updateCards();
     }
 
     filterCategoryPriority(props) {
         this.setState({clickedButton: 'Priority'});
+        this.updateCards();
     }
 
     filterCategoryCompleted(props) {
         this.setState({clickedButton: 'Completed'});
+        this.updateCards();
     }
 
     buttonStyle(props) {

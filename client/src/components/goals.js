@@ -16,6 +16,7 @@ class Goals extends Component {
             filteredType: ''
         };
         this.displayGoals = this.displayGoals.bind(this);
+        this.updateGoals = this.updateGoals.bind(this);
     }
 
     componentDidMount() {
@@ -41,14 +42,13 @@ class Goals extends Component {
 
     displayGoals(props) {
         const numGoals = props.length;
-        //console.log("THIS IS AN IMAGE" + goal.img);
         if (numGoals === 0) {
             return (<p> You currently have no goals. Add one by clicking the '+' button! </p>);
         } else {
             return (
                 <ul className='goal-cards'> {
                     props.map((goal, index) => {
-                        return (<GoalCard key={index} goalTitle={goal.title}
+                        return (<GoalCard key={index} id={goal._id} goalTitle={goal.title}
                                           goalDescription={goal.description} goalImage={goal.img}
                                           starred={goal.starred}/>);
                     })}
@@ -56,6 +56,13 @@ class Goals extends Component {
             )
         }
     };
+
+    updateGoals(goals){
+        this.setState({
+            cards: goals
+            }
+        );
+    }
 
 
     render() {

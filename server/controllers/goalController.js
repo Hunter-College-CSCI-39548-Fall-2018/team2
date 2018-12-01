@@ -1,11 +1,10 @@
 const Goal = require('../models/goal');
 const async = require('async');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
 
 const multer = require("multer");
 const upload = multer({dest: './uploads/'});
 const cloudinary = require("cloudinary");
+const {ObjectID } = require('mongodb');
 
 const {body, validationResult} = require('express-validator/check');
 
@@ -24,7 +23,8 @@ exports.goals_home_get = function (req, res, next) {
 
             // Format goals before displaying to meet card structure
             for (let i = 0; i < filtered_goals.length; i++) {
-                console.log(filtered_goals[i].img);
+                console.log('starred' , filtered_goals[i].starred);
+                console.log('id', filtered_goals[i]._id);
                 filtered_goals[i].title = list_goals[i].title.charAt(0).toUpperCase() + list_goals[i].title.slice(1);
 
                 if (filtered_goals[i].description.length > MAX_DESCRIPTION_LENGTH) filtered_goals[i].description =
@@ -54,6 +54,7 @@ exports.create_goal_post = [
             description: req.body.goalDescription,
             username: req.user.username,
             subgoals: [],
+            starred: false,
             posts: []
         });
 
@@ -88,35 +89,18 @@ exports.create_goal_post = [
 // Handles updating of a goal on POST
 exports.update_goal_post = [
 
-    // Validate fields
-    body('goalTitle').isLength({min: 1}).trim().withMessage('Title must not be empty.'),
-    body('goalDescription').isLength({min: 1}).trim().withMessage('Description must not be empty'),
-
     (req, res, next) => {
 
-        const errors = validationResult(req);
+    console.log('before', req.body.starred);
 
-        // Create a goal object with escaped and trimmed data
-        const goal = new Goal({
-            title: req.body.goalTitle,
-            description: req.body.goalDescription,
-            username: req.user.username,
-            subgoals: [],
-            posts: []
+    console.log('ids', req.body.id);
+            Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred}}, function(err, res) {
+            if (err) console.log(err);
+            console.log("1 document updated", res);
         });
-
-        if (!errors.isEmpty()) {
-            console.log("Errors in updating of a new card\n", errors.mapped());
-            res.redirect('/goals');
-
-        } else {
-            Goal.findByAndUpdate(req.params.author, goal, {}, function (req, res) {
-                if (err) {
-                    return next(err);
-                }
-                res.redirect('/goals');
-            });
-        }
+        Goal.findOne(ObjectID(req.body.id), function(err, res) {
+            console.log(res.starred);
+        });
     }
 ];
 

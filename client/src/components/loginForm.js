@@ -20,7 +20,7 @@ class LoginForm extends Component {
     handleSubmit = async e => {
         e.preventDefault();
 
-        const response = await fetch('/login', {
+        fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +31,6 @@ class LoginForm extends Component {
             }),
         });
 
-        const body = await response.text();
         const {history} = this.props;
         history.push('/goals');
     };
