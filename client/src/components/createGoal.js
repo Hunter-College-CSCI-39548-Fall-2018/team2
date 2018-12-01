@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios, { post } from 'axios';
 import '../css/goals.css';
 
 class GoalModal extends Component {
@@ -8,7 +9,7 @@ class GoalModal extends Component {
         this.state = {
             title: '',
             description: '',
-            imageValue: ''
+            imageValue: '',
         };
 
         this.fileInput = React.createRef();
@@ -21,26 +22,26 @@ class GoalModal extends Component {
     // Handles submission of form data and posts it to backend
     handleSubmit = async e => {
         e.preventDefault();
+        alert(this.state.imageValue.name);
+        alert(this.state.imageValue);
 
-        const response = await fetch('/login', {
-            mode: 'no-cors',
-            method: 'POST',
+        const url = '/create';
+        const formData = new FormData();
+        formData.append('img', this.state.imageValue);
+        formData.append('goalTitle', this.state.title);
+        formData.append('goalDescription', this.state.description);
+
+        const config = {
             headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: this.state.username,
-                description: this.state.password,
-                imageValue: this.fileInput.current.files[0]
-            }),
-        });
-        const body = await response.text();
-        this.setState({responseToPost: body});
+                'content-type': 'multipart/form-data'
+            }
+        };
+        post(url, formData, config);
+
     };
 
     // Updates the state of component with data entered into form
     handleInputChange(event) {
-
         const target = event.target;
         const name = target.name;
 
@@ -51,7 +52,7 @@ class GoalModal extends Component {
 
     uploadFile(event) {
         let file = event.target.files[0];
-        this.setState({imageValue: file.name});
+        this.setState({imageValue: file});
 
         if (file) {
             let data = new FormData();
@@ -84,18 +85,20 @@ class GoalModal extends Component {
 
                             {/** Modal body **/}
                             <div className="add-goal modal-body">
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={this.handleSubmit} ref={el => this.form = el}>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input" type="text" id="fname"/>
+                                        <input className="mdl-textfield__input" name='title'
+                                               onChange={this.handleInputChange} value={this.state.title} type="text"/>
                                         <label className="mdl-textfield__label">Goal Title</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input" type="text" id="sample1"/>
+                                        <input className="mdl-textfield__input" name='description'
+                                               type="text" onChange={this.handleInputChange}/>
                                         <label className="mdl-textfield__label">Goal Description</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input file-input"
-                                               placeholder={this.state.imageValue} type="text" id="uploadFile"
+                                        <input className="mdl-textfield__input file-input" name='img'
+                                               onChange={this.handleInputChange} placeholder={this.state.imageValue.name} type="text" id="uploadFile"
                                                readOnly/>
                                         <div
                                             className="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
@@ -108,11 +111,11 @@ class GoalModal extends Component {
                                     </div>
 
                                     <div className="modal-footer">
-                                        <input type="submit" value="Create" className='rkmd-btn-toggled'/>
+                                        <input type="submit" value="submit" className='rkmd-btn-toggled'
+                                               data-dismiss="modal" onClick={() => {this.form.dispatchEvent(new Event('submit'))}}/>
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>

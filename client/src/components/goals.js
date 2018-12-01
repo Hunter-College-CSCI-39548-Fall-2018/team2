@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom'
+
 import Header from './header';
 import GoalModal from './createGoal';
 import GoalCard from './goalCard';
@@ -10,11 +12,7 @@ class Goals extends Component {
         super(props);
         this.state = {
             user: '',
-            cards: [{title: 'Test card 1', description: 'testing description', img: '', starred: true},
-                {title: 'Test card 2', description: 'testing description', img: '', starred: false},
-                {title: 'Test card 3', description: 'testing description', img: '', starred: true},
-                {title: 'Test card 4', description: 'testing description', img: '', starred: false},
-                {title: 'Test card 5', description: 'testing description', img: '', starred: true}],
+            cards: [],
             filteredType: ''
         };
         this.displayGoals = this.displayGoals.bind(this);
@@ -22,12 +20,20 @@ class Goals extends Component {
 
     componentDidMount() {
         this.callApi()
-            .then(res => this.setState({response: res.express}))
-            .catch(err => console.log(err));
+            .then(res => {
+                if (!res.user) {
+                    const {history} = this.props;
+                    history.push('/login');
+                } else {
+                    this.setState(
+                        {user: res.user.username,
+                        cards: res.goals});
+                }
+            }).catch(err => console.log(err));
     }
 
     callApi = async () => {
-        const response = await fetch('/');
+        const response = await fetch('/goals');
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
         return body;
@@ -35,6 +41,7 @@ class Goals extends Component {
 
     displayGoals(props) {
         const numGoals = props.length;
+        //console.log("THIS IS AN IMAGE" + goal.img);
         if (numGoals === 0) {
             return (<p> You currently have no goals. Add one by clicking the '+' button! </p>);
         } else {
@@ -51,17 +58,17 @@ class Goals extends Component {
     };
 
 
-
     render() {
         return (
             <div>
                 <NavBar/>
                 <Header/>
-                <GoalModal/>
+                <p>{this.state.user}</p>
                 {this.displayGoals(this.state.cards)}
+                <GoalModal/>
             </div>
         );
     }
 }
 
-export default Goals;
+export default withRouter(Goals);

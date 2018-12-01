@@ -1,13 +1,28 @@
 const express = require('express');
 const passport = require('passport');
+
 const router = express.Router();
+const multer = require("multer");
+const upload = multer({dest: './uploads/'});
+
+// Require controllers
 const account_controller = require('../controllers/accountController');
+const goal_controller = require('../controllers/goalController');
 
 /** Home and Goal Page Routes **/
-
-router.get('/', account_controller.account_home_get);
+router.get('/home', account_controller.account_home_get);
 
 router.get('/subgoals', account_controller.account_subgoals_get);
+
+/** Goals routes **/
+
+router.get('/goals', goal_controller.goals_home_get);
+
+// POST request for creating a goal
+router.post('/create', upload.single("img"), goal_controller.create_goal_post);
+
+router.post('/update', upload.single("img"), goal_controller.update_goal_post);
+
 
 /** Registration Routes **/
 
@@ -33,4 +48,12 @@ router.post('/login', passport.authenticate('local',
 // GET request for logging out
 router.get('/logout', account_controller.account_logout_get);
 
+
+/** Error Routes **/
+
+// GET request for error page
+router.get('/error', account_controller.account_error_get);
+
+
 module.exports = router;
+

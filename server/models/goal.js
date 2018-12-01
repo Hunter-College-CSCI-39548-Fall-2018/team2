@@ -8,7 +8,7 @@ const Goal = new Schema({
     created: {type: Date, default: Date.now, required: true},
     img: {type: String},
     completed: {type: Date},
-    priority: {type: Boolean, default: false},
+    starred: {type: Boolean, default: false},
     subgoals: [{type: Schema.ObjectId, ref: 'Subgoal'}],
     posts: [{type: Schema.ObjectId, ref: 'Post'}],
 });

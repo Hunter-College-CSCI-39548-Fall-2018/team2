@@ -31,7 +31,6 @@ class RegistrationForm extends Component {
             }),
         });
         const body = await response.text();
-        this.setState({responseToPost: body});
     };
 
     // Updates the state of component with data entered into form

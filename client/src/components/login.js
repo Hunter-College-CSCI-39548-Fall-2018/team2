@@ -30,18 +30,19 @@ class Login extends Component {
     render() {
         return (
             <div className="bg">
-            <div className="main">
-                <section className="signup">
-                    <div className="container">
-                        <div className="signup-content">
-                            <div className="signup-form">
-                                <h2 className="form-title">Bloom</h2>
-                                <p id="lr-application-description">Track your goals and reflect upon your journey</p>
-                                <RegistrationForm/>
+                <div className="main">
+                    <section className="signup">
+                        <div className="container">
+                            <div className="signup-content">
+                                <div className="signup-form">
+                                    <h2 className="form-title">Bloom</h2>
+                                    <p id="lr-application-description">Track your goals and reflect upon your
+                                        journey</p>
+                                    <RegistrationForm/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
                 </div>
             </div>
         );

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Image} from 'cloudinary-react';
 import '../css/goals.css';
 
 class GoalCard extends Component {
@@ -8,7 +9,7 @@ class GoalCard extends Component {
         this.state = {
             goalTitle: this.props.goalTitle,
             goalDescription: this.props.goalDescription,
-            goalImage: this.props.img,
+            goalImage: this.props.goalImage,
             starred: this.props.starred
         };
 
@@ -40,6 +41,12 @@ class GoalCard extends Component {
             let data = new FormData();
             data.append('file', file);
         }
+    }
+
+    getImage(props){
+            return(
+                <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}/>
+            );
     }
 
     render() {
@@ -92,7 +99,8 @@ class GoalCard extends Component {
                                             <option/>
                                             <option value="Update Goal">Update Goal</option>
                                             <option value="Complete Goal">Complete Goal</option>
-                                            <option value="Delete Goal">Delete Goal (Warning: Deletion is permanent) </option>
+                                            <option value="Delete Goal">Delete Goal (Warning: Deletion is permanent)
+                                            </option>
                                         </select>
                                         <label className="mdl-textfield__label">Select Action</label>
                                     </div>
@@ -113,7 +121,7 @@ class GoalCard extends Component {
                 {/** Goal Card **/}
                 <div className="mdl-card mdl-shadow--2dp demo-card-square">
                     <div className="mdl-card__title mdl-card__accent mdl-card--expand">
-                        <img src={require('../assets/default_Images/cactus.jpg')} alt="goal"/>
+                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}/>
                     </div>
                     <div className="card-information">
                         <div className="mdl-card__card-title">

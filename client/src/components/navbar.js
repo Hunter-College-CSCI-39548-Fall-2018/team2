@@ -1,6 +1,25 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 
 class NavBar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.logout = this.logout.bind(this);
+        this.home = this.home.bind(this);
+    }
+
+    logout() {
+        const {history} = this.props;
+        fetch('/logout')
+            .then(history.push('/'));
+    }
+
+    home() {
+        const {history} = this.props;
+        fetch('/')
+            .then(history.push('/'));
+    }
 
     render() {
         return (
@@ -13,8 +32,8 @@ class NavBar extends Component {
                         <div className="mdl-layout-spacer"/>
 
                         <nav className="mdl-navigation mdl-layout--large-screen-only">
-                            <a className="mdl-navigation__link" href="https://www.google.com/">Home</a>
-                            <a className="mdl-navigation__link" href="https://www.google.com/" onClick={this.logout}>Logout</a>
+                            <p className="mdl-navigation__link" onClick={this.home}>Home</p>
+                            <p className="mdl-navigation__link" onClick={this.logout}>Logout</p>
                         </nav>
                     </div>
                 </header>
@@ -26,4 +45,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

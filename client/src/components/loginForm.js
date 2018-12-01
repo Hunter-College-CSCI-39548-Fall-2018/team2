@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import '../css/login-register.css';
 
 class LoginForm extends Component {
@@ -29,8 +30,10 @@ class LoginForm extends Component {
                 password: this.state.password
             }),
         });
+
         const body = await response.text();
-        this.setState({responseToPost: body});
+        const {history} = this.props;
+        history.push('/goals');
     };
 
     // Updates the state of component with data entered into form
@@ -65,4 +68,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

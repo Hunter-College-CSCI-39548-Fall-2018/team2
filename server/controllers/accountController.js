@@ -1,10 +1,13 @@
 const Account = require('../models/account');
 const passport = require('passport');
 
-
 exports.account_home_get = function (req, res) {
-    if (req.user) {
-        res.redirect('/goals');
+    if(req.user) {
+        console.log('HIIIIIIIIII');
+        res.send({username: 'tina'});
+    } else {
+        console.log('HIIIIIIIIII');
+        res.send({username: 'tacos'});
     }
 };
 
@@ -35,7 +38,7 @@ exports.account_registration_post = function (req, res) {
 };
 
 exports.account_login_post = function (req, res) {
-
+    res.send({express: 'HELLO WORLD'});
 };
 
 exports.account_login_get = function (req, res) {
@@ -47,5 +50,10 @@ exports.account_login_get = function (req, res) {
 exports.account_logout_get = function (req, res) {
     req.session.destroy();
     req.logout();
-    res.redirect('/login');
+    res.redirect('/');
+};
+
+
+exports.account_error_get = function (req,res) {
+
 };

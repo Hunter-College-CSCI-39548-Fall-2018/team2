@@ -19,8 +19,6 @@ require('dotenv').config();
 
 // Require modules from routes directory
 const routes = require('./routes/index');
-const goals = require('./routes/goals');
-const subgoals = require('./routes/subgoals');
 
 
 /* Create app object using express module and
@@ -48,9 +46,6 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 // Add route-handling code to request handling chain
 app.use('/', routes);
-app.use('/goals', goals);
-app.use('/subgoals', subgoals);
-
 
 // Passport setup
 const Account = require('./models/account');
@@ -109,11 +104,7 @@ app.use(function(req, res, next) {
 // Development error handler. Will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+        console.log(err, err.message);
     });
 }
 

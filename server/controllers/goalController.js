@@ -8,33 +8,32 @@ const upload = multer({dest: './uploads/'});
 const cloudinary = require("cloudinary");
 
 const {body, validationResult} = require('express-validator/check');
-const {sanitizeBody} = require('express-validator/filter');
 
 // Return home goals page (retrieves list of filtered goals belonging to a given user
 exports.goals_home_get = function (req, res, next) {
 
-    // ToDo: Add a filter to filter goals by the current button toggled
+    if (!req.user) {
+        res.redirect('/login');
+    } else {
+        // ToDo: Add a filter to filter goals by the current button toggled
+        Goal.find({'username': req.user.username}, function (err, list_goals) {
+            if (err) return next(err);
 
-    Goal.find({'username': req.user.username}, function (err, list_goals) {
-        if (err) return next(err);
+            const filtered_goals = list_goals.slice();
+            const MAX_DESCRIPTION_LENGTH = 68;
 
-        res.locals.goals = (req.session.goals === undefined || req.session.length === 0)
-            ? list_goals : req.session.goals;
+            // Format goals before displaying to meet card structure
+            for (let i = 0; i < filtered_goals.length; i++) {
+                console.log(filtered_goals[i].img);
+                filtered_goals[i].title = list_goals[i].title.charAt(0).toUpperCase() + list_goals[i].title.slice(1);
 
-        const MAX_DESCRIPTION_LENGTH = 68;
+                if (filtered_goals[i].description.length > MAX_DESCRIPTION_LENGTH) filtered_goals[i].description =
+                    filtered_goals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
+            }
 
-        // Format goals before displaying to meet card structure
-        for (let i = 0; i < res.locals.goals.length; i++) {
-            res.locals.goals[i].title = list_goals[i].title.charAt(0).toUpperCase() + list_goals[i].title.slice(1);
-
-            if (res.locals.goals[i].description.length > MAX_DESCRIPTION_LENGTH) res.locals.goals[i].description =
-                res.locals.goals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
-        }
-
-        req.session.goals = res.locals.goals;
-        res.render('index', {user: req.user});
-
-    }).lean();
+            res.send({user: req.user, goals: filtered_goals});
+        }).lean();
+    }
 };
 
 // Handles creation of a goal on POST
@@ -70,25 +69,17 @@ exports.create_goal_post = [
             // ToDo: Look into a better way to do this to avoid code repetition
 
             if (req.file) { // Image provided during goal creation
+
                 try {
                     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
-                        goal.img = result.url.toString();
+                        goal.img = result.public_id.toString() + ".png";
                         goal.save();
                         console.log('Image successfully uploaded to Cloudinary', result.url);
-                        req.session.goals.push(goal);
-                        res.redirect('/goals');
                     });
+                    res.redirect('/goals');
                 } catch (err) {
                     console.log(err);
                 }
-            } else {
-                // Select a random default image to be associated with the goal
-                const default_images = ['cactus.jpg', 'garden.jpg', 'greenhouse.jpg', 'meadow.jpg'];
-                goal.img = 'assets/' + default_images[Math.floor(Math.random() * default_images.length)];
-
-                goal.save();
-                req.session.goals.push(goal);
-                res.redirect('/goals');
             }
         }
     }
@@ -115,7 +106,6 @@ exports.update_goal_post = [
         });
 
         if (!errors.isEmpty()) {
-
             console.log("Errors in updating of a new card\n", errors.mapped());
             res.redirect('/goals');
 
