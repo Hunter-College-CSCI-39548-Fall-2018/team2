@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Goals from './goals.js';
 import '../css/goals.css';
 
 class Header extends Component {
@@ -17,7 +18,6 @@ class Header extends Component {
 
     updateCards(filterCategory) {
         this.setState({clickedButton: filterCategory});
-        alert(filterCategory);
 
         fetch('/filter', {
             method: 'POST',
@@ -28,10 +28,11 @@ class Header extends Component {
                 filter: filterCategory }),
         });
 
-
-        fetch('/goals').then(res => {
-            this.props.updateGoals(res.goals);
-        }).catch(err => console.log(err))
+        fetch('/goals').then((response) => response.json())
+            .then((res) => {
+                this.props.updateGoals(res.goals);
+            })
+            .catch(error => console.warn(error));
     };
 
     filterCategoryAll() {
