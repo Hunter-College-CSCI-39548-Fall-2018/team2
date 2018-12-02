@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom'
 
-import Header from './header';
+import Header from './goalsHeader';
 import GoalModal from './createGoal';
 import GoalCard from './goalCard';
 import NavBar from './navbar';
@@ -13,10 +13,11 @@ class Goals extends Component {
         this.state = {
             user: '',
             cards: [],
-            filteredType: 'All'
+            filteredType: ''
         };
         this.displayGoals = this.displayGoals.bind(this);
         this.updateGoals = this.updateGoals.bind(this);
+        this.displayHeader = this.displayHeader.bind(this);
     }
 
     componentDidMount() {
@@ -57,6 +58,12 @@ class Goals extends Component {
             )
         }
     };
+
+    displayHeader(props){
+        return(
+            <Header filterImage={props} updateGoals={this.updateGoals}/>
+        )
+    }
 
     updateGoals(goals) {
         this.setState({

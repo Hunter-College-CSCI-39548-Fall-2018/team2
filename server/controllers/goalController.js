@@ -48,6 +48,7 @@ exports.goals_home_get = function (req, res, next) {
             console.log(filteredGoals);
             console.log(results.account.goalFilter);
 
+            console.log('selected filter', selectedFilter);
             res.send({user: req.user, goals: filteredGoals, filter: selectedFilter});
 
         });
