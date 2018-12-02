@@ -102,7 +102,7 @@ html, body {
 .mdl-demo #add {
     position: absolute;
     right: 120px;
-    top: 36px;
+    top: 56px;
     z-index: 999;
     margin-top:86px;
 }
@@ -232,10 +232,19 @@ html, body {
 }
 
 #imageArea {
-    margin-top:20px;
+    padding-top:172px;
+    background-image: url('../assets/plant-background.jpg');
 }
 
 #goalInfo {
-    padding-bottom: 20px;
+    padding-bottom: 72px;
+    color: white;
+}
+
+.mdl-color--accent {
+    background-color: #3aa246 !important;
+}
+
+.mdl-button .material-icons {
     color: white;
 }
