@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Goals from './goals.js';
 import '../css/goals.css';
 
 class Header extends Component {
@@ -7,13 +6,19 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clickedButton: this.props.filter
+           button: this.props.filter
         };
 
         this.filterCategoryPriority = this.filterCategoryPriority.bind(this);
         this.filterCategoryAll = this.filterCategoryAll.bind(this);
         this.filterCategoryCompleted = this.filterCategoryCompleted.bind(this);
         this.buttonStyle = this.buttonStyle.bind(this);
+    }
+
+    componentDidMount(){
+        this.setState({
+            button: this.props.filter
+        });
     }
 
     updateCards(filterCategory) {
@@ -51,7 +56,8 @@ class Header extends Component {
     }
 
     buttonStyle(props) {
-        if (props === this.state.clickedButton) {
+        //alert(props.value + this.state.clickedButton);
+        if (props.value === this.state.button) {
             return 'rkmd-btn-toggled';
         } else {
             return 'rkmd-btn';
@@ -61,11 +67,13 @@ class Header extends Component {
     render() {
         return (
             <div id='header'>
+                <p>{this.props.filter}</p>
+                <p>{this.state.button}</p>
                 <h1 id='application-title'> Bloom </h1>
                 <h2 id='application-description'> Welcome!</h2>
-                <button className={this.buttonStyle('All')} onClick={this.filterCategoryAll}>All</button>
-                <button className={this.buttonStyle('Priority')} onClick={this.filterCategoryPriority}>Priority</button>
-                <button className={this.buttonStyle('Completed')} onClick={this.filterCategoryCompleted}>Completed
+                <button className={this.buttonStyle({value: 'All'})} onClick={this.filterCategoryAll}>All</button>
+                <button className={this.buttonStyle({value: 'Priority'})} onClick={this.filterCategoryPriority}>Priority</button>
+                <button className={this.buttonStyle({value: 'Completed'})} onClick={this.filterCategoryCompleted}>Completed
                 </button>
                 <hr className='divider'/>
             </div>
