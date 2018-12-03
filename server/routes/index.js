@@ -30,6 +30,12 @@ router.post('/star', goal_controller.update_star_post);
 // POST request for updating a goal
 router.post('/update', upload.single("img"), goal_controller.update_goal_post);
 
+// POST request fpr deleting a goal
+router.post('/delete', goal_controller.delete_goal_post);
+
+// POST request for completing a goal
+router.post('/delete', goal_controller.complete_goal_post);
+
 //POST request for filtering a goal
 router.post('/filter', goal_controller.filter_goals_post);
 

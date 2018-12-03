@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Image} from 'cloudinary-react';
 import '../css/goals.css';
+import {post} from "axios/index";
 
 class GoalCard extends Component {
 
@@ -11,13 +12,14 @@ class GoalCard extends Component {
             goalTitle: props.goalTitle,
             goalDescription: props.goalDescription,
             goalImage: props.goalImage,
-            starred: props.starred
+            starred: props.starred,
+            selectedValue: ''
         };
 
         this.toggleStar = this.toggleStar.bind(this);
-        this.handleEditClick = this.handleEditClick.bind(this);
-        this.editGoal = this.editGoal.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,13 +28,41 @@ class GoalCard extends Component {
             goalTitle: nextProps.goalTitle,
             goalDescription: nextProps.goalDescription,
             goalImage: nextProps.goalImage,
-            starred: nextProps.starred
+            starred: nextProps.starred,
+            selectedValue: ''
         });
     }
 
-    handleEditClick() {
+    // Handles submission of form data and posts it to backend
+    handleSubmit = async e => {
+        e.preventDefault();
 
-    }
+        let url = '';
+
+        if(this.state.selectedValue === 'Update') {
+            url = '/update';
+        } else if (this.state.selectedValue === 'Complete') {
+            url ='/complete';
+        } else {
+            url ='/delete'
+        }
+
+        const formData = new FormData();
+        formData.append('id', this.state.id);
+        formData.append('img', this.state.goalImage);
+        formData.append('goalTitle', this.state.goalTitle);
+        formData.append('goalDescription', this.state.goalDescription);
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        post(url, formData, config);
+        window.location.reload();
+    };
+
 
     toggleStar() {
 
@@ -55,8 +85,14 @@ class GoalCard extends Component {
         }).catch(err => console.log(err));
     }
 
-    editGoal() {
+    // Updates the state of component with data entered into form
+    handleInputChange(event) {
+        const target = event.target;
+        const name = target.name;
 
+        this.setState({
+            [name]: target.value
+        });
     }
 
     uploadFile(event) {
@@ -101,25 +137,24 @@ class GoalCard extends Component {
                                         <label className="mdl-textfield__label">Goal Description</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input file-input"
-                                               placeholder={this.state.goalImage} type="text" id="uploadFile"
+                                        <input className="mdl-textfield__input file-input" name='img'
+                                               onChange={this.handleInputChange} type="text" id="uploadFile"
                                                readOnly/>
                                         <div
                                             className="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
                                             <i className="material-icons">
                                                 cloud_upload
                                             </i>
-                                            <input type="file" id="uploadBtn" onChange={this.uploadFile}
-                                                   ref={this.fileInput}/>
+                                            <input type="file" id="uploadBtn" onChange={this.uploadFile}/>
                                         </div>
                                         <label className="mdl-textfield__label">Goal Image Upload</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <select className="mdl-textfield__input">
+                                        <select className="mdl-textfield__input" value={this.state.selectedValue} onChange={this.handleInputChange}>
                                             <option/>
-                                            <option value="Update Goal">Update Goal</option>
-                                            <option value="Complete Goal">Complete Goal</option>
-                                            <option value="Delete Goal">Delete Goal (Warning: Deletion is permanent)
+                                            <option value="Update">Update Goal</option>
+                                            <option value="Complete">Complete Goal</option>
+                                            <option value="Delete">Delete Goal (Warning: Deletion is permanent)
                                             </option>
                                         </select>
                                         <label className="mdl-textfield__label">Select Action</label>
@@ -128,7 +163,8 @@ class GoalCard extends Component {
 
                                     <div className="modal-footer">
                                         <div className="modal-footer">
-                                            <input type="submit" value="Update" className='edit-btn'/>
+                                            <input type="submit" value="Update" className='edit-btn' onClick={() => {
+                                                this.form.dispatchEvent(new Event('submit'))}}/>
                                         </div>
                                     </div>
                                 </form>

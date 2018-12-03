@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/subgoals.css';
-import logo from './cactus.jpg';
+import logo from '../assets/cactus.jpg';
 
 class Post extends Component {
 

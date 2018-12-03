@@ -18,6 +18,7 @@ class Goals extends Component {
         this.displayGoals = this.displayGoals.bind(this);
         this.updateGoals = this.updateGoals.bind(this);
         this.displayHeader = this.displayHeader.bind(this);
+        this.addGoal = this.addGoal.bind(this);
     }
 
     componentDidMount() {
@@ -72,13 +73,21 @@ class Goals extends Component {
         );
     }
 
+    addGoal(goal){
+        let copy = Array.from(this.state.cards);
+        copy.push(goal);
+        this.setState({
+            cards: copy
+        });
+    }
+
     render() {
         return (
             <div>
                 <NavBar/>
                 <Header filter={this.state.filteredType} updateGoals={this.updateGoals}/>
                 {this.displayGoals(this.state.cards)}
-                <GoalModal/>
+                <GoalModal addGoal={this.addGoal}/>
             </div>
         );
     }
