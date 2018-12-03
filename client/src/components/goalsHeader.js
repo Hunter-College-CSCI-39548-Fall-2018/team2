@@ -56,7 +56,6 @@ class Header extends Component {
     }
 
     buttonStyle(props) {
-        //alert(props.value + this.state.clickedButton);
         if (props.value === this.state.button) {
             return 'rkmd-btn-toggled';
         } else {
@@ -67,8 +66,6 @@ class Header extends Component {
     render() {
         return (
             <div id='header'>
-                <p>{this.props.filter}</p>
-                <p>{this.state.button}</p>
                 <h1 id='application-title'> Bloom </h1>
                 <h2 id='application-description'> Welcome!</h2>
                 <button className={this.buttonStyle({value: 'All'})} onClick={this.filterCategoryAll}>All</button>

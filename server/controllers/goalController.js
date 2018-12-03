@@ -31,8 +31,14 @@ exports.goals_home_get = function (req, res, next) {
             // Filter the resulting goals for the goals that meet the specified criteria
             if(selectedFilter === 'Priority') {
                 filteredGoals = results.goals.filter(goal => goal.starred === true);
+                for(var i = 0; i < filteredGoals.length; i++){
+                    console.log(filteredGoals[i].starred);
+                }
             } else if(selectedFilter === 'Completed') {
                 filteredGoals = results.goals.filter(goal => goal.completed === true);
+                for(var i = 0; i < filteredGoals.length; i++){
+                    console.log(filteredGoals[i].starred);
+                }
             }
 
             const MAX_DESCRIPTION_LENGTH = 68;
@@ -48,7 +54,6 @@ exports.goals_home_get = function (req, res, next) {
             console.log(filteredGoals);
             console.log(results.account.goalFilter);
 
-            console.log('selected filter', selectedFilter);
             res.send({user: req.user, goals: filteredGoals, filter: selectedFilter});
 
         });
@@ -105,22 +110,32 @@ exports.create_goal_post = [
 ];
 
 // Handles updating of a goal on POST
-exports.update_star_post = function (req) {
+exports.update_star_post = function (req, res) {
 
+    console.log('Updated', req.body.starred);
     Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred} }, function (err, res) {
         if (err) console.log(err);
+        console.log('Done', res.starred);
         console.log("Document updated - star", res);
     });
+
+    Goal.findOne(ObjectID(req.body.id), function(err, res) {
+        console.log('After', res.starred);
+    });
+
+    res.send(200);
 };
 
 
-exports.filter_goals_post = function(req) {
+exports.filter_goals_post = function(req, res) {
 
     const category = req.body.filter;
     Account.updateOne({'username': req.user.username}, {$set: {"goalFilter": category}}, function (err, res) {
         if(err) console.log(err);
         console.log("Document updated - filter", res);
     });
+
+    res.send(200);
 };
 
 exports.update_goal_post = function(req, res, next) {

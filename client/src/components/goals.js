@@ -49,7 +49,7 @@ class Goals extends Component {
         } else {
             return (
                 <ul className='goal-cards'> {
-                    props.map((goal, index) => {
+                    this.state.cards.map((goal, index) => {
                         return (<GoalCard key={index} id={goal._id} goalTitle={goal.title}
                                           goalDescription={goal.description} goalImage={goal.img}
                                           starred={goal.starred}/>);
@@ -77,7 +77,6 @@ class Goals extends Component {
             <div>
                 <NavBar/>
                 <Header filter={this.state.filteredType} updateGoals={this.updateGoals}/>
-                <p>{this.state.user}</p>
                 {this.displayGoals(this.state.cards)}
                 <GoalModal/>
             </div>

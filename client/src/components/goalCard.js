@@ -7,11 +7,11 @@ class GoalCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.id,
-            goalTitle: this.props.goalTitle,
-            goalDescription: this.props.goalDescription,
-            goalImage: this.props.goalImage,
-            starred: this.props.starred
+            id: props.id,
+            goalTitle: props.goalTitle,
+            goalDescription: props.goalDescription,
+            goalImage: props.goalImage,
+            starred: props.starred
         };
 
         this.toggleStar = this.toggleStar.bind(this);
@@ -57,6 +57,16 @@ class GoalCard extends Component {
             let data = new FormData();
             data.append('file', file);
         }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            id: nextProps.id,
+            goalTitle: nextProps.goalTitle,
+            goalDescription: nextProps.goalDescription,
+            goalImage: nextProps.goalImage,
+            starred: nextProps.starred
+        });
     }
 
     render() {
