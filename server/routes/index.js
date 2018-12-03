@@ -3,7 +3,7 @@ const passport = require('passport');
 
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({dest: './uploads/'});
+const upload = multer({ dest: './uploads/' });
 
 // Require controllers
 const account_controller = require('../controllers/accountController');
@@ -51,7 +51,7 @@ router.get('/login', account_controller.account_login_get);
 
 // POST request for logging in
 router.post('/login', passport.authenticate('local',
-    {successRedirect: '/', failureRedirect: '/login', failureFlash: true}));
+    { successRedirect: '/', failureRedirect: '/login', failureFlash: true }));
 
 /** Logout Routes **/
 
