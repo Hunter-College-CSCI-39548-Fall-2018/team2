@@ -6,20 +6,7 @@ import Post from './post';
 
 
 class Subgoals extends Component {
-/*
-    componentDidMount() {
-        this.callApi()
-            .then(res => this.setState({response: res.express}))
-            .catch(err => console.log(err));
-    }
-
-    callApi = async () => {
-        const response = await fetch('/subgoals');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-    }; */
-
+    
     render() {
         return (
             <div className="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
