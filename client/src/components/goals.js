@@ -53,7 +53,7 @@ class Goals extends Component {
                     this.state.cards.map((goal, index) => {
                         return (<GoalCard key={index} id={goal._id} goalTitle={goal.title}
                                           goalDescription={goal.description} goalImage={goal.img}
-                                          starred={goal.starred}/>);
+                                          starred={goal.starred} completed={goal.completed}/>);
                     })}
                 </ul>
             )

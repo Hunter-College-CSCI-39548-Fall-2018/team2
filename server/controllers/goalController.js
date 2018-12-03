@@ -144,11 +144,18 @@ exports.update_goal_post = function(req, res, next) {
 // Handles completing a goal on POST
 exports.complete_goal_post = function(req, res, next) {
 
+    console.log(req.body.id);
+
     Goal.updateOne({"_id": ObjectID(req.body.id)},
         {$set: {"completed": true} }, function (err, res) {
         if (err) console.log(err);
-        console.log("Goal marked as completed", res);
+        console.log("Goal marked as completed");
     });
+
+    Goal.findOne(ObjectID(req.body.id), function(err, res) {
+        console.log('hi');
+    });
+
 
     res.sendStatus(200);
 };

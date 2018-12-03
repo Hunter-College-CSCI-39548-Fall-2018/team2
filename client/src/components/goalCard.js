@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image} from 'cloudinary-react';
-import '../css/goals.css';
 import {post} from "axios/index";
+import '../css/goals.css';
 
 class GoalCard extends Component {
 
@@ -52,19 +52,15 @@ class GoalCard extends Component {
             url = '/delete'
         }
 
-        const formData = new FormData();
-        formData.append('id', this.state.id);
-        formData.append('img', this.state.modalImage);
-        formData.append('goalTitle', this.state.modalTitle);
-        formData.append('goalDescription', this.state.modalDescription);
+        post(url, {
+            id: this.state.id,
+        }).then(function (response) {
+            console.log(response);
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-
-        post(url, formData, config);
         window.location.reload();
     };
 
