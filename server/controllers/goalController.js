@@ -137,7 +137,8 @@ exports.filter_goals_post = function(req, res) {
 
 // Handles updating a goal on POST
 exports.update_goal_post = function(req, res, next) {
-
+    console.log("Goal marked as completed", res);
+    res.sendStatus(200);
 };
 
 // Handles completing a goal on POST

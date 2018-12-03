@@ -6,7 +6,7 @@ import Post from './post';
 
 
 class Subgoals extends Component {
-    
+
     render() {
         return (
             <div className="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">

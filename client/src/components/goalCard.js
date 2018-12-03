@@ -13,7 +13,11 @@ class GoalCard extends Component {
             goalDescription: props.goalDescription,
             goalImage: props.goalImage,
             starred: props.starred,
-            selectedValue: ''
+
+            modalTitle: '',
+            modalDescription: '',
+            modalImage: '',
+            dropDown: ''
         };
 
         this.toggleStar = this.toggleStar.bind(this);
@@ -22,6 +26,7 @@ class GoalCard extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    // Used to initialize the component with the previous state
     componentWillReceiveProps(nextProps) {
         this.setState({
             id: nextProps.id,
@@ -39,19 +44,19 @@ class GoalCard extends Component {
 
         let url = '';
 
-        if(this.state.selectedValue === 'Update') {
+        if (this.state.dropDown === 'Update') {
             url = '/update';
-        } else if (this.state.selectedValue === 'Complete') {
-            url ='/complete';
+        } else if (this.state.dropDown === 'Complete') {
+            url = '/complete';
         } else {
-            url ='/delete'
+            url = '/delete'
         }
 
         const formData = new FormData();
         formData.append('id', this.state.id);
-        formData.append('img', this.state.goalImage);
-        formData.append('goalTitle', this.state.goalTitle);
-        formData.append('goalDescription', this.state.goalDescription);
+        formData.append('img', this.state.modalImage);
+        formData.append('goalTitle', this.state.modalTitle);
+        formData.append('goalDescription', this.state.modalDescription);
 
         const config = {
             headers: {
@@ -63,7 +68,7 @@ class GoalCard extends Component {
         window.location.reload();
     };
 
-
+    // Toggles the star to favorite a post and updates the database
     toggleStar() {
 
         const newState = !this.state.starred;
@@ -80,8 +85,6 @@ class GoalCard extends Component {
                 starred: newState,
                 id: this.state.id
             }),
-        }).then(res => {
-
         }).catch(err => console.log(err));
     }
 
@@ -95,9 +98,10 @@ class GoalCard extends Component {
         });
     }
 
+    // Handles file uploading event
     uploadFile(event) {
         let file = event.target.files[0];
-        this.setState({goalImage: file.name});
+        this.setState({modalImage: file.name});
 
         if (file) {
             let data = new FormData();
@@ -127,17 +131,18 @@ class GoalCard extends Component {
                             <div className="add-goal modal-body">
                                 <form onSubmit={this.handleSubmit}>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input" type="text"
-                                               value={this.state.title} onChange={this.handleInputChange}/>
+                                        <input className="mdl-textfield__input" type="text" name="modalTitle"
+                                               value={this.state.modalTitle} onChange={this.handleInputChange}/>
                                         <label className="mdl-textfield__label">Goal Title</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input" type="text"
-                                               value={this.state.description} onChange={this.handleInputChange}/>
+                                        <input className="mdl-textfield__input" type="text" name="modalDescription"
+                                               value={this.state.modalDescription} onChange={this.handleInputChange}/>
                                         <label className="mdl-textfield__label">Goal Description</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input file-input" name='img'
+                                        <input className="mdl-textfield__input file-input" name="modalImage"
+                                               value={this.state.modalImage}
                                                onChange={this.handleInputChange} type="text" id="uploadFile"
                                                readOnly/>
                                         <div
@@ -150,7 +155,8 @@ class GoalCard extends Component {
                                         <label className="mdl-textfield__label">Goal Image Upload</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <select className="mdl-textfield__input" value={this.state.selectedValue} onChange={this.handleInputChange}>
+                                        <select className="mdl-textfield__input" name="dropDown" value={this.state.dropDown}
+                                                onChange={this.handleInputChange}>
                                             <option/>
                                             <option value="Update">Update Goal</option>
                                             <option value="Complete">Complete Goal</option>
@@ -164,7 +170,8 @@ class GoalCard extends Component {
                                     <div className="modal-footer">
                                         <div className="modal-footer">
                                             <input type="submit" value="Update" className='edit-btn' onClick={() => {
-                                                this.form.dispatchEvent(new Event('submit'))}}/>
+                                                this.form.dispatchEvent(new Event('submit'))
+                                            }}/>
                                         </div>
                                     </div>
                                 </form>
@@ -190,7 +197,7 @@ class GoalCard extends Component {
                     <div className="mdl-card__actions mdl-card--border">
                         <button className="mdl-button mdl-js-button mdl-button--icon">
                             <i id="edit_goal" data-toggle="modal" data-target={'#editGoalModal'}
-                               className="material-icons" onChange={this.handleEditClick}>
+                               className="material-icons">
                                 create
                             </i>
                         </button>
