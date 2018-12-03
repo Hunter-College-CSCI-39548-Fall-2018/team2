@@ -38,8 +38,10 @@ exports.account_login_post = function (req, res) {
 exports.account_login_get = function (req, res) {
     if (req.user) {
         res.redirect('/goals');
+    } else {
+        res.sendStatus(200);
     }
-    res.sendStatus(200);
+
 };
 
 exports.account_logout_get = function (req, res) {
