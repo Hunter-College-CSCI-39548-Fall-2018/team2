@@ -5,7 +5,7 @@ import Subgoal from './subgoal';
 import Post from './post';
 
 
-class Subgoals extends Component {
+class GoalFeed extends Component {
 
     render() {
         return (
@@ -25,4 +25,4 @@ class Subgoals extends Component {
     }
 }
 
-export default Subgoals;
+export default GoalFeed;

@@ -24,7 +24,6 @@ exports.goals_home_get = function (req, res, next) {
                 Account.findOne({'username': req.user.username}).exec(callback);
             },
         }, function (err, results) {
-            console.log(results + "HI");
             if (err) { return next(err);}
 
             let selectedFilter = results.account.goalFilter;
@@ -32,15 +31,9 @@ exports.goals_home_get = function (req, res, next) {
 
             // Filter the resulting goals for the goals that meet the specified criteria
             if(selectedFilter === 'Priority') {
-                filteredGoals = results.goals.filter(goal => goal.starred === true);
-                for(var i = 0; i < filteredGoals.length; i++){
-                    console.log(filteredGoals[i].starred);
-                }
+                filteredGoals = results.goals.filter(goal => goal.starred);
             } else if(selectedFilter === 'Completed') {
-                filteredGoals = results.goals.filter(goal => goal.completed === true);
-                for(var i = 0; i < filteredGoals.length; i++){
-                    console.log(filteredGoals[i].starred);
-                }
+                filteredGoals = results.goals.filter(goal => goal.completed);
             }
 
             const MAX_DESCRIPTION_LENGTH = 68;
@@ -54,8 +47,9 @@ exports.goals_home_get = function (req, res, next) {
                     filteredGoals[i].description = filteredGoals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
             }
 
-            console.log(filteredGoals.length);
-            console.log(results.account.goalFilter);
+            console.log(selectedFilter);
+            console.log('LENGTTTHHH', filteredGoals.length);
+
             res.send({user: req.user, goals: filteredGoals, filter: selectedFilter});
 
         });
@@ -81,6 +75,7 @@ exports.create_goal_post = [
             username: req.user.username,
             subgoals: [],
             starred: false,
+            completed:false,
             posts: []
         });
 
@@ -145,15 +140,14 @@ exports.update_goal_post = function(req, res, next) {
 exports.complete_goal_post = function(req, res, next) {
 
     console.log(req.body.id);
-
     Goal.updateOne({"_id": ObjectID(req.body.id)},
         {$set: {"completed": true} }, function (err, res) {
         if (err) console.log(err);
-        console.log("Goal marked as completed");
+        console.log("Goal marked as completed", res);
     });
 
     Goal.findOne(ObjectID(req.body.id), function(err, res) {
-        console.log('hi');
+        console.log('After', res.completed, req.body.id);
     });
 
 
