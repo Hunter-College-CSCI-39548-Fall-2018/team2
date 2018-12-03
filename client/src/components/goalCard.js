@@ -20,6 +20,16 @@ class GoalCard extends Component {
         this.uploadFile = this.uploadFile.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            id: nextProps.id,
+            goalTitle: nextProps.goalTitle,
+            goalDescription: nextProps.goalDescription,
+            goalImage: nextProps.goalImage,
+            starred: nextProps.starred
+        });
+    }
+
     handleEditClick() {
 
     }
@@ -57,16 +67,6 @@ class GoalCard extends Component {
             let data = new FormData();
             data.append('file', file);
         }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            id: nextProps.id,
-            goalTitle: nextProps.goalTitle,
-            goalDescription: nextProps.goalDescription,
-            goalImage: nextProps.goalImage,
-            starred: nextProps.starred
-        });
     }
 
     render() {

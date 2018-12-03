@@ -6,39 +6,20 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           button: this.props.filter
+           button: ''
         };
 
         this.filterCategoryPriority = this.filterCategoryPriority.bind(this);
         this.filterCategoryAll = this.filterCategoryAll.bind(this);
         this.filterCategoryCompleted = this.filterCategoryCompleted.bind(this);
-        this.buttonStyle = this.buttonStyle.bind(this);
+        this.updateCards = this.updateCards.bind(this);
     }
 
-    componentDidMount(){
+    componentWillReceiveProps(nextProps) {
         this.setState({
-            button: this.props.filter
+            button: nextProps.filter
         });
     }
-
-    updateCards(filterCategory) {
-        this.setState({clickedButton: filterCategory});
-
-        fetch('/filter', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                filter: filterCategory }),
-        });
-
-        fetch('/goals').then((response) => response.json())
-            .then((res) => {
-                this.props.updateGoals(res.goals);
-            })
-            .catch(error => console.warn(error));
-    };
 
     filterCategoryAll() {
         const newState = 'All';
@@ -48,29 +29,40 @@ class Header extends Component {
     filterCategoryPriority() {
         const newState = 'Priority';
         this.updateCards(newState);
+
     }
 
     filterCategoryCompleted() {
         const newState = 'Completed';
         this.updateCards(newState);
+
     }
 
-    buttonStyle(props) {
-        if (props.value === this.state.button) {
-            return 'rkmd-btn-toggled';
-        } else {
-            return 'rkmd-btn';
-        }
-    }
+    updateCards(filterCategory) {
+        fetch('/filter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                filter: filterCategory }),
+        }).then(() => fetch('/goals').then((response) => response.json())
+            .then((res) => {
+                this.props.updateGoals(res.goals);
+                this.setState({
+                    button: filterCategory
+                });
+            }).catch(error => console.warn(error)));
+    };
 
     render() {
         return (
             <div id='header'>
                 <h1 id='application-title'> Bloom </h1>
                 <h2 id='application-description'> Welcome!</h2>
-                <button className={this.buttonStyle({value: 'All'})} onClick={this.filterCategoryAll}>All</button>
-                <button className={this.buttonStyle({value: 'Priority'})} onClick={this.filterCategoryPriority}>Priority</button>
-                <button className={this.buttonStyle({value: 'Completed'})} onClick={this.filterCategoryCompleted}>Completed
+                <button onClick={this.filterCategoryAll} className={this.state.button === 'All' ? 'rkmd-btn-toggled' : 'rkmd-btn'}>All</button>
+                <button onClick={this.filterCategoryPriority} className={this.state.button === 'Priority' ? 'rkmd-btn-toggled' : 'rkmd-btn'}>Priority</button>
+                <button onClick={this.filterCategoryCompleted} className={this.state.button === 'Completed' ? 'rkmd-btn-toggled' : 'rkmd-btn'} >Completed
                 </button>
                 <hr className='divider'/>
             </div>
