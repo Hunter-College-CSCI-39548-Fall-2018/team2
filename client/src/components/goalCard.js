@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image} from 'cloudinary-react';
-import '../css/goals.css';
 import {post} from "axios/index";
+import '../css/goals.css';
 
 class GoalCard extends Component {
 
@@ -13,6 +13,7 @@ class GoalCard extends Component {
             goalDescription: props.goalDescription,
             goalImage: props.goalImage,
             starred: props.starred,
+            completed: props.completed,
 
             modalTitle: '',
             modalDescription: '',
@@ -28,6 +29,7 @@ class GoalCard extends Component {
 
     // Used to initialize the component with the previous state
     componentWillReceiveProps(nextProps) {
+
         this.setState({
             id: nextProps.id,
             goalTitle: nextProps.goalTitle,
@@ -39,8 +41,9 @@ class GoalCard extends Component {
     }
 
     // Handles submission of form data and posts it to backend
-    handleSubmit = async e => {
-        e.preventDefault();
+    handleSubmit() {
+
+        alert('sub' + this.props.id);
 
         let url = '';
 
@@ -52,25 +55,20 @@ class GoalCard extends Component {
             url = '/delete'
         }
 
-        const formData = new FormData();
-        formData.append('id', this.state.id);
-        formData.append('img', this.state.modalImage);
-        formData.append('goalTitle', this.state.modalTitle);
-        formData.append('goalDescription', this.state.modalDescription);
-
-        const config = {
+        fetch(url, {
+            method: 'POST',
             headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: this.props.id }),
+        }).then(() => fetch('/goals').then((response) => response.json()).catch(error => console.warn(error)));
 
-        post(url, formData, config);
         window.location.reload();
     };
 
     // Toggles the star to favorite a post and updates the database
     toggleStar() {
-
         const newState = !this.state.starred;
         this.setState({
             starred: newState

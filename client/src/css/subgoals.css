@@ -239,3 +239,54 @@ html, body {
     padding-bottom: 20px;
     color: white;
 }
+
+#subgoalDescription {
+    font-size: 13px;
+    color: black;
+    margin-bottom: 50px;
+}
+
+#modal-body {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+#navigate {
+    background: #266A2E;
+    color: white;
+    font-family: roboto;
+    font-weight: 500;
+    font-size: 13px;
+    margin-left: 40px;
+}
+
+
+.tab{
+//min-height:50px;
+    width:100%;
+    padding:25px;
+    font-family:sans-serif;
+    color:#444;
+}
+
+ul.inline{
+    list-style:none;
+    padding: 0;
+    margin-bottom:0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px; }
+li{
+    display:inline-block;
+    margin-left:0;
+    padding:10px;
+    border-bottom:2px solid #eee;
+    transition: all .5s;
+    font-family:sans-serif;
+    font-weight:300;
+    cursor:pointer;
+    color:#aaa;
+
+}
