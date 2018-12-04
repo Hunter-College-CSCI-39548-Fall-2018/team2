@@ -25,7 +25,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         <p>
           {" "}
           Hello World! {this.state.user} This page will eventually be the home
