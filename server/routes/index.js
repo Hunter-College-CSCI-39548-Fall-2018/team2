@@ -15,7 +15,7 @@ const post_controller = require('../controllers/postcontroller');
 
 router.get('/home', account_controller.account_home_get);
 
-/** Goals routes **/
+/** Goals Routes **/
 
 router.get('/goals/fetch', goal_controller.goals_home_get);
 
@@ -37,6 +37,30 @@ router.post('/goal/complete', goal_controller.complete_goal_post);
 //POST request for filtering a goal
 router.post('/goal/filter', goal_controller.filter_goals_post);
 
+/** Feed Routes **/
+
+
+/** Post Routes **/
+
+router.get('/posts/fetch', post_controller.fetch_posts_get);
+
+router.post('/post/update', post_controller.update_post_post);
+
+router.post('/post/delete', post_controller.update_post_post);
+
+router.post('/post/create', post_controller.create_post_post);
+
+/** Subgoal Routes **/
+
+router.get('/subgoals/fetch', subgoal_controller.fetch_subgoal_get);
+
+router.post('/subgoal/check', subgoal_controller.check_subgoal_post);
+
+router.post('/subgoal/update', subgoal_controller.update_subgoal_post);
+
+router.post('subgoal/delete', subgoal_controller.delete_subgoal_post);
+
+router.post('subgoal/create', subgoal_controller.create_subgoal_post);
 
 /** Registration Routes **/
 

@@ -64,7 +64,7 @@ class GoalCard extends Component {
             },
             body: JSON.stringify({
                 id: this.props.id }),
-        }).then(() => fetch('/goals').then((response) => response.json()).catch(error => console.warn(error)));
+        }).then(() => fetch('/goals/fetch').then((response) => response.json()).catch(error => console.warn(error)));
 
         window.location.reload();
     };
@@ -112,7 +112,10 @@ class GoalCard extends Component {
     navigateToSubgoal(){
         const url = '/feed/' + this.state.id;
         const {history} = this.props;
-        history.push(url);
+        history.push({
+            pathname: url,
+            state: {goalId: this.state.id, goalTitle: this.state.goalTitle, goalDescription: this.state.goalDescription}
+        });
     }
 
     render() {

@@ -9,7 +9,8 @@ class SubgoalsHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editPanel: 'Default'
+            editPanel: 'Default',
+            title: ''
         };
 
         this.displayForm = this.displayForm.bind(this);
@@ -17,6 +18,12 @@ class SubgoalsHeader extends Component {
         this.displayTitle = this.displayTitle.bind(this);
         this.switchForm = this.switchForm.bind(this);
         this.toMain = this.toMain.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            title: nextProps.goalTitle
+        });
     }
 
     displayForm() {
@@ -69,7 +76,7 @@ class SubgoalsHeader extends Component {
                         <div className="mdl-layout--large-screen-only mdl-layout__header-row">
                         </div>
                         <div className="mdl-layout--large-screen-only mdl-layout__header-row" id="imageArea">
-                            <h3 id="goalInfo">Goal Title and Description</h3>
+                            <h3 id="goalInfo">{this.state.title}</h3>
                         </div>
                         <div className="mdl-layout--large-screen-only mdl-layout__header-row" id="addAnchor">
                         </div>

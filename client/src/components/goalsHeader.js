@@ -6,7 +6,8 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           button: ''
+           button: '',
+            user: ''
         };
 
         this.filterCategoryPriority = this.filterCategoryPriority.bind(this);
@@ -17,7 +18,8 @@ class Header extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            button: nextProps.filter
+            button: nextProps.filter,
+            user: nextProps.user
         });
     }
 
@@ -59,7 +61,7 @@ class Header extends Component {
         return (
             <div id='header'>
                 <h1 id='application-title'> Bloom </h1>
-                <h2 id='application-description'> Welcome!</h2>
+                <h2 id='application-description'> Welcome {this.state.user}!</h2>
                 <button onClick={this.filterCategoryAll} className={this.state.button === 'All' ? 'rkmd-btn-toggled' : 'rkmd-btn'}>All</button>
                 <button onClick={this.filterCategoryPriority} className={this.state.button === 'Priority' ? 'rkmd-btn-toggled' : 'rkmd-btn'}>Priority</button>
                 <button onClick={this.filterCategoryCompleted} className={this.state.button === 'Completed' ? 'rkmd-btn-toggled' : 'rkmd-btn'} >Completed

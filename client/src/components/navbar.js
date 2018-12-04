@@ -26,11 +26,8 @@ class NavBar extends Component {
             <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <header className="mdl-layout__header">
                     <div className="mdl-layout__header-row">
-
-                        <span className="mdl-layout-title">Bloom</span>
-
+                        <span className="mdl-layout-title"onClick={this.home}>Bloom</span>
                         <div className="mdl-layout-spacer"/>
-
                         <nav className="mdl-navigation mdl-layout--large-screen-only">
                             <p className="mdl-navigation__link" onClick={this.home}>Home</p>
                             <p className="mdl-navigation__link" onClick={this.logout}>Logout</p>

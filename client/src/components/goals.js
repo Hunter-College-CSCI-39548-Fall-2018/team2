@@ -85,7 +85,7 @@ class Goals extends Component {
         return (
             <div>
                 <NavBar/>
-                <Header filter={this.state.filteredType} updateGoals={this.updateGoals}/>
+                <Header filter={this.state.filteredType} user={this.state.user} updateGoals={this.updateGoals}/>
                 {this.displayGoals(this.state.cards)}
                 <GoalModal addGoal={this.addGoal}/>
             </div>

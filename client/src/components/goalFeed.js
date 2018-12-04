@@ -9,7 +9,9 @@ class GoalFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            goalId: '',
             goalTitle: '',
+            goalDescription: '',
             posts: [],
             subgoals: [],
         };
@@ -20,6 +22,12 @@ class GoalFeed extends Component {
     }
 
     componentDidMount() {
+
+        this.setState({
+            goalId: this.props.location.state.goalId,
+            goalTitle: this.props.location.state.goalTitle,
+            goalDescription: this.props.location.state.goalDescription,
+        });
 
         let feedPosts = [];
 
@@ -41,56 +49,78 @@ class GoalFeed extends Component {
     }
 
     callApiSubgoals = async () => {
-        const response = await fetch('/subgoals');
+        const response = await fetch('/subgoals/fetch', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: this.state.id
+            })
+        });
+
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
         return body;
-    };
-
-    callApiPosts = async () => {
-        const response = await fetch('/posts');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
-    };
-
-    displayFeed(props) {
-        const numPosts = this.state.posts.length;
-        if (numPosts === 0) {
-            return (<p id='no-goals'> Your feed is currently empty. Add an update by clicking the '+' button!</p>);
-        } else {
-            return (
-                <ul className='goal-cards'> {
-                    this.state.feed.map((post, index) => {
-                        if (post.structure === 'Subgoal') {
-                            return (<Post key={index} id={post._id} postTitle={post.title}
-                                          postDescription={post.description} postImage={post.img}/>);
-                        } else {
-                            return (<Subgoal key={index} id={post._id} subgoalTitle={post.title}
-                                             subgoalDescription={post.description} subgoalImage={post.img}
-                                             completed={post.completed}/>);
-                        }
-                    })}
-                </ul>
-            )
-        }
-    };
-
-    render() {
-        return (
-            <div className="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
-                <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                    <NavBar/>
-                    <Header/>
-                    <main className="mdl-layout__content">
-                        <div className="mdl-layout__tab-panel is-active" id="overview">
-                            {this.displayFeed(this.state.posts)}
-                        </div>
-                    </main>
-                </div>
-            </div>
-        );
     }
-}
+        ;
 
-export default GoalFeed;
+        callApiPosts = async () => {
+            const response = await fetch('/posts/fetch', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: this.state.id
+                })
+            });
+            const body = await response.json();
+            if (response.status !== 200) throw Error(body.message);
+            return body;
+        };
+
+        displayFeed(props)
+        {
+            const numPosts = this.state.posts.length;
+            if (numPosts === 0) {
+                return (<p id='no-goals'> Your feed is currently empty. Add an update by clicking the '+' button!</p>);
+            } else {
+                return (
+                    <ul className='goal-cards'> {
+                        this.state.feed.map((post, index) => {
+                            if (post.structure === 'Subgoal') {
+                                return (<Post key={index} id={post._id} postTitle={post.title}
+                                              postDescription={post.description} postImage={post.img}/>);
+                            } else {
+                                return (<Subgoal key={index} id={post._id} subgoalTitle={post.title}
+                                                 subgoalDescription={post.description} subgoalImage={post.img}
+                                                 completed={post.completed}/>);
+                            }
+                        })}
+                    </ul>
+                )
+            }
+        };
+
+        render()
+        {
+            return (
+                <div className="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+                    <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+                        <NavBar/>
+                        <Header goalTitle={this.state.goalTitle}/>
+                        <main className="mdl-layout__content">
+                            <div className="mdl-layout__tab-panel is-active" id="overview">
+                                {this.displayFeed(this.state.posts)}
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    export
+    default
+    GoalFeed;
