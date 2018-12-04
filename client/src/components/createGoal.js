@@ -22,7 +22,7 @@ class GoalModal extends Component {
     handleSubmit = async e => {
         e.preventDefault();
 
-        const url = '/create';
+        const url = '/goal/create';
         const formData = new FormData();
 
         formData.append('img', this.state.imageValue);

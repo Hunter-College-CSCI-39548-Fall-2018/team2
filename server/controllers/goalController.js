@@ -79,7 +79,7 @@ exports.create_goal_post = [
 
         if (!errors.isEmpty()) {
             console.log("Errors in creation of a new card\n", errors.mapped());
-            res.redirect('/goals');
+            res.redirect('/goals/fetch');
 
         } else {
 
@@ -121,7 +121,6 @@ exports.filter_goals_post = function(req, res) {
         if(err) console.log(err);
         console.log("Document updated - filter", res);
     });
-
     res.sendStatus(200);
 };
 

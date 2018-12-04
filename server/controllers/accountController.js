@@ -36,7 +36,7 @@ exports.account_login_post = function (req, res) {
 
 exports.account_login_get = function (req, res) {
     if (req.user) {
-        res.redirect('/goals');
+        res.redirect('/goals/fetch');
     } else {
         res.sendStatus(200);
     }

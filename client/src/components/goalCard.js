@@ -50,11 +50,11 @@ class GoalCard extends Component {
         let url = '';
 
         if (this.state.dropDown === 'Update') {
-            url = '/update';
+            url = '/goal/update';
         } else if (this.state.dropDown === 'Complete') {
-            url = '/complete';
+            url = '/goal/complete';
         } else {
-            url = '/delete'
+            url = '/goal/delete'
         }
 
         fetch(url, {
@@ -76,7 +76,7 @@ class GoalCard extends Component {
             starred: newState
         });
 
-        fetch('/star', {
+        fetch('/goal/star', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

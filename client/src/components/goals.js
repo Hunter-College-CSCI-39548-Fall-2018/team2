@@ -37,7 +37,7 @@ class Goals extends Component {
     }
 
     callApi = async () => {
-        const response = await fetch('/goals');
+        const response = await fetch('/goals/fetch');
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
         return body;

@@ -39,14 +39,14 @@ class Header extends Component {
     }
 
     updateCards(filterCategory) {
-        fetch('/filter', {
+        fetch('/goal/filter', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 filter: filterCategory }),
-        }).then(() => fetch('/goals').then((response) => response.json())
+        }).then(() => fetch('/goals/fetch').then((response) => response.json())
             .then((res) => {
                 this.props.updateGoals(res.goals);
                 this.setState({
