@@ -1,33 +1,40 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
+import Navbar from "./navbar";
 
 class Home extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: ''
-        };
-    }
-
-    componentDidMount() {
-        this.callApi()
-            .then(res => this.setState({user: res.username}))
-            .catch(err => console.log(err));
-    }
-
-    callApi = async () => {
-        const response = await fetch('/home');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: ""
     };
+  }
 
-    render() {
-        return (
-            <p> Hello World! {this.state.user} This page will eventually be the home page but it is currently <br/>
-                under construction. Thanks for the patience! </p>
-        );
-    }
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ user: res.username }))
+      .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch("/home");
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
+
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <p>
+          {" "}
+          Hello World! {this.state.user} This page will eventually be the home
+          page but it is currently <br />
+          under construction. Thanks for the patience!{" "}
+        </p>
+      </div>
+    );
+  }
 }
 
 export default Home;
