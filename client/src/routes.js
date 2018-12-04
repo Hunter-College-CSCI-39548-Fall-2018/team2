@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from './components/home'
 import Goals from './components/goals';
-import Subgoals from './components/subgoals';
+import Subgoals from './components/goalFeed';
 import Login from './components/login';
 import Register from './components/register'
 

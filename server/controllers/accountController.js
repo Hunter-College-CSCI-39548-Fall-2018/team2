@@ -1,7 +1,9 @@
 const Account = require('../models/account');
 const passport = require('passport');
 
-exports.account_home_get = function (req, res) { };
+exports.account_home_get = function (req, res) {
+    res.sendStatus(200);
+};
 
 exports.account_subgoals_get = function (req, res) {
     if (req.user) {
@@ -29,12 +31,15 @@ exports.account_registration_post = function (req, res) {
         });
 };
 
-exports.account_login_post = function (req, res) {};
+exports.account_login_post = function (req, res) {
+    res.sendStatus(200);
+};
 
 exports.account_login_get = function (req, res) {
     if (req.user) {
         res.redirect('/goals');
     }
+    res.sendStatus(200);
 };
 
 exports.account_logout_get = function (req, res) {
@@ -45,5 +50,5 @@ exports.account_logout_get = function (req, res) {
 
 
 exports.account_error_get = function (req,res) {
-
+    res.sendStatus(200);
 };

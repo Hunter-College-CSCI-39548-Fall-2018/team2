@@ -8,12 +8,14 @@ const upload = multer({dest: './uploads/'});
 // Require controllers
 const account_controller = require('../controllers/accountController');
 const goal_controller = require('../controllers/goalController');
+const subgoal_controller = require('../controllers/subgoalController');
+const feed_controller = require('../controllers/feedController');
 
 /** Home Routes **/
 router.get('/home', account_controller.account_home_get);
 
 /** Subgoal Routes **/
-router.get('/subgoals', account_controller.account_subgoals_get);
+router.get('/subgoals', feed_controller.account_feed_get);
 
 /** Goals routes **/
 
@@ -27,6 +29,12 @@ router.post('/star', goal_controller.update_star_post);
 
 // POST request for updating a goal
 router.post('/update', upload.single("img"), goal_controller.update_goal_post);
+
+// POST request fpr deleting a goal
+router.post('/delete', goal_controller.delete_goal_post);
+
+// POST request for completing a goal
+router.post('/delete', goal_controller.complete_goal_post);
 
 //POST request for filtering a goal
 router.post('/filter', goal_controller.filter_goals_post);

@@ -12,7 +12,6 @@ class GoalModal extends Component {
             imageValue: '',
         };
 
-        this.fileInput = React.createRef();
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
@@ -34,8 +33,9 @@ class GoalModal extends Component {
                 'content-type': 'multipart/form-data'
             }
         };
-        post(url, formData, config);
 
+        post(url, formData, config);
+        window.location.reload();
     };
 
     // Updates the state of component with data entered into form

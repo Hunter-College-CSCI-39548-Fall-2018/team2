@@ -1,5 +1,6 @@
 const Goal = require('../models/goal');
 const Account = require('../models/account');
+const Subgoal = require('../models/subgoal');
 const async = require('async');
 
 const multer = require("multer");
@@ -23,6 +24,7 @@ exports.goals_home_get = function (req, res, next) {
                 Account.findOne({'username': req.user.username}).exec(callback);
             },
         }, function (err, results) {
+            console.log(results + "HI");
             if (err) { return next(err);}
 
             let selectedFilter = results.account.goalFilter;
@@ -31,23 +33,29 @@ exports.goals_home_get = function (req, res, next) {
             // Filter the resulting goals for the goals that meet the specified criteria
             if(selectedFilter === 'Priority') {
                 filteredGoals = results.goals.filter(goal => goal.starred === true);
+                for(var i = 0; i < filteredGoals.length; i++){
+                    console.log(filteredGoals[i].starred);
+                }
             } else if(selectedFilter === 'Completed') {
                 filteredGoals = results.goals.filter(goal => goal.completed === true);
+                for(var i = 0; i < filteredGoals.length; i++){
+                    console.log(filteredGoals[i].starred);
+                }
             }
 
             const MAX_DESCRIPTION_LENGTH = 68;
 
             // Format goals before displaying to meet card structure
             for (let i = 0; i < filteredGoals.length; i++) {
-                filteredGoals[i].title = filteredGoals[i].title.charAt(0).toUpperCase() + filteredGoals[i].title.slice(1);
+                filteredGoals[i].title = filteredGoals[i].title.charAt(0).toUpperCase()
+                    + filteredGoals[i].title.slice(1);
 
-                if (filteredGoals[i].description.length > MAX_DESCRIPTION_LENGTH) filteredGoals[i].description =
-                    filteredGoals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
+                if (filteredGoals[i].description.length > MAX_DESCRIPTION_LENGTH)
+                    filteredGoals[i].description = filteredGoals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
             }
 
-            console.log(filteredGoals);
+            console.log(filteredGoals.length);
             console.log(results.account.goalFilter);
-
             res.send({user: req.user, goals: filteredGoals, filter: selectedFilter});
 
         });
@@ -85,16 +93,15 @@ exports.create_goal_post = [
 
         } else {
 
-            // ToDo: Look into a better way to do this to avoid code repetition
-
             if (req.file) { // Image provided during goal creation
                 try {
                     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
                         goal.img = result.public_id.toString() + ".png";
                         goal.save();
                         console.log('Image successfully uploaded to Cloudinary', result.url);
+                        console.log(goal.img);
+                        res.send({'image': goal.img});
                     });
-                    res.redirect('/goals');
                 } catch (err) {
                     console.log(err);
                 }
@@ -104,26 +111,46 @@ exports.create_goal_post = [
 ];
 
 // Handles updating of a goal on POST
-exports.update_star_post = function (req) {
+exports.update_star_post = function (req, res) {
 
-    Goal.updateOne({"_id": ObjectID(req.body.id)}, {$set: {"starred": req.body.starred} }, function (err, res) {
+    Goal.updateOne({"_id": ObjectID(req.body.id)},
+        {$set: {"starred": req.body.starred} }, function (err, res) {
         if (err) console.log(err);
         console.log("Document updated - star", res);
     });
+
+    res.sendStatus(200);
 };
 
 
-exports.filter_goals_post = function(req) {
+exports.filter_goals_post = function(req, res) {
 
     const category = req.body.filter;
-    Account.updateOne({'username': req.user.username}, {$set: {"goalFilter": category}}, function (err, res) {
+    Account.updateOne({'username': req.user.username},
+        {$set: {"goalFilter": category}}, function (err, res) {
         if(err) console.log(err);
         console.log("Document updated - filter", res);
     });
+
+    res.sendStatus(200);
 };
 
+// Handles updating a goal on POST
 exports.update_goal_post = function(req, res, next) {
+    console.log("Goal marked as completed", res);
+    res.sendStatus(200);
+};
 
+// Handles completing a goal on POST
+exports.complete_goal_post = function(req, res, next) {
+
+    Goal.updateOne({"_id": ObjectID(req.body.id)},
+        {$set: {"completed": true} }, function (err, res) {
+        if (err) console.log(err);
+        console.log("Goal marked as completed", res);
+    });
+
+    res.sendStatus(200);
 };
 
 // Handles deleting a goal on POST
@@ -131,16 +158,15 @@ exports.delete_goal_post = function (req, res, next) {
 
     async.parallel({
         goal: function (callback) {
-            Goal.findById(req.paramas.id).exec(callback)
-        }
-
-        // ToDo: Insert code to delete all of the subgoals
-
+            Goal.findById(req.params._id).exec(callback)
+        },
+        subgoal: function (callback) {
+            Subgoal.find({'goal': req.params._id}).exec(callback)
+        },
     }, function (err, results) {
         if (err) {
             return next(err);
         }
-        if (results.goal == null) res.redirect('/goals');
-        res.render('index')
+        res.sendStatus(200);
     });
 };
