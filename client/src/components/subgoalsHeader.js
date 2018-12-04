@@ -104,12 +104,9 @@ class SubgoalsHeader extends Component {
                                 <div id="modal-body" className="modal-body">
                                     {this.displayForm()}
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         );

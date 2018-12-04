@@ -48,8 +48,6 @@ exports.goals_home_get = function (req, res, next) {
             }
 
             console.log(selectedFilter);
-            console.log('LENGTTTHHH', filteredGoals.length);
-
             res.send({user: req.user, goals: filteredGoals, filter: selectedFilter});
 
         });

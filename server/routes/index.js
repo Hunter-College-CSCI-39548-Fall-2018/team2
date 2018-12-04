@@ -68,10 +68,5 @@ router.get('/logout', account_controller.account_logout_get);
 // GET request for error page
 router.get('/error', account_controller.account_error_get);
 
-
-
-
-
-
 module.exports = router;
 
