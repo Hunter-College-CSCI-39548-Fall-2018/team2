@@ -80,9 +80,6 @@ exports.create_goal_post = [
         });
 
         if (!errors.isEmpty()) {
-
-            // ToDo: Insert response if form fields are invalid.
-
             console.log("Errors in creation of a new card\n", errors.mapped());
             res.redirect('/goals');
 
@@ -149,7 +146,6 @@ exports.complete_goal_post = function(req, res, next) {
     Goal.findOne(ObjectID(req.body.id), function(err, res) {
         console.log('After', res.completed, req.body.id);
     });
-
 
     res.sendStatus(200);
 };

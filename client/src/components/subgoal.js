@@ -18,8 +18,6 @@ class Subgoal extends Component {
         this.setState({
             checked: newState
         });
-
-        // Todo: Insert DB update
     }
 
 

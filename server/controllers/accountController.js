@@ -22,7 +22,6 @@ exports.account_registration_post = function (req, res) {
         req.body.password, function (err, account) {
             if (err || (req.body.password !== req.body.re_password)) {
                 console.log(err);
-                // ToDo: Currently just refreshes page if invalid. Add response indicating error to user
             }
 
             passport.authenticate('local')(req, res, function () {

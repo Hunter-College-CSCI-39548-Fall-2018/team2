@@ -63,7 +63,6 @@ class GoalModal extends Component {
         }
     }
 
-    // ToDo: Get rid of some of these divs and make this more clean (do it for other files too)
     render() {
         return (
             <div>

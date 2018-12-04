@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Image} from 'cloudinary-react';
+import {withRouter} from 'react-router-dom';
 import {post} from "axios/index";
 import '../css/goals.css';
 
@@ -25,6 +26,7 @@ class GoalCard extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.navigateToSubgoal = this.navigateToSubgoal.bind(this);
     }
 
     // Used to initialize the component with the previous state
@@ -107,6 +109,12 @@ class GoalCard extends Component {
         }
     }
 
+    navigateToSubgoal(){
+        const url = '/feed/' + this.state.id;
+        const {history} = this.props;
+        history.push(url);
+    }
+
     render() {
         return (
             <div>
@@ -182,7 +190,7 @@ class GoalCard extends Component {
                 {/** Goal Card **/}
                 <div className="mdl-card mdl-shadow--2dp demo-card-square">
                     <div className="mdl-card__title mdl-card__accent mdl-card--expand">
-                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}/>
+                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage} onClick={this.navigateToSubgoal} />
                     </div>
                     <div className="card-information">
                         <div className="mdl-card__card-title">
@@ -211,4 +219,4 @@ class GoalCard extends Component {
     }
 }
 
-export default GoalCard;
+export default withRouter(GoalCard);
