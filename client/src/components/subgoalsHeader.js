@@ -13,27 +13,52 @@ class SubgoalsHeader extends Component {
         };
 
         this.displayForm = this.displayForm.bind(this);
+        this.displayBackButton = this.displayBackButton.bind(this);
+        this.displayTitle = this.displayTitle.bind(this);
         this.switchForm = this.switchForm.bind(this);
+        this.toMain = this.toMain.bind(this);
     }
 
     displayForm() {
         let editPanel = this.state.editPanel;
 
         if (editPanel === 'createSubgoal') {
-            return(<CreateSubgoal/>);
-        } else if(editPanel === 'createUpdate') {
-            return(<CreateUpdate/>);
+            return (<CreateSubgoal/>);
+        } else if (editPanel === 'createUpdate') {
+            return (<CreateUpdate/>);
         } else {
-            return(<SubgoalMenu switchForm={this.switchForm}/>);
+            return (<SubgoalMenu switchForm={this.switchForm}/>);
         }
     }
 
-    switchForm(formChoice){
-        alert(formChoice);
-        this.setState({
-            editPanel : formChoice
-        });
+    toMain() {
+        return(<SubgoalMenu switchForm={this.switchForm}/>);
+    }
 
+    displayBackButton(){
+        let editPanel = this.state.editPanel;
+
+        if (editPanel === 'createSubgoal' || editPanel === 'createUpdate') {
+            return (<i className="material-icons" onClick={this.toMain()}>arrow_back</i>);
+        }
+    }
+
+    displayTitle(){
+        let editPanel = this.state.editPanel;
+
+        if (editPanel === 'createSubgoal') {
+            return (<h5 className="modal-title">Add A Subgoal</h5>);
+        } else if (editPanel === 'createUpdate') {
+            return (<h5 className="modal-title">Add An Update</h5>);
+        } else {
+            return (<h5 className="modal-title">Main Menu</h5>);
+        }
+    }
+
+    switchForm(formChoice) {
+        this.setState({
+            editPanel: formChoice
+        });
     }
 
     render() {
@@ -66,7 +91,10 @@ class SubgoalsHeader extends Component {
 
                                 {/** Modal header **/}
                                 <div className="modal-header">
-                                    <h5 className="modal-title">Add Progress Point</h5>
+                                    <span>
+                                        {this.displayBackButton()}
+                                        {this.displayTitle()}
+                                    </span>
                                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>

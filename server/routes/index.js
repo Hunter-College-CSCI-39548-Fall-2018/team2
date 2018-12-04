@@ -5,17 +5,15 @@ const router = express.Router();
 const multer = require("multer");
 const upload = multer({dest: './uploads/'});
 
-// Require controllers
 const account_controller = require('../controllers/accountController');
 const goal_controller = require('../controllers/goalController');
 const subgoal_controller = require('../controllers/subgoalController');
 const feed_controller = require('../controllers/feedController');
+const post_controller = require('../controllers/postcontroller');
 
 /** Home Routes **/
-router.get('/home', account_controller.account_home_get);
 
-/** Subgoal Routes **/
-router.get('/subgoals', feed_controller.account_feed_get);
+router.get('/home', account_controller.account_home_get);
 
 /** Goals routes **/
 
@@ -69,6 +67,10 @@ router.get('/logout', account_controller.account_logout_get);
 
 // GET request for error page
 router.get('/error', account_controller.account_error_get);
+
+
+
+
 
 
 module.exports = router;
