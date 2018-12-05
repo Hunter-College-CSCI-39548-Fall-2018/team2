@@ -92,14 +92,14 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-/*
+
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
     const err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-*/
+
 
 // Development error handler. Will print stacktrace
 if (app.get('env') === 'development') {
