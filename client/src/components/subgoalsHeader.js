@@ -46,7 +46,7 @@ class SubgoalsHeader extends Component {
         let editPanel = this.state.editPanel;
 
         if (editPanel === 'createSubgoal' || editPanel === 'createUpdate') {
-            return (<i className="material-icons" onClick={this.toMain()}>arrow_back</i>);
+            return (<i className="material-icons" onClick={this.toMain}>arrow_back</i>);
         }
     }
 

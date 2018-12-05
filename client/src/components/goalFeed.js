@@ -9,7 +9,7 @@ class GoalFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            goalId: '',
+            goalId: this.props.goalId,
             goalTitle: '',
             goalDescription: '',
             posts: [],
@@ -49,32 +49,19 @@ class GoalFeed extends Component {
     }
 
     callApiSubgoals = async () => {
-        const response = await fetch('/subgoals/fetch', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.state.id
-            })
-        });
+        var url = new URL('/subgoals/fetch/');
+        var params = this.state.goalId;
+        url.search = new URLSearchParams(params);
+
+        const response = await fetch('/subgoals/fetch/' + this.state.goalId);
 
         const body = await response.json();
         if (response.status !== 200) throw Error(body.message);
         return body;
-    }
-        ;
+    };
 
         callApiPosts = async () => {
-            const response = await fetch('/posts/fetch', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: this.state.id
-                })
-            });
+            const response = await fetch('/posts/fetch/' + this.state.goalId);
             const body = await response.json();
             if (response.status !== 200) throw Error(body.message);
             return body;
@@ -121,6 +108,4 @@ class GoalFeed extends Component {
         }
     }
 
-    export
-    default
-    GoalFeed;
+    export default GoalFeed;

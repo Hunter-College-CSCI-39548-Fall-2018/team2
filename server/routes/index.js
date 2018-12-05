@@ -42,7 +42,7 @@ router.post('/goal/filter', goal_controller.filter_goals_post);
 
 /** Post Routes **/
 
-router.get('/posts/fetch', post_controller.fetch_posts_get);
+router.get('/posts/fetch/:id', post_controller.fetch_posts_get);
 
 router.post('/post/update', post_controller.update_post_post);
 
@@ -52,7 +52,7 @@ router.post('/post/create', post_controller.create_post_post);
 
 /** Subgoal Routes **/
 
-router.get('/subgoals/fetch', subgoal_controller.fetch_subgoal_get);
+router.get('/subgoals/fetch/:id', subgoal_controller.fetch_subgoal_get);
 
 router.post('/subgoal/check', subgoal_controller.check_subgoal_post);
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {post} from 'axios';
 
 class createUpdate extends Component {
 
@@ -20,7 +21,7 @@ class createUpdate extends Component {
     handleSubmit = async e => {
         e.preventDefault();
 
-        const url = '/goal/create';
+        const url = '/post/create';
         const formData = new FormData();
 
         formData.append('img', this.state.imageValue);
@@ -62,30 +63,34 @@ class createUpdate extends Component {
     render() {
         return (
             <div id="createSubgoal"className="add-goal modal-body">
-                <form>
+                <form onSubmit={this.handleSubmit} ref={el => this.form = el}>
                     <div className="mdl-textfield mdl-js-textfield">
-                        <input className="mdl-textfield__input" name='title' type="text"/>
+                        <input className="mdl-textfield__input" name='title'
+                               onChange={this.handleInputChange} value={this.state.title} type="text"/>
                         <label className="mdl-textfield__label">Update Title</label>
                     </div>
                     <div className="mdl-textfield mdl-js-textfield">
                         <input className="mdl-textfield__input" name='description'
-                               type="text"/>
+                               type="text" onChange={this.handleInputChange}/>
                         <label className="mdl-textfield__label">Update Description</label>
                     </div>
                     <div className="mdl-textfield mdl-js-textfield">
-                        <input className="mdl-textfield__input file-input" name='img' type="text" id="uploadFile"
-                               readOnly/>
+                        <input className="mdl-textfield__input file-input" name='img'
+                               onChange={this.handleInputChange}
+                               placeholder={this.state.imageValue.name}type="text" id="uploadFile" readOnly/>
                         <div
                             className="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
                             <i className="material-icons">
                                 cloud_upload
                             </i>
-                            <input type="file" id="uploadBtn"/>
+                            <input type="file" id="uploadBtn"onChange={this.uploadFile}/>
                         </div>
                         <label className="mdl-textfield__label">Update Image Upload</label>
                     </div>                                    <div className="modal-footer">
                     <input type="submit" value="submit" className='rkmd-btn-toggled'
-                           data-dismiss="modal" />
+                           data-dismiss="modal" onClick={() => {
+                        this.form.dispatchEvent(new Event('submit'))
+                    }} />
                 </div>
                 </form>
             </div>

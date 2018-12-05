@@ -16,9 +16,9 @@ class GoalCard extends Component {
             starred: props.starred,
             completed: props.completed,
 
-            modalTitle: '',
-            modalDescription: '',
-            modalImage: '',
+            modalTitle: props.goalTitle,
+            modalDescription: props.goalDescription,
+            modalImage: props.goalImage,
             dropDown: ''
         };
 
@@ -64,7 +64,9 @@ class GoalCard extends Component {
             },
             body: JSON.stringify({
                 id: this.props.id }),
-        }).then(() => fetch('/goals/fetch').then((response) => response.json()).catch(error => console.warn(error)));
+        }).then(() => fetch('/goals/fetch').
+        then((response) => response.json()).
+        catch(error => console.warn(error)));
 
         window.location.reload();
     };
@@ -86,6 +88,8 @@ class GoalCard extends Component {
                 id: this.state.id
             }),
         }).catch(err => console.log(err));
+
+        window.location.reload();
     }
 
     // Updates the state of component with data entered into form

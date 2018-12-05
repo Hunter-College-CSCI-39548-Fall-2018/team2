@@ -40,6 +40,7 @@ exports.goals_home_get = function (req, res, next) {
 
             // Format goals before displaying to meet card structure
             for (let i = 0; i < filteredGoals.length; i++) {
+                console.log(filteredGoals[i]._id);
                 filteredGoals[i].title = filteredGoals[i].title.charAt(0).toUpperCase()
                     + filteredGoals[i].title.slice(1);
 
@@ -152,15 +153,16 @@ exports.delete_goal_post = function (req, res, next) {
 
     async.parallel({
         goal: function (callback) {
-            Goal.findById(req.params._id).exec(callback)
+            Goal.findById(req.body.id).remove().exec(callback)
         },
         subgoal: function (callback) {
-            Subgoal.find({'goal': req.params._id}).exec(callback)
+            Subgoal.find({'goal': req.body.id}).remove().exec(callback)
         },
     }, function (err, results) {
         if (err) {
             return next(err);
         }
+        console.log('Item deleted', results);
         res.sendStatus(200);
     });
 };

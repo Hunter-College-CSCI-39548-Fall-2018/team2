@@ -2,12 +2,12 @@ const Account = require('../models/account');
 const Goal = require('../models/goal');
 const async = require('async');
 
-exports.fetch_posts_get = function(req, res) {
+exports.fetch_posts_get= function(req, res) {
 
     if (!req.user) {
         res.redirect('/login');
     } else {
-        Goal.find({'_id': req.body.id}).exec(function (err, goal){
+        Goal.find({'_id': req.params.id}).exec(function (err, goal){
             if (err) { return next(err); }
             let goalPosts = goal.posts;
             console.log('POSTS:', goalPosts.length, goal.posts);
