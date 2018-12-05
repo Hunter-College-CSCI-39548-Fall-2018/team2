@@ -7,10 +7,10 @@ exports.fetch_posts_get= function(req, res) {
     if (!req.user) {
         res.redirect('/login');
     } else {
-        Goal.find({'_id': req.params.id}).exec(function (err, goal){
-            if (err) { return next(err); }
+        Goal.find({'_id': req.query.id}).exec(function (err, goal){
+            console.log(goal);
             let goalPosts = goal.posts;
-            console.log('POSTS:', goalPosts.length, goal.posts);
+            console.log('POSTS:', goal.posts);
             res.send({posts: goalPosts});
         });
     }

@@ -40,7 +40,6 @@ exports.goals_home_get = function (req, res, next) {
 
             // Format goals before displaying to meet card structure
             for (let i = 0; i < filteredGoals.length; i++) {
-                console.log(filteredGoals[i]._id);
                 filteredGoals[i].title = filteredGoals[i].title.charAt(0).toUpperCase()
                     + filteredGoals[i].title.slice(1);
 

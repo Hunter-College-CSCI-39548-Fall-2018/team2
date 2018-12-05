@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Image} from 'cloudinary-react';
 import {withRouter} from 'react-router-dom';
-import {post} from "axios/index";
 import '../css/goals.css';
 
 class GoalCard extends Component {
@@ -45,8 +44,6 @@ class GoalCard extends Component {
     // Handles submission of form data and posts it to backend
     handleSubmit() {
 
-        alert('sub' + this.props.id);
-
         let url = '';
 
         if (this.state.dropDown === 'Delete') {
@@ -68,10 +65,11 @@ class GoalCard extends Component {
                 goalDescription: this.state.modalDescription,
                 goalImage: this.state.modalImage,
                 starred: this.state.starred,
-                completed:this.state.completed
+                completed: this.state.completed
             }),
-        }).then(() => fetch('/goals/fetch').then((response) => response.json()).
-        catch(error => console.warn(error)));
+        }).then(() => fetch('/goals/fetch')
+            .then((response) => response.json())
+            .catch(error => console.warn(error)));
 
         window.location.reload();
     };
@@ -118,12 +116,16 @@ class GoalCard extends Component {
         }
     }
 
-    navigateToSubgoal(){
+    navigateToSubgoal() {
         const url = '/feed/' + this.state.id;
         const {history} = this.props;
         history.push({
             pathname: url,
-            state: {goalId: this.state.id, goalTitle: this.state.goalTitle, goalDescription: this.state.goalDescription}
+            state: {
+                goalId: this.state.id,
+                goalTitle: this.state.goalTitle,
+                goalDescription: this.state.goalDescription
+            }
         });
     }
 
@@ -173,7 +175,8 @@ class GoalCard extends Component {
                                         <label className="mdl-textfield__label">Goal Image Upload</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <select className="mdl-textfield__input" name="dropDown" value={this.state.dropDown}
+                                        <select className="mdl-textfield__input" name="dropDown"
+                                                value={this.state.dropDown}
                                                 onChange={this.handleInputChange}>
                                             <option/>
                                             <option value="Update">Update Goal</option>
@@ -202,7 +205,8 @@ class GoalCard extends Component {
                 {/** Goal Card **/}
                 <div className="mdl-card mdl-shadow--2dp demo-card-square">
                     <div className="mdl-card__title mdl-card__accent mdl-card--expand">
-                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage} onClick={this.navigateToSubgoal} />
+                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}
+                               onClick={this.navigateToSubgoal}/>
                     </div>
                     <div className="card-information">
                         <div className="mdl-card__card-title">

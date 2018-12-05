@@ -1,15 +1,15 @@
 const Account = require('../models/account');
 const async = require('async');
+const Goal = require('../models/goal');
 
 exports.fetch_subgoal_get = function(req, res) {
 
     if (!req.user) {
         res.redirect('/login');
     } else {
-        Goal.find({'_id': req.params.id}).exec(function (err, goal){
-            if (err) { return next(err); }
+        Goal.find({'_id': req.query.id}).exec(function (err, goal){
             let goalSubgoals = goal.subgoals;
-            console.log('POSTS:', goalSubgoals.length, goal.subgoals);
+            console.log('SUBGOALS:', goal.subgoals);
             res.send({subgoals: goalSubgoals});
         });
     }
@@ -17,7 +17,6 @@ exports.fetch_subgoal_get = function(req, res) {
 
 exports.create_subgoal_post = function(req, res) {
 
-    console.log('hi');
     const subgoal = new Subgoal({
         title: req.body.title,
         description: req.body.description,
