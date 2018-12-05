@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const server = http.createServer(app);
 const path = require("path");
 
-const routes = require('./routes/index');
+//const routes = require('./routes/index');
 // Add route-handling code to request handling chain
 app.use('/', routes);
 
