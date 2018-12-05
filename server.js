@@ -22,7 +22,7 @@ const path = require("path");
 
 //const routes = require('./routes/index');
 // Add route-handling code to request handling chain
-app.use('/', routes);
+//app.use('/', routes);
 
 app.use(express.static('client/build'));
 app.get("*", (req, res) => {
