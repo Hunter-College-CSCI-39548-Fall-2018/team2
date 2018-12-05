@@ -153,7 +153,7 @@ exports.delete_goal_post = function (req, res, next) {
 
     async.parallel({
         goal: function (callback) {
-            Goal.findById(req.body.id).remove().exec(callback)
+            Goal.findById(req.body.id).deleteOne().exec(callback)
         },
         subgoal: function (callback) {
             Subgoal.find({'goal': req.body.id}).remove().exec(callback)
@@ -166,3 +166,43 @@ exports.delete_goal_post = function (req, res, next) {
         res.sendStatus(200);
     });
 };
+
+// Handles updating of a goal on POST
+exports.update_goal_post = [
+
+    // Validate fields
+    body('goalTitle').isLength({min: 1}).trim().withMessage('Title must not be empty.'),
+    body('goalDescription').isLength({min: 1}).trim().withMessage('Description must not be empty'),
+
+    (req, res, next) => {
+
+        // Extracts validation errors from the request
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            console.log("Errors in creation of a new card\n", errors.mapped());
+            res.redirect('/goals/fetch');
+
+        } else {
+            console.log('DA ID', req.body.id);
+            console.log(req);
+
+            Goal.replaceOne({"_id": ObjectID(req.body.id)},
+                {"id":ObjectID(req.body.id),
+                    "title": req.body.goalTitle,
+                    "description": req.body.goalDescription,
+                    "username": req.user.username,
+                    "subgoals": [],
+                    "starred": req.body.starred,
+                    "completed":req.body.completed,
+                    "posts": [],
+                    "img": req.body.goalImage,},
+                {}, function (err, result) {
+                if (err) { return next(err); }
+                // Successful - redirect to genre detail page.
+                console.log('Your goal information has been updated!');
+            });
+
+        }
+    }
+];

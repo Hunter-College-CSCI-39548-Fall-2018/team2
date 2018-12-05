@@ -49,12 +49,12 @@ class GoalCard extends Component {
 
         let url = '';
 
-        if (this.state.dropDown === 'Update') {
-            url = '/goal/update';
+        if (this.state.dropDown === 'Delete') {
+            url = '/goal/delete'
         } else if (this.state.dropDown === 'Complete') {
             url = '/goal/complete';
         } else {
-            url = '/goal/delete'
+            url = '/goal/update'
         }
 
         fetch(url, {
@@ -63,9 +63,14 @@ class GoalCard extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id: this.props.id }),
-        }).then(() => fetch('/goals/fetch').
-        then((response) => response.json()).
+                id: this.state.id,
+                goalTitle: this.state.modalTitle,
+                goalDescription: this.state.modalDescription,
+                goalImage: this.state.modalImage,
+                starred: this.state.starred,
+                completed:this.state.completed
+            }),
+        }).then(() => fetch('/goals/fetch').then((response) => response.json()).
         catch(error => console.warn(error)));
 
         window.location.reload();
