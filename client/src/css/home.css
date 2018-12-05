@@ -37,11 +37,6 @@
 .home__header {
   text-align: center;
 }
-/* img {
-  width: 100%;
-  height: 100%;
-  opacity: 0.9;
-} */
 
 .home__header-title {
   margin-top: 0;
@@ -49,18 +44,6 @@
   font-weight: bold;
   font-style: italic;
   font-family: Poppins;
-
-  /* font-weight: bold;
-  font-style: italic;
-  font-family: Poppins;
-  color: rgb(5, 74, 131);
-  font-size: 100px;
-  text-align: center;
-  position: absolute;
-  top: 20vh;
-  right: 0;
-  left: 0;
-  z-index: 999; */
 }
 
 .home__header-subtitle {
@@ -69,18 +52,6 @@
   font-family: IM Fell Great Primer;
   color: black;
   font-size: 25px;
-
-  /* font-weight: bold;
-  font-style: italic;
-  font-family: IM Fell Great Primer;
-  color: black;
-  font-size: 50px;
-  text-align: center;
-  position: absolute;
-  top: 40vh;
-  right: 0;
-  left: 0;
-  z-index: 999; */
 }
 
 .home__button-container {
@@ -91,7 +62,8 @@
 
 .home__button {
   background-color: #b35acc;
-  font-size: 18px;
+  font-family: Poppins;
+  font-size: 16px;
   border-radius: 4px;
   margin: 0 20px;
   padding: 10px 20px;

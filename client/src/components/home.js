@@ -26,10 +26,6 @@ class Home extends Component {
     return body;
   };
 
-  //   setRedirect = () => {
-  //     this.setState({ redirect: true });
-  //   };
-
   learnButtonClick = () => {
     const { history } = this.props;
     history.push("/learn");
