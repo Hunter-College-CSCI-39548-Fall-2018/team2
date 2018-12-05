@@ -26,17 +26,20 @@ class Home extends Component {
 
   render() {
     return (
-      <div classname="bg">
-        <div id="title">
-          {" "}
-          <h1>Welcome to Bloom</h1>
-          <p>Set goals, track your progress, stay motivated!</p>
+      <div className="home__bg">
+        <div className="home__bg-image">
+          <div className="home__box">
+            <header class="home__header">
+              {" "}
+              <h1 class="home__header-title">Welcome to Bloom</h1>
+              <p>Set goals, track your progress, stay motivated!</p>
+            </header>
+            <div id="buttonContainer">
+              <button id="button1">Login</button>
+              <button id="button2">Learn</button>
+            </div>
+          </div>
         </div>
-        <div id="buttonContainer">
-          <button id="button1">Login</button>
-          <button id="button2">Learn</button>
-        </div>
-        <img alt="Bloom" src={backgroundImage} />
       </div>
     );
   }
