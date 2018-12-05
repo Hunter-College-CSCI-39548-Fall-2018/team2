@@ -10,7 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
 
 const multer = require("multer");
-const upload = multer({ dest: './uploads/'});
+const upload = multer({ dest: './uploads/' });
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
 
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('express-session')({
-    secret: 'keyboard cat',
+    secret: process.env.SECRET || 'keyboard cat',
     resave: false,
     saveUninitialized: false
 }));
@@ -50,7 +50,7 @@ app.use('/', routes);
 // Passport setup
 const Account = require('./models/account');
 passport.use(new LocalStrategy(
-    function(username, password, done) {
+    function (username, password, done) {
         User.findOne({ username: username }, function (err, user) {
             // If the credentials are valid, the verify callback invokes done to supply
             // Passport with the user that authenticated
@@ -85,7 +85,7 @@ cloudinary.config({
 
 // Set up default mongoose connection
 const mongoDB = 'mongodb://127.0.0.1:27017/bloom';
-mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || mongoDB, { useNewUrlParser: true });
 
 // Get notification of connection errors
 const db = mongoose.connection;
@@ -94,7 +94,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
 // Catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     const err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -103,7 +103,7 @@ app.use(function(req, res, next) {
 
 // Development error handler. Will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         console.log(err, err.message);
     });
 }
