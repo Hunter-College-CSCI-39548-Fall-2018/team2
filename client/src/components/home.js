@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+// import { Redirect } from "react-router-dom";
 import "../css/home.css";
-import backgroundImage from "../assets/homeplants.jpg";
+//import backgroundImage from "../assets/homeplants.jpg";
 import "../material-icon/css/material-design-iconic-font.css";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: ""
+      user: "",
+      redirect: false
     };
   }
 
@@ -24,8 +26,18 @@ class Home extends Component {
     return body;
   };
 
-  handleClick = () => {
-    console.log("yay");
+  //   setRedirect = () => {
+  //     this.setState({ redirect: true });
+  //   };
+
+  learnButtonClick = () => {
+    const { history } = this.props;
+    history.push("/learn");
+  };
+
+  loginButtonClick = () => {
+    const { history } = this.props;
+    history.push("/login");
   };
 
   render() {
@@ -41,8 +53,12 @@ class Home extends Component {
               </p>
             </header>
             <div className="home__button-container">
-              <button className="home__button">Login</button>
-              <button className="home__button">Learn</button>
+              <button onClick={this.loginButtonClick} className="home__button">
+                Login
+              </button>
+              <button onClick={this.learnButtonClick} className="home__button">
+                Learn
+              </button>
             </div>
           </div>
         </div>
