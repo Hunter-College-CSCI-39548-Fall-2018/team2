@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import Navbar from "./navbar";
+import "../css/home.css";
+import backgroundImage from "../assets/homeplants.jpg";
+import "../material-icon/css/material-design-iconic-font.css";
 
 class Home extends Component {
   constructor(props) {
@@ -24,13 +26,17 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <p>
+      <div classname="bg">
+        <div id="title">
           {" "}
-          Hello World! {this.state.user} This page will eventually be the home
-          page but it is currently <br />
-          under construction. Thanks for the patience!{" "}
-        </p>
+          <h1>Welcome to Bloom</h1>
+          <p>Set goals, track your progress, stay motivated!</p>
+        </div>
+        <div id="buttonContainer">
+          <button id="button1">Login</button>
+          <button id="button2">Learn</button>
+        </div>
+        <img alt="Bloom" src={backgroundImage} />
       </div>
     );
   }

@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css?family=Poppins");
+}
+
+@font-face {
+  font-family: "IM Fell Great Primer", serif;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer:400i");
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+
+#title h1 {
+  font-weight: bold;
+  font-style: italic;
+  font-family: Poppins;
+  color: rgb(5, 74, 131);
+  font-size: 100px;
+  text-align: center;
+  position: absolute;
+  top: 20vh;
+  right: 0;
+  left: 0;
+  z-index: 999;
+}
+
+#title p {
+  font-weight: bold;
+  font-style: italic;
+  font-family: IM Fell Great Primer;
+  color: black;
+  font-size: 50px;
+  text-align: center;
+  position: absolute;
+  top: 40vh;
+  right: 0;
+  left: 0;
+  z-index: 999;
+}
+
+#buttonContainer {
+  width: 120px;
+  position: absolute;
+  top: 38vh;
+  height: 38px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 999;
+}
+
+#buttonOne,
+#buttonTwo {
+  background-color: yellow;
+  padding: 10px;
+  font-family: arial;
+  border-radius: 4px;
+}
+
+#buttonOne:hover,
+#buttonTwo:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#buttonOne {
+  float: left;
+}
+
+#buttonTwo {
+  float: right;
+}
+
+.bg {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+}
