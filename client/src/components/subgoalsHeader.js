@@ -10,7 +10,8 @@ class SubgoalsHeader extends Component {
         super(props);
         this.state = {
             editPanel: 'Default',
-            title: ''
+            title: '',
+            id: ''
         };
 
         this.displayForm = this.displayForm.bind(this);
@@ -22,7 +23,8 @@ class SubgoalsHeader extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            title: nextProps.goalTitle
+            title: nextProps.goalTitle,
+            id: nextProps.goalId
         });
     }
 
@@ -30,7 +32,7 @@ class SubgoalsHeader extends Component {
         let editPanel = this.state.editPanel;
 
         if (editPanel === 'createSubgoal') {
-            return (<CreateSubgoal/>);
+            return (<CreateSubgoal goalId={this.state.id}/>);
         } else if (editPanel === 'createUpdate') {
             return (<CreateUpdate/>);
         } else {

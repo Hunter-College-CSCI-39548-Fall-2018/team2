@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 const Subgoal = new Schema({
     title :{type: String, required: true},
+    goal: {type: String, required: true},
     description: {type: String, required: true},
-    created: {type: Date, required: true},
-    completed: {type: Date},
+    created: {type: Date, default: Date.now, required: true},
+    completed: {type: Boolean},
     structure: {type: String}
 });
 

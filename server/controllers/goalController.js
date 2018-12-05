@@ -6,7 +6,7 @@ const async = require('async');
 const multer = require("multer");
 const upload = multer({dest: './uploads/'});
 const cloudinary = require("cloudinary");
-const {ObjectID } = require('mongodb');
+const {ObjectID} = require('mongodb');
 
 const {body, validationResult} = require('express-validator/check');
 
@@ -20,19 +20,21 @@ exports.goals_home_get = function (req, res, next) {
             goals: function (callback) {
                 Goal.find({'username': req.user.username}).exec(callback);
             },
-            account : function (callback) {
+            account: function (callback) {
                 Account.findOne({'username': req.user.username}).exec(callback);
             },
         }, function (err, results) {
-            if (err) { return next(err);}
+            if (err) {
+                return next(err);
+            }
 
             let selectedFilter = results.account.goalFilter;
             let filteredGoals = (selectedFilter === 'All') ? results.goals : [];
 
             // Filter the resulting goals for the goals that meet the specified criteria
-            if(selectedFilter === 'Priority') {
+            if (selectedFilter === 'Priority') {
                 filteredGoals = results.goals.filter(goal => goal.starred);
-            } else if(selectedFilter === 'Completed') {
+            } else if (selectedFilter === 'Completed') {
                 filteredGoals = results.goals.filter(goal => goal.completed);
             }
 
@@ -71,10 +73,8 @@ exports.create_goal_post = [
             title: req.body.goalTitle,
             description: req.body.goalDescription,
             username: req.user.username,
-            subgoals: [],
             starred: false,
-            completed:false,
-            posts: []
+            completed: false,
         });
 
         if (!errors.isEmpty()) {
@@ -89,7 +89,6 @@ exports.create_goal_post = [
                         goal.img = result.public_id.toString() + ".png";
                         goal.save();
                         console.log('Image successfully uploaded to Cloudinary', result.url);
-                        console.log(goal.img);
                         res.send({'image': goal.img});
                     });
                 } catch (err) {
@@ -104,43 +103,43 @@ exports.create_goal_post = [
 exports.update_star_post = function (req, res) {
 
     Goal.updateOne({"_id": ObjectID(req.body.id)},
-        {$set: {"starred": req.body.starred} }, function (err, res) {
-        if (err) console.log(err);
-        console.log("Document updated - star", res);
-    });
+        {$set: {"starred": req.body.starred}}, function (err, res) {
+            if (err) console.log(err);
+            console.log("Document updated - star", res);
+        });
 
     res.sendStatus(200);
 };
 
 
-exports.filter_goals_post = function(req, res) {
+exports.filter_goals_post = function (req, res) {
 
     const category = req.body.filter;
     Account.updateOne({'username': req.user.username},
         {$set: {"goalFilter": category}}, function (err, res) {
-        if(err) console.log(err);
-        console.log("Document updated - filter", res);
-    });
+            if (err) console.log(err);
+            console.log("Document updated - filter", res);
+        });
     res.sendStatus(200);
 };
 
 // Handles updating a goal on POST
-exports.update_goal_post = function(req, res, next) {
+exports.update_goal_post = function (req, res, next) {
     console.log("Goal marked as completed", res);
     res.sendStatus(200);
 };
 
 // Handles completing a goal on POST
-exports.complete_goal_post = function(req, res, next) {
+exports.complete_goal_post = function (req, res, next) {
 
     console.log(req.body.id);
     Goal.updateOne({"_id": ObjectID(req.body.id)},
-        {$set: {"completed": true} }, function (err, res) {
-        if (err) console.log(err);
-        console.log("Goal marked as completed", res);
-    });
+        {$set: {"completed": true}}, function (err, res) {
+            if (err) console.log(err);
+            console.log("Goal marked as completed", res);
+        });
 
-    Goal.findOne(ObjectID(req.body.id), function(err, res) {
+    Goal.findOne(ObjectID(req.body.id), function (err, res) {
         console.log('After', res.completed, req.body.id);
     });
 
@@ -187,20 +186,22 @@ exports.update_goal_post = [
             console.log(req);
 
             Goal.replaceOne({"_id": ObjectID(req.body.id)},
-                {"id":ObjectID(req.body.id),
+                {
+                    "id": ObjectID(req.body.id),
                     "title": req.body.goalTitle,
                     "description": req.body.goalDescription,
                     "username": req.user.username,
-                    "subgoals": [],
                     "starred": req.body.starred,
-                    "completed":req.body.completed,
-                    "posts": [],
-                    "img": req.body.goalImage,},
+                    "completed": req.body.completed,
+                    "img": req.body.goalImage,
+                },
                 {}, function (err, result) {
-                if (err) { return next(err); }
-                // Successful - redirect to genre detail page.
-                console.log('Your goal information has been updated!');
-            });
+                    if (err) {
+                        return next(err);
+                    }
+                    // Successful - redirect to genre detail page.
+                    console.log('Your goal information has been updated!');
+                });
 
         }
     }

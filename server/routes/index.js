@@ -58,9 +58,9 @@ router.post('/subgoal/check', subgoal_controller.check_subgoal_post);
 
 router.post('/subgoal/update', subgoal_controller.update_subgoal_post);
 
-router.post('subgoal/delete', subgoal_controller.delete_subgoal_post);
+router.post('/subgoal/delete', subgoal_controller.delete_subgoal_post);
 
-router.post('subgoal/create', subgoal_controller.create_subgoal_post);
+router.post('/subgoal/create', subgoal_controller.create_subgoal_post);
 
 /** Registration Routes **/
 

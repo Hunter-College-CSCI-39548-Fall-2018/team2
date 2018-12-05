@@ -34,14 +34,16 @@ class GoalFeed extends Component {
         let feedPosts = [];
 
         this.callApiSubgoals()
-            .then(res => {
-                feedPosts.concat(res.subgoals);
+            .then(result => {
+                this.setState({subgoals: result.subgoals});
+                feedPosts.push.apply(feedPosts, result.subgoals);
             }).catch(err => console.log(err));
 
 
         this.callApiPosts()
-            .then(res => {
-                feedPosts.concat(res.posts);
+            .then(result => {
+                this.setState({posts: result.posts});
+                feedPosts.push.apply(feedPosts, result.posts);
             }).catch(err => console.log(err));
 
         // Merge the feeds somehow
@@ -53,41 +55,30 @@ class GoalFeed extends Component {
 
     callApiSubgoals = async () => {
 
-        const response = await get('/subgoals/fetch', {
+        return get('/subgoals/fetch', {
             params: {
                 id: this.props.location.state.goalId
-            }
-        }).then(response => {
-            this.setState({subgoals: response.subgoals});
-        }).catch(function (error) {
-                console.log(error);
+            }}).then(response => {
+            // returning the data here allows the caller to get it through another .then(...)
+            return response.data;
         });
-
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
 
     };
 
     callApiPosts = async () => {
 
-        const response = await get('/posts/fetch', {
+        return get('/posts/fetch', {
             params: {
                 id: this.props.location.state.goalId
-            }
-        }).then(response => {
-            this.setState({posts: response.posts});
-        }).catch(function (error) {
-            console.log(error);
+            }}).then(response => {
+            // returning the data here allows the caller to get it through another .then(...)
+            return response.data;
         });
-
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
     };
 
     displayFeed(props) {
         const numPosts = this.state.feed.length;
+        alert(numPosts);
         if (numPosts === 0) {
             return (<p id='no-goals'> Your feed is currently empty. Add an update by clicking the '+' button!</p>);
         } else {
@@ -113,10 +104,10 @@ class GoalFeed extends Component {
             <div className="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
                 <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                     <NavBar/>
-                    <Header goalTitle={this.state.goalTitle}/>
+                    <Header goalTitle={this.state.goalTitle} goalId={this.state.goalId}/>
                     <main className="mdl-layout__content">
                         <div className="mdl-layout__tab-panel is-active" id="overview">
-                            {this.displayFeed(this.state.posts)}
+                            {this.displayFeed(this.state.feed)}
                         </div>
                     </main>
                 </div>

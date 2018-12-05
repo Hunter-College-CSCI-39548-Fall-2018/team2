@@ -9,6 +9,7 @@ class createSubgoal extends Component {
             title: '',
             description: '',
             completed: false,
+            id: this.props.goalId
         };
 
         this.fileInput = React.createRef();
@@ -16,30 +17,33 @@ class createSubgoal extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            title: nextProps.goalTitle,
+            id: nextProps.goalId
+        });
+    }
+
     handleSubmit = async e => {
         e.preventDefault();
+
         const url = '/subgoal/create';
-        const formData = new FormData();
 
-        const config = {
+        let data = JSON.stringify({
+            title: this.state.title,
+            description: this.state.description,
+            id: this.state.id
+        });
+
+        post(url, data, {
             headers: {
-                'content-type': 'multipart/form-data'
+                'Content-Type': 'application/json',
             }
-        };
-
-        formData.append('title', this.state.title);
-        formData.append('description', this.state.description);
-
-        post(url, formData, config).then(() =>{
-            window.location.reload();
-        }).catch(err =>{
-            console.log(err);
         });
     };
 
     // Updates the state of component with data entered into form
     handleInputChange(event) {
-        alert('hi');
         const target = event.target;
         const name = target.name;
 
@@ -64,7 +68,8 @@ class createSubgoal extends Component {
                     </div>
                     <div className="modal-footer">
                     <input type="submit" value="submit" className='rkmd-btn-toggled'
-                           data-dismiss="modal"/>
+                           data-dismiss="modal" onClick={() => {
+                        this.form.dispatchEvent(new Event('submit'))}} />
                 </div>
                 </form>
             </div>

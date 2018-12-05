@@ -1,25 +1,29 @@
 const Account = require('../models/account');
 const async = require('async');
 const Goal = require('../models/goal');
+const Subgoal = require('../models/subgoal');
+const {ObjectID} = require('mongodb');
+const {db} = require('mongodb');
 
-exports.fetch_subgoal_get = function(req, res) {
+
+exports.fetch_subgoal_get = function (req, res) {
 
     if (!req.user) {
         res.redirect('/login');
     } else {
-        Goal.find({'_id': req.query.id}).exec(function (err, goal){
-            let goalSubgoals = goal.subgoals;
-            console.log('SUBGOALS:', goal.subgoals);
-            res.send({subgoals: goalSubgoals});
+
+        Subgoal.find({'goal': req.query.id}, function (err, result) {
+            res.send({subgoals: result});
         });
     }
 };
 
-exports.create_subgoal_post = function(req, res) {
+exports.create_subgoal_post = function (req, res) {
 
     const subgoal = new Subgoal({
         title: req.body.title,
         description: req.body.description,
+        goal: req.body.id,
         completed: false,
         structure: 'Subgoal'
     });
@@ -29,17 +33,17 @@ exports.create_subgoal_post = function(req, res) {
     res.sendStatus(200);
 };
 
-exports.check_subgoal_post = function(req, res) {
+exports.check_subgoal_post = function (req, res) {
 
 };
 
 
-exports.update_subgoal_post = function(req, res) {
+exports.update_subgoal_post = function (req, res) {
 
 };
 
 
-exports.delete_subgoal_post = function(req, res) {
+exports.delete_subgoal_post = function (req, res) {
 
 };
 

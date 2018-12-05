@@ -28,10 +28,11 @@ class Goals extends Component {
                     const {history} = this.props;
                     history.push('/login');
                 } else {
-                    this.setState(
-                        {user: res.user.username,
+                    this.setState({
+                        user: res.user.username,
                         cards: res.goals,
-                        filteredType: res.filter});
+                        filteredType: res.filter
+                    });
                 }
             }).catch(err => console.log(err));
     }
