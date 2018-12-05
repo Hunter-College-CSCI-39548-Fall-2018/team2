@@ -24,6 +24,10 @@ class Home extends Component {
     return body;
   };
 
+  handleClick = () => {
+    console.log("yay");
+  };
+
   render() {
     return (
       <div className="home__bg">
