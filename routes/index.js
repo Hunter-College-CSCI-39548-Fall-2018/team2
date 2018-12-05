@@ -3,13 +3,13 @@ const passport = require('passport');
 
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({dest: './uploads/'});
+const upload = multer({ dest: './uploads/' });
 
 const account_controller = require('../controllers/accountController');
 const goal_controller = require('../controllers/goalController');
 const subgoal_controller = require('../controllers/subgoalController');
 const feed_controller = require('../controllers/feedController');
-const post_controller = require('../controllers/postcontroller');
+const post_controller = require('../controllers/postController');
 
 /** Home Routes **/
 
@@ -79,7 +79,7 @@ router.get('/login', account_controller.account_login_get);
 
 // POST request for logging in
 router.post('/login', passport.authenticate('local',
-    {successRedirect: '/goals/fetch', failureRedirect: '/login', failureFlash: true}));
+    { successRedirect: '/goals/fetch', failureRedirect: '/login', failureFlash: true }));
 
 /** Logout Routes **/
 
