@@ -28,11 +28,14 @@
 }
 
 .home__box {
-  background-color: rgba(206, 226, 211, 0.5);
-  padding: 50px;
+  background-color: rgba(206, 226, 211, 0.65);
+  padding: 80px;
   border-radius: 4px;
 }
 
+.home__header {
+  text-align: center;
+}
 /* img {
   width: 100%;
   height: 100%;
@@ -41,6 +44,10 @@
 
 .home__header-title {
   margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Poppins;
 
   /* font-weight: bold;
   font-style: italic;
@@ -55,7 +62,13 @@
   z-index: 999; */
 }
 
-#title p {
+.home__header-subtitle {
+  font-weight: bold;
+  font-style: italic;
+  font-family: IM Fell Great Primer;
+  color: black;
+  font-size: 25px;
+
   /* font-weight: bold;
   font-style: italic;
   font-family: IM Fell Great Primer;
@@ -69,30 +82,30 @@
   z-index: 999; */
 }
 
-#buttonContainer {
-  /* width: 120px;
-  position: absolute;
-  top: 38vh;
-  height: 38px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 999; */
+.home__button-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
 }
 
-#buttonOne,
-#buttonTwo {
-  /* background-color: yellow;
-  padding: 10px;
-  font-family: arial;
-  border-radius: 4px; */
+.home__button {
+  background-color: #b35acc;
+  font-size: 18px;
+  border-radius: 4px;
+  margin: 0 20px;
+  padding: 10px 20px;
+  border-color: #482738;
+  border-width: 1px;
 }
 
-#buttonOne:hover,
-#buttonTwo:hover {
-  /* opacity: 0.7;
-  cursor: pointer; */
+.home__button:hover,
+.home__button:focus {
+  background-color: #d49fe4;
+  cursor: pointer;
+}
+
+.home__button:active {
+  background-color: #8d3a7a;
 }
 
 #buttonOne {

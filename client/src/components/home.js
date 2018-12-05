@@ -29,14 +29,16 @@ class Home extends Component {
       <div className="home__bg">
         <div className="home__bg-image">
           <div className="home__box">
-            <header class="home__header">
+            <header className="home__header">
               {" "}
-              <h1 class="home__header-title">Welcome to Bloom</h1>
-              <p>Set goals, track your progress, stay motivated!</p>
+              <h1 className="home__header-title">Welcome to Bloom</h1>
+              <p className="home__header-subtitle">
+                Set goals, track your progress, stay motivated!
+              </p>
             </header>
-            <div id="buttonContainer">
-              <button id="button1">Login</button>
-              <button id="button2">Learn</button>
+            <div className="home__button-container">
+              <button className="home__button">Login</button>
+              <button className="home__button">Learn</button>
             </div>
           </div>
         </div>
