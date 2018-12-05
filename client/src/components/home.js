@@ -1,33 +1,66 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
+// import { Redirect } from "react-router-dom";
+import "../css/home.css";
+//import backgroundImage from "../assets/homeplants.jpg";
+import "../material-icon/css/material-design-iconic-font.css";
 
 class Home extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: ''
-        };
-    }
-
-    componentDidMount() {
-        this.callApi()
-            .then(res => this.setState({user: res.username}))
-            .catch(err => console.log(err));
-    }
-
-    callApi = async () => {
-        const response = await fetch('/home');
-        const body = await response.json();
-        if (response.status !== 200) throw Error(body.message);
-        return body;
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: "",
+      redirect: false
     };
+  }
 
-    render() {
-        return (
-            <p> Hello World! {this.state.user} This page will eventually be the home page but it is currently <br/>
-                under construction. Thanks for the patience! </p>
-        );
-    }
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ user: res.username }))
+      .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch("/home");
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
+
+  learnButtonClick = () => {
+    const { history } = this.props;
+    history.push("/learn");
+  };
+
+  loginButtonClick = () => {
+    const { history } = this.props;
+    history.push("/login");
+  };
+
+  render() {
+    return (
+      <div className="home__bg">
+        <div className="home__bg-image">
+          <div className="home__box">
+            <header className="home__header">
+              {" "}
+              <h1 className="home__header-title">Welcome to Bloom</h1>
+              <p className="home__header-subtitle">
+                Set goals, track your progress, stay motivated!
+              </p>
+            </header>
+            <div className="home__button-container">
+              <button onClick={this.loginButtonClick} className="home__button">
+                Login
+              </button>
+              <button onClick={this.learnButtonClick} className="home__button">
+                Learn
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Home;

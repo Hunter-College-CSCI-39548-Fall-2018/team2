@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Image} from 'cloudinary-react';
+import {post} from "axios/index";
 import '../css/goals.css';
 
 class GoalCard extends Component {
@@ -7,25 +8,67 @@ class GoalCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.id,
-            goalTitle: this.props.goalTitle,
-            goalDescription: this.props.goalDescription,
-            goalImage: this.props.goalImage,
-            starred: this.props.starred
+            id: props.id,
+            goalTitle: props.goalTitle,
+            goalDescription: props.goalDescription,
+            goalImage: props.goalImage,
+            starred: props.starred,
+            completed: props.completed,
+
+            modalTitle: '',
+            modalDescription: '',
+            modalImage: '',
+            dropDown: ''
         };
 
         this.toggleStar = this.toggleStar.bind(this);
-        this.handleEditClick = this.handleEditClick.bind(this);
-        this.editGoal = this.editGoal.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleEditClick() {
+    // Used to initialize the component with the previous state
+    componentWillReceiveProps(nextProps) {
 
+        this.setState({
+            id: nextProps.id,
+            goalTitle: nextProps.goalTitle,
+            goalDescription: nextProps.goalDescription,
+            goalImage: nextProps.goalImage,
+            starred: nextProps.starred,
+            selectedValue: ''
+        });
     }
 
+    // Handles submission of form data and posts it to backend
+    handleSubmit() {
+
+        alert('sub' + this.props.id);
+
+        let url = '';
+
+        if (this.state.dropDown === 'Update') {
+            url = '/update';
+        } else if (this.state.dropDown === 'Complete') {
+            url = '/complete';
+        } else {
+            url = '/delete'
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: this.props.id }),
+        }).then(() => fetch('/goals').then((response) => response.json()).catch(error => console.warn(error)));
+
+        window.location.reload();
+    };
+
+    // Toggles the star to favorite a post and updates the database
     toggleStar() {
-
         const newState = !this.state.starred;
         this.setState({
             starred: newState
@@ -40,18 +83,23 @@ class GoalCard extends Component {
                 starred: newState,
                 id: this.state.id
             }),
-        }).then(res => {
-
         }).catch(err => console.log(err));
     }
 
-    editGoal() {
+    // Updates the state of component with data entered into form
+    handleInputChange(event) {
+        const target = event.target;
+        const name = target.name;
 
+        this.setState({
+            [name]: target.value
+        });
     }
 
+    // Handles file uploading event
     uploadFile(event) {
         let file = event.target.files[0];
-        this.setState({goalImage: file.name});
+        this.setState({modalImage: file.name});
 
         if (file) {
             let data = new FormData();
@@ -81,35 +129,36 @@ class GoalCard extends Component {
                             <div className="add-goal modal-body">
                                 <form onSubmit={this.handleSubmit}>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input" type="text"
-                                               value={this.state.title} onChange={this.handleInputChange}/>
+                                        <input className="mdl-textfield__input" type="text" name="modalTitle"
+                                               value={this.state.modalTitle} onChange={this.handleInputChange}/>
                                         <label className="mdl-textfield__label">Goal Title</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input" type="text"
-                                               value={this.state.description} onChange={this.handleInputChange}/>
+                                        <input className="mdl-textfield__input" type="text" name="modalDescription"
+                                               value={this.state.modalDescription} onChange={this.handleInputChange}/>
                                         <label className="mdl-textfield__label">Goal Description</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield">
-                                        <input className="mdl-textfield__input file-input"
-                                               placeholder={this.state.goalImage} type="text" id="uploadFile"
+                                        <input className="mdl-textfield__input file-input" name="modalImage"
+                                               value={this.state.modalImage}
+                                               onChange={this.handleInputChange} type="text" id="uploadFile"
                                                readOnly/>
                                         <div
                                             className="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
                                             <i className="material-icons">
                                                 cloud_upload
                                             </i>
-                                            <input type="file" id="uploadBtn" onChange={this.uploadFile}
-                                                   ref={this.fileInput}/>
+                                            <input type="file" id="uploadBtn" onChange={this.uploadFile}/>
                                         </div>
                                         <label className="mdl-textfield__label">Goal Image Upload</label>
                                     </div>
                                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <select className="mdl-textfield__input">
+                                        <select className="mdl-textfield__input" name="dropDown" value={this.state.dropDown}
+                                                onChange={this.handleInputChange}>
                                             <option/>
-                                            <option value="Update Goal">Update Goal</option>
-                                            <option value="Complete Goal">Complete Goal</option>
-                                            <option value="Delete Goal">Delete Goal (Warning: Deletion is permanent)
+                                            <option value="Update">Update Goal</option>
+                                            <option value="Complete">Complete Goal</option>
+                                            <option value="Delete">Delete Goal (Warning: Deletion is permanent)
                                             </option>
                                         </select>
                                         <label className="mdl-textfield__label">Select Action</label>
@@ -118,7 +167,9 @@ class GoalCard extends Component {
 
                                     <div className="modal-footer">
                                         <div className="modal-footer">
-                                            <input type="submit" value="Update" className='edit-btn'/>
+                                            <input type="submit" value="Update" className='edit-btn' onClick={() => {
+                                                this.form.dispatchEvent(new Event('submit'))
+                                            }}/>
                                         </div>
                                     </div>
                                 </form>
@@ -144,7 +195,7 @@ class GoalCard extends Component {
                     <div className="mdl-card__actions mdl-card--border">
                         <button className="mdl-button mdl-js-button mdl-button--icon">
                             <i id="edit_goal" data-toggle="modal" data-target={'#editGoalModal'}
-                               className="material-icons" onChange={this.handleEditClick}>
+                               className="material-icons">
                                 create
                             </i>
                         </button>

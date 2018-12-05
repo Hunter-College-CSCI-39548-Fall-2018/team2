@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css?family=Poppins");
+}
+
+@font-face {
+  font-family: "IM Fell Great Primer", serif;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer:400i");
+}
+
+.home__bg {
+  position: relative;
+}
+
+.home__bg-image {
+  align-items: center;
+  background-image: url("../assets/homeplants.jpg");
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  position: absolute;
+  width: 100vw;
+}
+
+.home__box {
+  background-color: rgba(222, 240, 228, 0.7);
+  padding: 80px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 30px;
+}
+
+.home__header {
+  text-align: center;
+}
+
+.home__header-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Poppins;
+}
+
+.home__header-subtitle {
+  font-weight: bold;
+  font-style: italic;
+  font-family: IM Fell Great Primer;
+  color: black;
+  font-size: 25px;
+}
+
+.home__button-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.home__button {
+  background-color: #b35acc;
+  font-family: Poppins;
+  font-size: 16px;
+  border-radius: 4px;
+  margin: 0 20px;
+  padding: 10px 20px;
+  border-color: #482738;
+  border-width: 1px;
+}
+
+.home__button:hover,
+.home__button:focus {
+  background-color: #d49fe4;
+  cursor: pointer;
+}
+
+.home__button:active {
+  background-color: #8d3a7a;
+}
+
+#buttonOne {
+  /* float: left; */
+}
+
+#buttonTwo {
+  /* float: right; */
+}

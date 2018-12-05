@@ -34,8 +34,12 @@ class GoalModal extends Component {
                 'content-type': 'multipart/form-data'
             }
         };
-        post(url, formData, config);
 
+        post(url, formData, config).then(() =>{
+            window.location.reload();
+        }).catch(err =>{
+            console.log(err);
+        });
     };
 
     // Updates the state of component with data entered into form
