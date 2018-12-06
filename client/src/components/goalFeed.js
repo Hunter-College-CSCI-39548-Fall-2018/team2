@@ -55,7 +55,6 @@ class GoalFeed extends Component {
     }
 
     callApiSubgoals = async () => {
-
         return get('/subgoals/fetch', {
             params: {
                 id: this.props.location.state.goalId

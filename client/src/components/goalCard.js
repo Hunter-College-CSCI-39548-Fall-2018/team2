@@ -28,6 +28,17 @@ class GoalCard extends Component {
         this.navigateToSubgoal = this.navigateToSubgoal.bind(this);
     }
 
+    componentDidMount() {
+        this.state = {
+            id: this.props.id,
+            goalTitle: this.props.goalTitle,
+            goalDescription: this.props.goalDescription,
+            goalImage: this.props.goalImage,
+            starred: this.props.starred,
+            completed: this.props.completed,
+        }
+    }
+
     // Used to initialize the component with the previous state
     componentWillReceiveProps(nextProps) {
 
@@ -40,39 +51,6 @@ class GoalCard extends Component {
             selectedValue: ''
         });
     }
-
-    // Handles submission of form data and posts it to backend
-    handleSubmit() {
-
-        let url = '';
-
-        if (this.state.dropDown === 'Delete') {
-            url = '/goal/delete'
-        } else if (this.state.dropDown === 'Complete') {
-            url = '/goal/complete';
-        } else {
-            url = '/goal/update'
-        }
-
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                id: this.state.id,
-                goalTitle: this.state.modalTitle,
-                goalDescription: this.state.modalDescription,
-                goalImage: this.state.modalImage,
-                starred: this.state.starred,
-                completed: this.state.completed
-            }),
-        }).then(() => fetch('/goals/fetch')
-            .then((response) => response.json())
-            .catch(error => console.warn(error)));
-
-        window.location.reload();
-    };
 
     // Toggles the star to favorite a post and updates the database
     toggleStar() {
@@ -92,7 +70,10 @@ class GoalCard extends Component {
             }),
         }).catch(err => console.log(err));
 
-        window.location.reload();
+        fetch('/goals/fetch').then((response) => response.json())
+            .then((res) => {
+                this.props.updateGoals(res.goals);
+            }).catch(error => console.warn(error));
     }
 
     // Updates the state of component with data entered into form
@@ -128,6 +109,37 @@ class GoalCard extends Component {
             }
         });
     }
+
+    // Handles submission of form data and posts it to backend
+    handleSubmit(key) {
+
+        let url = '';
+
+        if (this.state.dropDown === 'Delete') {
+            url = '/goal/delete'
+        } else if (this.state.dropDown === 'Complete') {
+            url = '/goal/complete';
+        } else {
+            url = '/goal/update'
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: this.state.id,
+                goalTitle: this.state.modalTitle,
+                goalDescription: this.state.modalDescription,
+                goalImage: this.state.modalImage,
+                starred: this.state.starred,
+                completed: this.state.completed
+            }),
+        });
+
+        window.location.reload();
+    };
 
     render() {
         return (
@@ -205,7 +217,8 @@ class GoalCard extends Component {
                 {/** Goal Card **/}
                 <div className="mdl-card mdl-shadow--2dp demo-card-square">
                     <div className="mdl-card__title mdl-card__accent mdl-card--expand">
-                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}/>
+                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}
+                               onClick={this.navigateToSubgoal}/>
                     </div>
                     <div className="card-information">
                         <div className="mdl-card__card-title">
@@ -218,7 +231,7 @@ class GoalCard extends Component {
                     <div className="mdl-card__actions mdl-card--border">
                         <button className="mdl-button mdl-js-button mdl-button--icon">
                             <i id="edit_goal" data-toggle="modal" data-target={'#editGoalModal'}
-                               className="material-icons">
+                               className="material-icons" >
                                 create
                             </i>
                         </button>

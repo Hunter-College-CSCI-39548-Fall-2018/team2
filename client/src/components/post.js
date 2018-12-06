@@ -32,18 +32,9 @@ class Post extends Component {
             <section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                 <div className="mdl-card mdl-cell mdl-cell--12-col">
                     <div className="mdl-card__supporting-text">
-                        <div className="parentContainer dropdownHeader">
-                            <span><i id="dropdownIcon" className="material-icons">more_vert</i></span>
-                            <span>
-                                <select className="dropdown mdl-textfield__input" name="dropDown">
-                                    <option value="Delete">Delete</option>
-                                    <option value="Complete">Share</option>
-                                </select>
-                            </span>
-                        </div>
                         <div className="postHeader"><span id="postTitle">{this.state.title}</span><span className="date">{this.state.date}</span></div>
-                        <Image cloudName="bloom-goal-setting" publicId={this.state.image}/>
-                        {this.state.description}
+                        <Image className="postImage" cloudName="bloom-goal-setting" publicId={this.state.image}/>
+                        <div id="description"> {this.state.description} </div>
                     </div>
                 </div>
             </section>

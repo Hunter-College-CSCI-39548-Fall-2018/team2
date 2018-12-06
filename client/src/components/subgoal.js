@@ -57,15 +57,6 @@ class Subgoal extends Component {
                 </header>
                 <div className="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                     <div className="mdl-card__supporting-text">
-                        <div className="parentContainer dropdownHeader">
-                            <span><i id="dropdownIcon" className="material-icons">more_vert</i></span>
-                            <span>
-                                <select className=" dropdown mdl-textfield__input" name="dropDown">
-                                    <option value="Delete">Delete</option>
-                                    <option value="Complete">Share</option>
-                                </select>
-                            </span>
-                        </div>
                         <div className="postHeader"><span id="subgoalTitle">{this.state.title}</span><span
                             className="date">{this.state.date}</span>
                         </div>

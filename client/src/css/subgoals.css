@@ -278,7 +278,9 @@ html, body {
 }
 
 .postHeader{
-    margin-bottom: 26px;
+    margin-bottom: 30px;
+    margin-left: 5px;
+    margin-top:20px;
 }
 
 #createSubgoal{
@@ -330,5 +332,17 @@ div .parentContainer {
 #feed {
     margin-left:0 !important;
     padding-left:0 !important;
+}
+
+.postImage {
+    margin-bottom: 20px;
+}
+
+#description {
+    font-size: 17px;
+}
+
+.mdl-textfield__input {
+    font-size: 15px !important;
 }
 

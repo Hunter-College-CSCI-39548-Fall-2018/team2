@@ -48,8 +48,6 @@ exports.goals_home_get = function (req, res, next) {
                 if (filteredGoals[i].description.length > MAX_DESCRIPTION_LENGTH)
                     filteredGoals[i].description = filteredGoals[i].description.substring(0, MAX_DESCRIPTION_LENGTH) + "....";
             }
-
-            console.log(selectedFilter);
             res.send({user: req.user, goals: filteredGoals, filter: selectedFilter});
 
         });
@@ -183,8 +181,6 @@ exports.update_goal_post = [
             res.redirect('/goals/fetch');
 
         } else {
-            console.log('DA ID', req.body.id);
-            console.log(req);
 
             Goal.replaceOne({"_id": ObjectID(req.body.id)},
                 {

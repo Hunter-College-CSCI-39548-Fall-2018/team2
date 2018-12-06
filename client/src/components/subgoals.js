@@ -12,8 +12,6 @@ class Subgoals extends Component {
       subgoals: [],
       filteredType: "All"
     };
-    //this.displayGoals = this.displayGoals.bind(this);
-    //this.updateGoals = this.updateGoals.bind(this);
   }
 
   componentDidMount() {

@@ -38,7 +38,6 @@ class createUpdate extends Component {
         formData.append('description', this.state.description);
         formData.append('id', this.state.id);
 
-
         fetch(url, {
             method: 'POST',
             body: formData,
@@ -46,29 +45,6 @@ class createUpdate extends Component {
         }).then(function (response) {
             window.location.reload();
         });
-
-
-
-/*
-
-        alert(formData);
-
-        let data = JSON.stringify(this.state.imageValue);
-
-        post({
-            url: "/post/create",
-            type: 'POST',
-            contentType: 'application/json',
-            data: data, // here it is
-        }); */
-
-        /*
-            .then(() =>{
-            window.location.reload();
-        }).catch(err =>{
-            console.log(err);
-        }); */
-
     };
 
     handleInputChange(event) {

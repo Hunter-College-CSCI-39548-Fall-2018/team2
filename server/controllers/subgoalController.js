@@ -35,8 +35,6 @@ exports.create_subgoal_post = function (req, res) {
 
 exports.check_subgoal_post = function (req, res) {
 
-    console.log('ID', req.body.id);
-
     Subgoal.updateOne({"_id": ObjectID(req.body.id)},
         {$set: {"completed": req.body.checked}}, function (err, res) {
             if (err) console.log(err);
@@ -44,14 +42,4 @@ exports.check_subgoal_post = function (req, res) {
         });
 
     res.sendStatus(200);
-};
-
-
-exports.update_subgoal_post = function (req, res) {
-
-};
-
-
-exports.delete_subgoal_post = function (req, res) {
-
 };

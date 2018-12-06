@@ -41,13 +41,3 @@ exports.create_post_post = function(req, res) {
         res.sendStatus(200);
     }
 };
-
-exports.update_post_post = function(req, res) {
-
-};
-
-exports.delete_post_post = function(req, res) {
-
-
-};
-
