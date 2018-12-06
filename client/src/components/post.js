@@ -4,6 +4,25 @@ import logo from '../assets/cactus.jpg';
 
 class Post extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: props.id,
+            title: props.postTitle,
+            description: props.postDescription,
+        };
+
+    }
+
+    // Used to initialize the component with the previous state
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            id: nextProps.id,
+            title: nextProps.postTitle,
+            description: nextProps.postDescription,
+        });
+    }
+
     render() {
         return (
             <section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
@@ -18,11 +37,9 @@ class Post extends Component {
                                 </select>
                             </span>
                         </div>
-                        <div className="postHeader"><span id="postTitle"> Goal Update Template</span><span className="date">Date Here</span></div>
+                        <div className="postHeader"><span id="postTitle">{this.state.title}</span><span className="date">Date Here</span></div>
                         <img id="post-image" src={logo} alt=""/>
-                        Today I did something super awesome that I'm going to use this post to talk about!
-                        This post will ideally allow you to click to zoom on the picture, have an option
-                        to edit and delete it as well. Programming is awesome! Hello world! :)
+                        {this.state.description}
                     </div>
 
                 </div>

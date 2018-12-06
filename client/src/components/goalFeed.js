@@ -44,13 +44,13 @@ class GoalFeed extends Component {
             .then(result => {
                 this.setState({posts: result.posts});
                 feedPosts.push.apply(feedPosts, result.posts);
+                this.setState({
+                    feed: feedPosts
+                });
             }).catch(err => console.log(err));
 
         // Merge the feeds somehow
 
-        this.setState({
-            feed: feedPosts
-        });
     }
 
     callApiSubgoals = async () => {
@@ -81,10 +81,13 @@ class GoalFeed extends Component {
             return (
                 <ul className='goal-cards'> {
                     this.state.feed.map((post, index) => {
+                        alert(post.structure);
                         if (post.structure === 'Post') {
+                            alert('hi');
                             return (<Post key={index} id={post._id} postTitle={post.title}
                                           postDescription={post.description} postImage={post.img}/>);
                         } else {
+                            alert('hue');
                             return (<Subgoal key={index} id={post._id} subgoalTitle={post.title}
                                              subgoalDescription={post.description}
                                              completed={post.completed}/>);
