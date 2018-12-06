@@ -5,6 +5,7 @@ import Goals from './components/goals';
 import Subgoals from './components/goalFeed';
 import Login from './components/login';
 import Register from './components/register';
+import Learn from './components/learn';
 
 const Routes = () => (
   <Router>
@@ -12,7 +13,7 @@ const Routes = () => (
       <Route exact path="/" component={Home} />
       <Route path="/learn" component={Learn} />
       <Route path="/goals" component={Goals} />
-      <Route path="/subgoals" component={Subgoals} />
+      <Route path="/feed/:id" component={Subgoals} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
     </div>

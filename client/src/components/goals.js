@@ -85,7 +85,7 @@ class Goals extends Component {
     render() {
         return (
             <div>
-                <NavBar/>
+                <NavBar loggedIn={true}/>
                 <Header filter={this.state.filteredType} user={this.state.user} updateGoals={this.updateGoals}/>
                 {this.displayGoals(this.state.cards)}
                 <GoalModal addGoal={this.addGoal}/>
