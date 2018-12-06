@@ -8,7 +8,6 @@ const upload = multer({dest: './uploads/'});
 const account_controller = require('../controllers/accountController');
 const goal_controller = require('../controllers/goalController');
 const subgoal_controller = require('../controllers/subgoalController');
-const feed_controller = require('../controllers/feedController');
 const post_controller = require('../controllers/postcontroller');
 
 /** Home Routes **/

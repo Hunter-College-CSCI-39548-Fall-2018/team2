@@ -10,6 +10,7 @@ class Post extends Component {
             id: props.id,
             title: props.postTitle,
             description: props.postDescription,
+            date: props.postDate
         };
 
     }
@@ -20,6 +21,7 @@ class Post extends Component {
             id: nextProps.id,
             title: nextProps.postTitle,
             description: nextProps.postDescription,
+            date: nextProps.postDate
         });
     }
 
@@ -37,7 +39,7 @@ class Post extends Component {
                                 </select>
                             </span>
                         </div>
-                        <div className="postHeader"><span id="postTitle">{this.state.title}</span><span className="date">Date Here</span></div>
+                        <div className="postHeader"><span id="postTitle">{this.state.title}</span><span className="date">{this.state.date}</span></div>
                         <img id="post-image" src={logo} alt=""/>
                         {this.state.description}
                     </div>

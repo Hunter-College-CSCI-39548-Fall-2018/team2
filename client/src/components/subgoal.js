@@ -10,6 +10,7 @@ class Subgoal extends Component {
             title: props.subgoalTitle,
             description: props.subgoalDescription,
             completed: props.completed,
+            date: props.subgoalDate
         };
 
         this.toggleCheckBox = this.toggleCheckBox.bind(this);
@@ -24,6 +25,7 @@ class Subgoal extends Component {
             title: nextProps.subgoalTitle,
             description: nextProps.subgoalDescription,
             completed: nextProps.completed,
+            date: nextProps.subgoalDate
         });
     }
 
@@ -31,10 +33,20 @@ class Subgoal extends Component {
     toggleCheckBox() {
         const newState = !this.state.checked;
         this.setState({
-            checked: newState
+            completed: newState
         });
-    }
 
+        fetch('/subgoal/check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                checked: newState,
+                id: this.state.id
+            }),
+        }).catch(err => console.log(err));
+    }
 
     render() {
         return (
@@ -55,13 +67,13 @@ class Subgoal extends Component {
                             </span>
                         </div>
                         <div className="postHeader"><span id="subgoalTitle">{this.state.title}</span><span
-                            className="date">8/24/17</span>
+                            className="date">{this.state.date}</span>
                         </div>
 
                         <div className="parentContainer">
                         <span onClick={this.toggleCheckBox}>
-                            {this.state.checked && <i id="checkBox" className="material-icons">check_box</i>}
-                            {!this.state.checked &&
+                            {this.state.completed && <i id="checkBox" className="material-icons">check_box</i>}
+                            {!this.state.completed &&
                             <i id="checkBox" className="material-icons">check_box_outline_blank</i>}
                         </span>
                             <span>

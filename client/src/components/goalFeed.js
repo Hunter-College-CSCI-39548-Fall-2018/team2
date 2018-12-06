@@ -49,8 +49,9 @@ class GoalFeed extends Component {
                 });
             }).catch(err => console.log(err));
 
-        // Merge the feeds somehow
-
+        this.setState({
+            feed: this.state.feed.sort(function(a,b){return a.getTime() - b.getTime()})
+        });
     }
 
     callApiSubgoals = async () => {
@@ -81,16 +82,13 @@ class GoalFeed extends Component {
             return (
                 <ul className='goal-cards'> {
                     this.state.feed.map((post, index) => {
-                        alert(post.structure);
                         if (post.structure === 'Post') {
-                            alert('hi');
                             return (<Post key={index} id={post._id} postTitle={post.title}
-                                          postDescription={post.description} postImage={post.img}/>);
+                                          postDescription={post.description} postImage={post.img} postDate={post.created}/>);
                         } else {
-                            alert('hue');
                             return (<Subgoal key={index} id={post._id} subgoalTitle={post.title}
                                              subgoalDescription={post.description}
-                                             completed={post.completed}/>);
+                                             completed={post.completed} subgoalDate={post.created}/>);
                         }
                     })}
                 </ul>
