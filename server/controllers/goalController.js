@@ -86,7 +86,8 @@ exports.create_goal_post = [
             if (req.file) { // Image provided during goal creation
                 try {
                     cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
-                        goal.img = result.public_id.toString() + ".png";
+                        goal.img = result.public_id.toString() + ".jpg";
+                        console.log(goal.img);
                         goal.save();
                         console.log('Image successfully uploaded to Cloudinary', result.url);
                         res.send({'image': goal.img});

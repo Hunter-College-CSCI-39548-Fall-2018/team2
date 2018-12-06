@@ -29,7 +29,7 @@ exports.create_post_post = function(req, res) {
     if (req.file) { // Image provided during goal creation
         try {
             cloudinary.v2.uploader.upload(req.file.path, function (err, result) {
-                post.img = result.public_id.toString() + ".png";
+                post.img = result.public_id.toString() + ".jpg";
                 console.log('New post created!');
                 post.save();
                 res.sendStatus(200);

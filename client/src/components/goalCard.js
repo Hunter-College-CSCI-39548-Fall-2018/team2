@@ -205,8 +205,7 @@ class GoalCard extends Component {
                 {/** Goal Card **/}
                 <div className="mdl-card mdl-shadow--2dp demo-card-square">
                     <div className="mdl-card__title mdl-card__accent mdl-card--expand">
-                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}
-                               onClick={this.navigateToSubgoal}/>
+                        <Image cloudName="bloom-goal-setting" publicId={this.state.goalImage}/>
                     </div>
                     <div className="card-information">
                         <div className="mdl-card__card-title">
