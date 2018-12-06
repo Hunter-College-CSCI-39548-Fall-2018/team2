@@ -44,9 +44,6 @@ class GoalFeed extends Component {
             .then(result => {
                 this.setState({ posts: result.posts });
                 feedPosts.push.apply(feedPosts, result.posts);
-                let copy = feedPosts.slice(0);
-                copy.sort(function (a, b) { return a.created.getTime() - b.created.getTime() });
-
                 this.setState({
                     feed: feedPosts
                 });
