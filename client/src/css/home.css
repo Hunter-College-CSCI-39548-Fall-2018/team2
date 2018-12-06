@@ -1,4 +1,4 @@
-@font-face {
+h@font-face {
   font-family: "Poppins";
   font-style: italic;
   font-weight: 400;
@@ -62,7 +62,8 @@
 }
 
 .home__button {
-  background-color: #b35acc;
+  background-color: #266A2E;
+  color: white;
   font-family: Poppins;
   font-size: 16px;
   border-radius: 4px;
@@ -74,10 +75,10 @@
 
 .home__button:hover,
 .home__button:focus {
-  background-color: #d49fe4;
+  background-color: #3aa246;
   cursor: pointer;
 }
 
 .home__button:active {
-  background-color: #8d3a7a;
+  background-color: #3aa246;
 }

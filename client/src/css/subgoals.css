@@ -1,5 +1,4 @@
 
-
 .mdl-button--fab.mdl-button--colored {
     position: absolute;
     right: 60px;
@@ -248,7 +247,7 @@ html, body {
 
 #modal-body {
     padding-top: 40px;
-    padding-bottom: 80px;
+    padding-left:30px;
 }
 
 #navigate {
@@ -257,36 +256,97 @@ html, body {
     font-family: roboto;
     font-weight: 500;
     font-size: 13px;
+    margin-left: 70px;
+    margin-bottom: 20px;
+}
+
+#postTitle {
+    font-size: 25px;
+    margin-right:48%;
+    font-family: Roboto, sans-serif;
+}
+
+#subgoalTitle {
+    font-size: 20px;
+    margin-right:56%;
+    font-family: Roboto, sans-serif;
+
+}
+
+.date {
+    font-size: 16px;
+}
+
+.postHeader{
+    margin-bottom: 30px;
+    margin-left: 5px;
+    margin-top:20px;
+}
+
+#createSubgoal{
+    padding-left: 40px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+#checkBox{
+    font-size: 40px;
+    color:green;
+    margin-right: 20px;
+    margin-top: 6px;
+}
+
+div .parentContainer {
+    display: flex;
+}
+
+.dropdown {
+    margin-left: 8px;
+    width: 5px;
+    padding-left: 0px;
+    border-bottom: white;
+    color: transparent;
+}
+
+#dropdownIcon {
+    width: 0px;
+    height: 0px;
+}
+
+.dropdownHeader {
+    width: 20px;
+    margin-left: 98%;
+}
+
+.mdl-demo .mdl-card .mdl-card__supporting-text {
+    margin-top: 20px;
     margin-left: 40px;
+    margin-bottom: 40px;
 }
 
-
-.tab{
-//min-height:50px;
-    width:100%;
-    padding:25px;
-    font-family:sans-serif;
-    color:#444;
+#subgoalTitle {
+    margin-bottom: 40px;
 }
 
-ul.inline{
-    list-style:none;
-    padding: 0;
-    margin-bottom:0;
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 0px; }
-li{
-    display:inline-block;
-    margin-left:0;
-    padding:10px;
-    border-bottom:2px solid #eee;
-    transition: all .5s;
-    font-family:sans-serif;
-    font-weight:300;
-    cursor:pointer;
-    color:#aaa;
-
+#feed {
+    margin-left:0 !important;
+    padding-left:0 !important;
 }
+
+.postImage {
+    margin-bottom: 20px;
+}
+
+#description {
+    font-size: 17px;
+}
+
+.mdl-textfield__input {
+    font-size: 15px !important;
+}
+
+body {
+    color: #f5f5f5 !important
+}
+

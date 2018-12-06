@@ -9,8 +9,6 @@ const Goal = new Schema({
     img: {type: String},
     completed: {type: Boolean},
     starred: {type: Boolean, default: false},
-    subgoals: [{type: Schema.ObjectId, ref: 'Subgoal'}],
-    posts: [{type: Schema.ObjectId, ref: 'Post'}],
 });
 
 module.exports = mongoose.model('Goal', Goal);

@@ -22,7 +22,7 @@ class GoalModal extends Component {
     handleSubmit = async e => {
         e.preventDefault();
 
-        const url = '/create';
+        const url = '/goal/create';
         const formData = new FormData();
 
         formData.append('img', this.state.imageValue);
@@ -63,7 +63,6 @@ class GoalModal extends Component {
         }
     }
 
-    // ToDo: Get rid of some of these divs and make this more clean (do it for other files too)
     render() {
         return (
             <div>

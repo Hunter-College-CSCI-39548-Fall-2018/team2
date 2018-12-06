@@ -9,31 +9,65 @@ class SubgoalsHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editPanel: 'Default'
+            editPanel: 'Default',
+            title: '',
+            id: ''
         };
 
         this.displayForm = this.displayForm.bind(this);
+        this.displayBackButton = this.displayBackButton.bind(this);
+        this.displayTitle = this.displayTitle.bind(this);
         this.switchForm = this.switchForm.bind(this);
+        this.toMain = this.toMain.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            title: nextProps.goalTitle,
+            id: nextProps.goalId
+        });
     }
 
     displayForm() {
         let editPanel = this.state.editPanel;
 
         if (editPanel === 'createSubgoal') {
-            return(<CreateSubgoal/>);
-        } else if(editPanel === 'createUpdate') {
-            return(<CreateUpdate/>);
+            return (<CreateSubgoal goalId={this.state.id}/>);
+        } else if (editPanel === 'createUpdate') {
+            return (<CreateUpdate goalId={this.state.id}/>);
         } else {
-            return(<SubgoalMenu switchForm={this.switchForm}/>);
+            return (<SubgoalMenu switchForm={this.switchForm}/>);
         }
     }
 
-    switchForm(formChoice){
-        alert(formChoice);
-        this.setState({
-            editPanel : formChoice
-        });
+    toMain() {
+        return(<SubgoalMenu switchForm={this.switchForm}/>);
+    }
 
+    displayBackButton(){
+        let editPanel = this.state.editPanel;
+
+        if (editPanel === 'createSubgoal' || editPanel === 'createUpdate') {
+            return (<i className="material-icons" onClick={this.toMain}>arrow_back</i>);
+        }
+    }
+
+    displayTitle(){
+        let editPanel = this.state.editPanel;
+
+        if (editPanel === 'createSubgoal') {
+            return (<h5 className="modal-title">Add A Subgoal</h5>);
+        } else if (editPanel === 'createUpdate') {
+            return (<h5 className="modal-title">Add An Update</h5>);
+        } else {
+            return (<h5 className="modal-title">Main Menu</h5>);
+        }
+    }
+
+    switchForm(formChoice) {
+        this.setState({
+            editPanel: formChoice
+        });
     }
 
     render() {
@@ -44,7 +78,7 @@ class SubgoalsHeader extends Component {
                         <div className="mdl-layout--large-screen-only mdl-layout__header-row">
                         </div>
                         <div className="mdl-layout--large-screen-only mdl-layout__header-row" id="imageArea">
-                            <h3 id="goalInfo">Goal Title and Description</h3>
+                            <h3 id="goalInfo">{this.state.title}</h3>
                         </div>
                         <div className="mdl-layout--large-screen-only mdl-layout__header-row" id="addAnchor">
                         </div>
@@ -66,7 +100,9 @@ class SubgoalsHeader extends Component {
 
                                 {/** Modal header **/}
                                 <div className="modal-header">
-                                    <h5 className="modal-title">Add Progress Point</h5>
+                                    <span>
+                                        {this.displayTitle()}
+                                    </span>
                                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -76,12 +112,9 @@ class SubgoalsHeader extends Component {
                                 <div id="modal-body" className="modal-body">
                                     {this.displayForm()}
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         );

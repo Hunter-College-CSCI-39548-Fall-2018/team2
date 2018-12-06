@@ -30,6 +30,7 @@ class SubgoalMenu extends Component {
 
     render() {
         return (
+
             <span>
                 <p id="subgoalDescription">1. Select 'Add Subgoal' to add a subgoal that you would like to accomplish. <br/>
                     2. Select 'Add Post' to create a new post to track your progress </p>
