@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-//import "../css/home.css";
+import "../css/learn.css";
 import "../material-icon/css/material-design-iconic-font.css";
+import loginVideo from "../assets/Login.mp4";
 
 class Learn extends Component {
   constructor(props) {
@@ -25,8 +26,14 @@ class Learn extends Component {
 
   render() {
     return (
-      <div>
-        <p>Learn about Bloom...eventually!</p>
+      <div className="learn__box-main">
+        <h1 className="learn__header-main">Learn to Bloom</h1>
+        <hr className="learn__header-divider" />
+        <h2 className="learn__header-subsection">Create Your Account</h2>
+        <video className="learn__video-login" loop autoPlay>
+          <source src={loginVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     );
   }
