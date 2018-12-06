@@ -48,7 +48,7 @@ router.post('/post/update', post_controller.update_post_post);
 
 router.post('/post/delete', post_controller.update_post_post);
 
-router.post('/post/create', post_controller.create_post_post);
+router.post('/post/create', upload.single("img"), post_controller.create_post_post);
 
 /** Subgoal Routes **/
 

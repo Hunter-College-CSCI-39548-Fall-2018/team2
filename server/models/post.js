@@ -6,7 +6,7 @@ const Post = new Schema({
     goal: {type: String, required: true},
     description: {type: String, required: true},
     created: {type: Date, default: Date.now,required: true},
-    img: {data: Buffer, contentType: String},
+    img: {type: String},
     structure: {type: String}
 });
 

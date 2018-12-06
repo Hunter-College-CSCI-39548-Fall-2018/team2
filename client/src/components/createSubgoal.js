@@ -19,7 +19,6 @@ class createSubgoal extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            title: nextProps.goalTitle,
             id: nextProps.goalId
         });
     }
@@ -40,9 +39,11 @@ class createSubgoal extends Component {
                 'Content-Type': 'application/json',
             }
         });
+        window.location.reload();
     };
 
     // Updates the state of component with data entered into form
+
     handleInputChange(event) {
         const target = event.target;
         const name = target.name;

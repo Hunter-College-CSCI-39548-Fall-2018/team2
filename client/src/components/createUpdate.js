@@ -5,10 +5,12 @@ class createUpdate extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             title: '',
             description: '',
             imageValue: '',
+            id: this.props.goalId
         };
 
         this.fileInput = React.createRef();
@@ -17,28 +19,56 @@ class createUpdate extends Component {
         this.uploadFile = this.uploadFile.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            title: nextProps.postTitle,
+            description: nextProps.postTitle,
+            id: nextProps.id,
+            imageValue: nextProps.postImage
+        });
+    }
+
     // Handles submission of form data and posts it to backend
     handleSubmit = async e => {
-        e.preventDefault();
-
         const url = '/post/create';
+
         const formData = new FormData();
-
         formData.append('img', this.state.imageValue);
-        formData.append('goalTitle', this.state.title);
-        formData.append('goalDescription', this.state.description);
+        formData.append('title', this.state.title);
+        formData.append('description', this.state.description);
+        formData.append('id', this.state.id);
 
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
 
-        post(url, formData, config).then(() =>{
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+            enctype: "multipart/form-data",
+        }).then(function (response) {
+            window.location.reload();
+        });
+
+
+
+/*
+
+        alert(formData);
+
+        let data = JSON.stringify(this.state.imageValue);
+
+        post({
+            url: "/post/create",
+            type: 'POST',
+            contentType: 'application/json',
+            data: data, // here it is
+        }); */
+
+        /*
+            .then(() =>{
             window.location.reload();
         }).catch(err =>{
             console.log(err);
-        });
+        }); */
+
     };
 
     handleInputChange(event) {
@@ -52,6 +82,7 @@ class createUpdate extends Component {
 
     uploadFile(event) {
         let file = event.target.files[0];
+        alert('file' + file);
         this.setState({imageValue: file});
 
         if (file) {
@@ -62,7 +93,7 @@ class createUpdate extends Component {
 
     render() {
         return (
-            <div id="createSubgoal"className="add-goal modal-body">
+            <div id="createSubgoal" className="add-goal modal-body">
                 <form onSubmit={this.handleSubmit} ref={el => this.form = el}>
                     <div className="mdl-textfield mdl-js-textfield">
                         <input className="mdl-textfield__input" name='title'
@@ -77,16 +108,17 @@ class createUpdate extends Component {
                     <div className="mdl-textfield mdl-js-textfield">
                         <input className="mdl-textfield__input file-input" name='img'
                                onChange={this.handleInputChange}
-                               placeholder={this.state.imageValue.name}type="text" id="uploadFile" readOnly/>
+                               placeholder={this.state.imageValue.name} type="text" id="uploadFile" readOnly/>
                         <div
                             className="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
                             <i className="material-icons">
                                 cloud_upload
                             </i>
-                            <input type="file" id="uploadBtn"onChange={this.uploadFile}/>
+                            <input type="file" id="uploadBtn" onChange={this.uploadFile}/>
                         </div>
                         <label className="mdl-textfield__label">Update Image Upload</label>
-                    </div>                                    <div className="modal-footer">
+                    </div>
+                    <div className="modal-footer">
                     <input type="submit" value="submit" className='rkmd-btn-toggled'
                            data-dismiss="modal" onClick={() => {
                         this.form.dispatchEvent(new Event('submit'))

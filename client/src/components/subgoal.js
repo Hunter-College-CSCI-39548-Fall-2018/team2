@@ -1,18 +1,33 @@
 import React, {Component} from 'react';
 
 class Subgoal extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            checked: false
+            id: props.id,
+            checked: false,
+            title: props.subgoalTitle,
+            description: props.subgoalDescription,
+            completed: props.completed,
         };
 
         this.toggleCheckBox = this.toggleCheckBox.bind(this);
+    }
 
+    // Used to initialize the component with the previous state
+    componentWillReceiveProps(nextProps) {
+
+        this.setState({
+            id: nextProps.id,
+            checked: false,
+            title: nextProps.subgoalTitle,
+            description: nextProps.subgoalDescription,
+            completed: nextProps.completed,
+        });
     }
 
     // Toggles the checkbox to mark a subgoal as completed
-
     toggleCheckBox() {
         const newState = !this.state.checked;
         this.setState({
@@ -39,19 +54,18 @@ class Subgoal extends Component {
                                 </select>
                             </span>
                         </div>
-                        <div className="postHeader"><span id="subgoalTitle">This is a subgoal template</span><span
+                        <div className="postHeader"><span id="subgoalTitle">{this.state.title}</span><span
                             className="date">8/24/17</span>
                         </div>
 
                         <div className="parentContainer">
                         <span onClick={this.toggleCheckBox}>
                             {this.state.checked && <i id="checkBox" className="material-icons">check_box</i>}
-                            {!this.state.checked && <i id="checkBox" className="material-icons">check_box_outline_blank</i>}
+                            {!this.state.checked &&
+                            <i id="checkBox" className="material-icons">check_box_outline_blank</i>}
                         </span>
                             <span>
-                        Here I'm going to talk about how close I'm getting towards my main goal! :) Ideally I can
-                        also update, delete, or mark this as completed as well. This will be totally flexible and
-                            whatever is programatically easier/ a better user experience.
+                                {this.state.description}
                         </span></div>
                     </div>
                 </div>

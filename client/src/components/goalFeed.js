@@ -59,38 +59,34 @@ class GoalFeed extends Component {
             params: {
                 id: this.props.location.state.goalId
             }}).then(response => {
-            // returning the data here allows the caller to get it through another .then(...)
             return response.data;
         });
 
     };
 
     callApiPosts = async () => {
-
         return get('/posts/fetch', {
             params: {
                 id: this.props.location.state.goalId
             }}).then(response => {
-            // returning the data here allows the caller to get it through another .then(...)
             return response.data;
         });
     };
 
     displayFeed(props) {
         const numPosts = this.state.feed.length;
-        alert(numPosts);
         if (numPosts === 0) {
             return (<p id='no-goals'> Your feed is currently empty. Add an update by clicking the '+' button!</p>);
         } else {
             return (
                 <ul className='goal-cards'> {
                     this.state.feed.map((post, index) => {
-                        if (post.structure === 'Subgoal') {
+                        if (post.structure === 'Post') {
                             return (<Post key={index} id={post._id} postTitle={post.title}
                                           postDescription={post.description} postImage={post.img}/>);
                         } else {
                             return (<Subgoal key={index} id={post._id} subgoalTitle={post.title}
-                                             subgoalDescription={post.description} subgoalImage={post.img}
+                                             subgoalDescription={post.description}
                                              completed={post.completed}/>);
                         }
                     })}

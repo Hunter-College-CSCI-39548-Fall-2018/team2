@@ -34,7 +34,7 @@ class SubgoalsHeader extends Component {
         if (editPanel === 'createSubgoal') {
             return (<CreateSubgoal goalId={this.state.id}/>);
         } else if (editPanel === 'createUpdate') {
-            return (<CreateUpdate/>);
+            return (<CreateUpdate goalId={this.state.id}/>);
         } else {
             return (<SubgoalMenu switchForm={this.switchForm}/>);
         }
