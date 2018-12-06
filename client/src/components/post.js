@@ -32,7 +32,7 @@ class Post extends Component {
             <section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                 <div className="mdl-card mdl-cell mdl-cell--12-col">
                     <div className="mdl-card__supporting-text">
-                        <div className="postHeader"><span id="postTitle">{this.state.title}</span><span className="date">{this.state.date}</span></div>
+                        <div className="postHeader"><span id="postTitle">{this.state.title}</span></div>
                         <Image className="postImage" cloudName="bloom-goal-setting" publicId={this.state.image}/>
                         <div id="description"> {this.state.description} </div>
                     </div>

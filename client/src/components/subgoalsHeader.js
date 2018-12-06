@@ -101,7 +101,6 @@ class SubgoalsHeader extends Component {
                                 {/** Modal header **/}
                                 <div className="modal-header">
                                     <span>
-                                        {this.displayBackButton()}
                                         {this.displayTitle()}
                                     </span>
                                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">

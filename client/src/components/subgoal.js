@@ -57,8 +57,7 @@ class Subgoal extends Component {
                 </header>
                 <div className="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
                     <div className="mdl-card__supporting-text">
-                        <div className="postHeader"><span id="subgoalTitle">{this.state.title}</span><span
-                            className="date">{this.state.date}</span>
+                        <div className="postHeader"><span id="subgoalTitle">{this.state.title}</span>
                         </div>
 
                         <div className="parentContainer">

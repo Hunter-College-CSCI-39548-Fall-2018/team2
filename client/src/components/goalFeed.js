@@ -44,13 +44,20 @@ class GoalFeed extends Component {
             .then(result => {
                 this.setState({posts: result.posts});
                 feedPosts.push.apply(feedPosts, result.posts);
+                let copy = feedPosts.slice(0);
+                copy.sort(function(a,b){return a.created.getTime() - b.created.getTime()});
+
+                for(var i = 0; i < copy.length; i++) {
+                    alert(copy[i].created);
+                }
+
                 this.setState({
                     feed: feedPosts
                 });
             }).catch(err => console.log(err));
 
         this.setState({
-            feed: this.state.feed.sort(function(a,b){return a.getTime() - b.getTime()})
+            feed: feedPosts
         });
     }
 
@@ -97,7 +104,7 @@ class GoalFeed extends Component {
 
     render() {
         return (
-            <div className="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+            <div  id ="backgroundFeed" className="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
                 <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
                     <NavBar loggedIn={true}/>
                     <Header goalTitle={this.state.goalTitle} goalId={this.state.goalId}/>
