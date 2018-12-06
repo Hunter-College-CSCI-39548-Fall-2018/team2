@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
 import "../css/home.css";
-//import backgroundImage from "../assets/homeplants.jpg";
 import "../material-icon/css/material-design-iconic-font.css";
 
 class Home extends Component {

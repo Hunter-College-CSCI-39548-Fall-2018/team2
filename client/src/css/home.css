@@ -28,7 +28,7 @@
 }
 
 .home__box {
-  background-color: rgba(222, 240, 228, 0.7);
+  background-color: rgba(242, 247, 244, 0.8);
   padding: 80px;
   border-radius: 4px;
   box-shadow: 5px 5px 30px;
@@ -58,6 +58,7 @@
   display: flex;
   justify-content: center;
   padding: 30px;
+  padding: 60px 0px 0px 0px;
 }
 
 .home__button {
@@ -79,12 +80,4 @@
 
 .home__button:active {
   background-color: #8d3a7a;
-}
-
-#buttonOne {
-  /* float: left; */
-}
-
-#buttonTwo {
-  /* float: right; */
 }
