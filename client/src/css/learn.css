@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css?family=Poppins");
+}
+
+@font-face {
+  font-family: "IM Fell Great Primer", serif;
+  font-style: italic;
+  font-weight: 400;
+  src: url("https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer:400i");
+}
+
+.learn__box-main {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100vw;
+  background-color: ghostwhite;
+  justify-content: center;
+  align-items: center;
+}
+
+.learn__header-main {
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 45px;
+  color: #314e31;
+  font-style: italic;
+  font-family: IM Fell Great Primer;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.learn__header-divider {
+  border: none;
+  width: 90%;
+  height: 50px;
+  border-bottom: 1px solid #c5c8c9;
+  box-shadow: 0 18px 15px -20px #333;
+  margin: -50px auto 20px;
+}
+
+.learn__header-subsection {
+  font-family: Poppins;
+  font-size: 25px;
+  text-align: center;
+}
+
+.learn__video {
+  width: 80%;
+  height: auto;
+  padding: 20px;
+}
+
+.learn__footer {
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 0px 20px 0px;
+}

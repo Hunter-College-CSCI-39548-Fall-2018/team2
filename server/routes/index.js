@@ -92,4 +92,3 @@ router.get('/logout', account_controller.account_logout_get);
 router.get('/error', account_controller.account_error_get);
 
 module.exports = router;
-

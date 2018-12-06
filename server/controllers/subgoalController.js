@@ -55,5 +55,3 @@ exports.update_subgoal_post = function (req, res) {
 exports.delete_subgoal_post = function (req, res) {
 
 };
-
-

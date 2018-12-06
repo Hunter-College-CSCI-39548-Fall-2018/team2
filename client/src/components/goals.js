@@ -69,7 +69,7 @@ class Goals extends Component {
 
     updateGoals(goals) {
         this.setState({
-            cards: goals
+                cards: goals
             }
         );
     }
