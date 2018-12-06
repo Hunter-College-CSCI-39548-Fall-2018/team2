@@ -26,6 +26,11 @@ class Learn extends Component {
     return body;
   };
 
+  register() {
+    const { history } = this.props;
+    fetch("/register").then(history.push("/register"));
+  }
+
   render() {
     return (
       <div className="learn__box-main">
@@ -36,11 +41,13 @@ class Learn extends Component {
           <source src={loginVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <hr className="learn__header-divider" />
         <h2 className="learn__header-subsection">Create New Goal Categories</h2>
         <video className="learn__video" loop autoPlay>
           <source src={createGoalVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <hr className="learn__header-divider" />
         <h2 className="learn__header-subsection">
           Create Subgoals and Progress Updates
         </h2>
@@ -48,6 +55,9 @@ class Learn extends Component {
           <source src={createSubGoalVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <hr className="learn__header-divider" />
+        <p className="learn__footer">Ready to Bloom? </p>
+        <p onClick={this.register}>Register Now</p>
       </div>
     );
   }

@@ -18,6 +18,8 @@
   position: absolute;
   width: 100vw;
   background-color: ghostwhite;
+  justify-content: center;
+  align-items: center;
 }
 
 .learn__header-main {
@@ -41,23 +43,20 @@
   margin: -50px auto 20px;
 }
 
-/* .learn__box-subsection {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  padding: 80px;
-  border-radius: 4px;
-  box-shadow: 5px 5px 30px;
-} */
-
 .learn__header-subsection {
   font-family: Poppins;
   font-size: 25px;
   text-align: center;
-  padding: 20px;
 }
 
 .learn__video {
-  width: 100%;
+  width: 80%;
   height: auto;
+  padding: 20px;
+}
+
+.learn__footer {
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 0px 20px 0px;
 }
