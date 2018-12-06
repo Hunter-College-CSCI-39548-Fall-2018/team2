@@ -38,7 +38,7 @@
   height: 50px;
   border-bottom: 1px solid #c5c8c9;
   box-shadow: 0 18px 15px -20px #333;
-  margin: -50px auto 40px;
+  margin: -50px auto 20px;
 }
 
 /* .learn__box-subsection {
@@ -54,9 +54,10 @@
   font-family: Poppins;
   font-size: 25px;
   text-align: center;
+  padding: 20px;
 }
 
-.learn__video-login {
+.learn__video {
   width: 100%;
   height: auto;
 }

@@ -30,10 +30,11 @@ class Learn extends Component {
         <h1 className="learn__header-main">Learn to Bloom</h1>
         <hr className="learn__header-divider" />
         <h2 className="learn__header-subsection">Create Your Account</h2>
-        <video className="learn__video-login" loop autoPlay>
+        <video className="learn__video" loop autoPlay>
           <source src={loginVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <h2 className="learn__header-subsection">Login</h2>
       </div>
     );
   }
