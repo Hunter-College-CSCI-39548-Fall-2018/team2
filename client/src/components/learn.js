@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../css/learn.css";
 import "../material-icon/css/material-design-iconic-font.css";
 import loginVideo from "../assets/Login.mp4";
+import createGoalVideo from "../assets/NewGoal.mp4";
+import createSubGoalVideo from "../assets/Login.mp4";
 
 class Learn extends Component {
   constructor(props) {
@@ -34,7 +36,18 @@ class Learn extends Component {
           <source src={loginVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <h2 className="learn__header-subsection">Login</h2>
+        <h2 className="learn__header-subsection">Create New Goal Categories</h2>
+        <video className="learn__video" loop autoPlay>
+          <source src={createGoalVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <h2 className="learn__header-subsection">
+          Create Subgoals and Progress Updates
+        </h2>
+        <video className="learn__video" loop autoPlay>
+          <source src={createSubGoalVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     );
   }
