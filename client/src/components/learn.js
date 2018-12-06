@@ -8,9 +8,7 @@ import createSubGoalVideo from "../assets/Login.mp4";
 class Learn extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: ""
-    };
+    this.home = this.register.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +24,10 @@ class Learn extends Component {
     return body;
   };
 
-  register() {
+  register = () => {
     const { history } = this.props;
-    fetch("/register").then(history.push("/register"));
-  }
+    history.push("/register");
+  };
 
   render() {
     return (
@@ -57,7 +55,9 @@ class Learn extends Component {
         </video>
         <hr className="learn__header-divider" />
         <p className="learn__footer">Ready to Bloom? </p>
-        <p onClick={this.register}>Register Now</p>
+        <p className="learn__footer" onClick={this.register}>
+          Register Now
+        </p>
       </div>
     );
   }
