@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
+import {Image} from 'cloudinary-react';
 import '../css/subgoals.css';
-import logo from '../assets/cactus.jpg';
 
 class Post extends Component {
 
@@ -10,7 +10,8 @@ class Post extends Component {
             id: props.id,
             title: props.postTitle,
             description: props.postDescription,
-            date: props.postDate
+            date: props.postDate,
+            image: props.postImage
         };
 
     }
@@ -21,7 +22,8 @@ class Post extends Component {
             id: nextProps.id,
             title: nextProps.postTitle,
             description: nextProps.postDescription,
-            date: nextProps.postDate
+            date: nextProps.postDate,
+            image:nextProps.postImage
         });
     }
 
@@ -40,10 +42,9 @@ class Post extends Component {
                             </span>
                         </div>
                         <div className="postHeader"><span id="postTitle">{this.state.title}</span><span className="date">{this.state.date}</span></div>
-                        <img id="post-image" src={logo} alt=""/>
+                        <Image cloudName="bloom-goal-setting" publicId={this.state.image}/>
                         {this.state.description}
                     </div>
-
                 </div>
             </section>
         );

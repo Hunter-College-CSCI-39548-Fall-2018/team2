@@ -80,7 +80,7 @@ class GoalFeed extends Component {
             return (<p id='no-goals'> Your feed is currently empty. Add an update by clicking the '+' button!</p>);
         } else {
             return (
-                <ul className='goal-cards'> {
+                <ul id="feed" className='goal-cards'> {
                     this.state.feed.map((post, index) => {
                         if (post.structure === 'Post') {
                             return (<Post key={index} id={post._id} postTitle={post.title}

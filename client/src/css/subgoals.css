@@ -327,8 +327,8 @@ div .parentContainer {
     margin-bottom: 40px;
 }
 
-.goal-cards{
-    margin-left:0;
+#feed {
+    margin-left:0 !important;
     padding-left:0 !important;
 }
 
