@@ -3,7 +3,7 @@ import "../css/learn.css";
 import "../material-icon/css/material-design-iconic-font.css";
 import loginVideo from "../assets/Login.mp4";
 import createGoalVideo from "../assets/NewGoal.mp4";
-import createSubGoalVideo from "../assets/NewGoal.mp4";
+import createSubGoalVideo from "../assets/Subgoals.mp4";
 
 class Learn extends Component {
   constructor(props) {
